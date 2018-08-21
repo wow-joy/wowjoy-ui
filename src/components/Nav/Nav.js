@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { SlideDown } from "wowjoy-component";
-import { PopOut } from "wowjoy-component";
-
+import { SlideDown, PopOut } from "wowjoy-component";
+import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
+import { withRouter } from "react-router-dom";
+import NavItem from "./NavItem";
 const Wrap = styled.nav`
   display: flex;
   width: 100%;
@@ -24,7 +25,11 @@ const Wrap = styled.nav`
   ${props => props.defaultStyles};
 `;
 
-const SubMenuSlideDown = styled(SlideDown)``;
+const SubMenuSlideDown = styled(SlideDown)`
+  & > div:first-child:hover {
+    background: #e1f0ef;
+  }
+`;
 const SubMenuPopOut = styled(PopOut)`
   & > div {
     background: #f8f8f8;
@@ -35,8 +40,8 @@ const SubMenuPopOut = styled(PopOut)`
     }
   }
   &.active > div {
-    color: ${p => (p.theme && p.theme.mainColor) || "#06aea6"};
-    &::before {
+    /* color: ${p => (p.theme && p.theme.mainColor) || "#06aea6"}; */
+    /* &::before {
       content: "";
       position: absolute;
       left: 0;
@@ -46,7 +51,7 @@ const SubMenuPopOut = styled(PopOut)`
       width: 4px;
       height: 26px;
       background: currentColor;
-    }
+    } */
   }
   .popOut-content__pop > div {
     background: #fff;
@@ -71,54 +76,60 @@ const SubMenu = props => {
   }
   return <SubMenuSlideDown {...props} />;
 };
+
+const getSubMenu = (list, number, clickHandle, value) => {
+  return list.map((item, index) => (
+    <SubMenu
+      content={
+        <NavItem
+          data={item}
+          onClick={clickHandle}
+          to={item.to}
+          rank={number}
+          isActive={value && value === item.key}
+        >
+          {item.content}
+        </NavItem>
+      }
+      key={item.key || index}
+      type={item.subViewType}
+      className={`wj-nav-item__${number}`}
+      isActive={item.isActive}
+      defaultIsActive={item.defaultIsActive}
+    >
+      {item.subList
+        ? getSubMenu(item.subList, number + 1, clickHandle, value)
+        : null}
+    </SubMenu>
+  ));
+};
 class Nav extends PureComponent {
-  chooseSubMenu = type => {};
   render() {
-    const { className, defaultStyles, children, navList, keyName } = this.props;
+    const {
+      className,
+      defaultStyles,
+      children,
+      navList,
+      keyName,
+      value
+    } = this.props;
     return (
       <Wrap defaultStyles={defaultStyles} className={className}>
-        {navList.map((navItem, navItemIndex) => (
-          <SubMenu
-            content={navItem.content}
-            key={keyName + navItemIndex}
-            type={navItem.subViewType}
-            className="wj-nav-submenu__1"
-            defaultIsActive={navItem.isActive}
-          >
-            {navItem.subList &&
-              navItem.subList.map((subItem, subItemIndex) => (
-                <SubMenu
-                  type={subItem.subViewType}
-                  content={subItem.content}
-                  key={keyName + navItemIndex + "_" + subItemIndex}
-                  className="wj-nav-submenu__2"
-                >
-                  {subItem.subList &&
-                    subItem.subList.map((subItem_1, subItemIndex_1) => (
-                      <div
-                        key={
-                          keyName +
-                          navItemIndex +
-                          "_" +
-                          subItemIndex +
-                          "_" +
-                          subItemIndex_1
-                        }
-                      >
-                        {subItem_1.content}
-                      </div>
-                    ))}
-                </SubMenu>
-              ))}
-          </SubMenu>
-        ))}
+        {getSubMenu(navList, 1, this.clickHandle, value)}
       </Wrap>
     );
   }
+  clickHandle = (e, itemData) => {
+    const { onChange } = this.props;
+    onChange&&onChange(itemData.key || '',itemData)
+  };
 }
 
 Nav.propTypes = {
   className: PropTypes.string,
   defaultStyles: PropTypes.string
 };
-export default Nav;
+export default withRouter(ControllSwitchHoc({
+  value: "activeKey",
+  defaultValue: "defaultActiveKey"
+})(Nav));

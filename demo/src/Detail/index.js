@@ -1,93 +1,98 @@
 import React, { Component } from "react";
-import Components, { NavItem } from "@src";
+import Components, { div } from "@src";
 import styled from "styled-components";
 import { ReactComponent as Home } from "@svg/home.svg";
 const X = props => <div>{props.value}</div>;
 
 const PROPS = {
+  user: {
+    name: "abc"
+  },
   navList: [
     {
       content: (
-        <NavItem>
+        <div>
           <Home /> 首页
-        </NavItem>
+        </div>
       ),
+      key: 'home1',
       // onClick: '',
       // subList: [],
       // subViewType: 'pop',
       subList: [
         {
-          content: <NavItem rank={1}>参数设置</NavItem>
+          content: <div rank={1}>参数设置</div>
         }
       ]
     },
     {
       content: (
-        <NavItem>
+        <div>
           <Home /> 招聘管理
-        </NavItem>
-      )
+        </div>
+      ),
+      to: './list'
     },
     {
       content: (
-        <NavItem>
+        <div>
           <Home /> 招聘管理
-        </NavItem>
+        </div>
       ),
       // subViewType: 'pop',
-      isActive: true,
+      // isActive: true,
       subList: [
         {
-          content: <NavItem  rank={1}>参数设置</NavItem >,
+          content: <div rank={1}>参数设置</div>,
           subViewType: "pop",
           subList: [
-            { content: <NavItem rank={2}>职级序列与职级</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位1</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位2</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位3</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位31</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位32</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位33</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位34</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位35</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位36</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位37</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位38</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位39</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位30</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位13</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位23</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位33</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位43</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位53</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位63</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位73</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位83</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位93</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位03</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位103</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位203</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位303</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位403</NavItem> },
-            { content: <NavItem rank={2}>岗位类型与岗位4</NavItem> }
+            { content: <div rank={2}>职级序列与职级</div> },
+            { content: <div rank={2}>岗位类型与岗位</div> },
+            { content: <div rank={2}>岗位类型与岗位1</div> },
+            { content: <div rank={2}>岗位类型与岗位2</div> },
+            { content: <div rank={2}>岗位类型与岗位3</div> },
+            { content: <div rank={2}>岗位类型与岗位31</div> },
+            { content: <div rank={2}>岗位类型与岗位32</div> },
+            { content: <div rank={2}>岗位类型与岗位33</div> },
+            { content: <div rank={2}>岗位类型与岗位34</div> },
+            { content: <div rank={2}>岗位类型与岗位35</div> },
+            { content: <div rank={2}>岗位类型与岗位36</div> },
+            { content: <div rank={2}>岗位类型与岗位37</div> },
+            { content: <div rank={2}>岗位类型与岗位38</div> },
+            { content: <div rank={2}>岗位类型与岗位39</div> },
+            { content: <div rank={2}>岗位类型与岗位30</div> },
+            { content: <div rank={2}>岗位类型与岗位13</div> },
+            { content: <div rank={2}>岗位类型与岗位23</div> },
+            { content: <div rank={2}>岗位类型与岗位33</div> },
+            { content: <div rank={2}>岗位类型与岗位43</div> },
+            { content: <div rank={2}>岗位类型与岗位53</div> },
+            { content: <div rank={2}>岗位类型与岗位63</div> },
+            { content: <div rank={2}>岗位类型与岗位73</div> },
+            { content: <div rank={2}>岗位类型与岗位83</div> },
+            { content: <div rank={2}>岗位类型与岗位93</div> },
+            { content: <div rank={2}>岗位类型与岗位03</div> },
+            { content: <div rank={2}>岗位类型与岗位103</div> },
+            { content: <div rank={2}>岗位类型与岗位203</div> },
+            { content: <div rank={2}>岗位类型与岗位303</div> },
+            { content: <div rank={2}>岗位类型与岗位403</div> },
+            { content: <div rank={2}>岗位类型与岗位4</div> }
           ]
         },
         {
           subViewType: "pop",
-          content: <NavItem rank={1}>考勤假期设置</NavItem>
+          content: <div rank={1}>考勤假期设置</div>
         }
       ]
     },
     {
       content: (
-        <NavItem>
+        <div>
           <Home /> 招聘管理
-        </NavItem>
+        </div>
       )
     }
   ],
-  keyName: "nav1"
+  defaultActiveKey: 'home1'
   // isblur: true
 };
 

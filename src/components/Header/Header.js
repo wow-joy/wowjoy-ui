@@ -15,6 +15,7 @@ const Wrap = styled.header`
   background: ${p => p.theme.mainColor};
   padding: 0 21px 0 27px;
   color: ${p => p.theme.fontColor};
+  z-index: 10; 
   ${p => (p.isblur ? `box-shadow: 0 1px 3px 0 rgba(225,225,225,0.50);` : ``)};
   ${p => p.defaultStyles};
 `;
@@ -56,6 +57,7 @@ const Title = styled.h1`
   padding-left: 19px;
   height: 23px;
   line-height: 23px;
+  color: #fff;
 `;
 const Center = styled.div`
   flex-grow: 1;
@@ -80,6 +82,9 @@ const NewsIconBox = styled.span`
   display: inline-block;
   margin-left: 26px;
   margin-right: 22px;
+  svg{
+    vertical-align: middle;
+  }
 `;
 const NewsIcon = styled(require("../../static/medias/svg/news.svg").ReactComponent)`
   width: 20px;
@@ -150,6 +155,11 @@ const User = styled.div`
       cursor: pointer;
       height: 48px;
       margin-bottom: -16px;
+      &:hover{
+        &::after{
+          background-color: #079C95;
+        }
+      }
     `
       : null};
 `;
