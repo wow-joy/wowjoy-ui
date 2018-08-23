@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import { ReactComponent as Password } from "../../static/medias/svg/password.svg";
 import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
-
+import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
+import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
+import { Pop } from "wowjoy-component";
 const Wrap = styled.header`
   display: flex;
   align-items: center;
@@ -15,7 +17,7 @@ const Wrap = styled.header`
   background: ${p => p.theme.mainColor};
   padding: 0 21px 0 27px;
   color: ${p => p.theme.fontColor};
-  z-index: 10; 
+  z-index: 10;
   ${p => (p.isblur ? `box-shadow: 0 1px 3px 0 rgba(225,225,225,0.50);` : ``)};
   ${p => p.defaultStyles};
 `;
@@ -24,7 +26,9 @@ const Left = styled.div`
   display: flex;
   align-items: center;
 `;
-const OpenIcon = styled(require("../../static/medias/svg/nav_open.svg").ReactComponent)`
+const OpenIcon = styled(
+  require("../../static/medias/svg/nav_open.svg").ReactComponent
+)`
   width: 18px;
   height: auto;
   cursor: pointer;
@@ -32,7 +36,9 @@ const OpenIcon = styled(require("../../static/medias/svg/nav_open.svg").ReactCom
     fill: ${p => p.theme.fontColor};
   }
 `;
-const CloseIcon = styled(require("../../static/medias/svg/nav_close.svg").ReactComponent)`
+const CloseIcon = styled(
+  require("../../static/medias/svg/nav_close.svg").ReactComponent
+)`
   width: 18px;
   height: auto;
   cursor: pointer;
@@ -69,7 +75,9 @@ const Right = styled.div`
   display: flex;
   align-items: center;
 `;
-const WowjoyIcon = styled(require("../../static/medias/svg/wowjoy_logo.svg").ReactComponent)`
+const WowjoyIcon = styled(
+  require("../../static/medias/svg/wowjoy_logo.svg").ReactComponent
+)`
   width: 22px;
   height: auto;
   path {
@@ -82,11 +90,13 @@ const NewsIconBox = styled.span`
   display: inline-block;
   margin-left: 26px;
   margin-right: 22px;
-  svg{
+  svg {
     vertical-align: middle;
   }
 `;
-const NewsIcon = styled(require("../../static/medias/svg/news.svg").ReactComponent)`
+const NewsIcon = styled(
+  require("../../static/medias/svg/news.svg").ReactComponent
+)`
   width: 20px;
   height: auto;
   path {
@@ -175,7 +185,6 @@ const UserControlWrap = styled.div.attrs({
   display: none;
   opacity: 0;
   width: 200px;
-  overflow: hidden;
   box-shadow: 0 1px 4px 0 rgba(132, 132, 132, 0.5);
   position: absolute;
   top: 48px;
@@ -208,18 +217,22 @@ const UserInfo = styled.div`
 `;
 
 const UserControl = styled.div`
-  height: 40px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: flex-end;
   span {
+    position: relative;
+    height: 40px;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
     color: #333;
     line-height: 14px;
     font-size: 12px;
     cursor: pointer;
+    user-select: none;
     svg {
       margin-right: 9px;
       width: 16px;
@@ -228,14 +241,72 @@ const UserControl = styled.div`
         fill: #666;
       }
     }
+    &:hover {
+      color: #06aea6;
+      svg {
+        path {
+          fill: #06aea6;
+        }
+      }
+    }
   }
 `;
-
+const Delta = styled.i`
+  display: inline-block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-left: 4px solid currentColor;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  transform: rotate(${p => (p.isActive ? "90deg" : "0deg")});
+  transition: 0.3s;
+`;
+const CompanyList = styled.ul`
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: 2px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px 0 rgba(132, 132, 132, 0.5);
+  width: 160px;
+  li {
+    color: #666;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 32px;
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg {
+      width: 10px;
+    }
+    &:hover {
+      background: #fffbe0;
+    }
+    &.active {
+      color: #06aea6;
+      svg {
+        path {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+`;
 class Header extends PureComponent {
   state = {
     userControlVisible: false,
     isOpen:
-      this.props.defaultValue !== undefined ? this.props.defaultValue : true
+      this.props.defaultValue !== undefined ? this.props.defaultValue : true,
+    companyListVisible: false,
+    selectedCompanyId: null
   };
 
   render() {
@@ -248,9 +319,10 @@ class Header extends PureComponent {
       newsCount,
       user,
       theme,
-      isblur
+      isblur,
+      companyList
     } = this.props;
-    const userLastName = user? user.name.substr(-1) : "";
+    const userLastName = user ? user.name.substr(-1) : "";
     const defaultTheme = isblur
       ? {
           mainColor: "#fff",
@@ -266,6 +338,7 @@ class Header extends PureComponent {
           defaultStyles={defaultStyles}
           className={className}
           isblur={isblur}
+          innerRef={el => (this.wrapNode = el)}
         >
           <Left>
             <span onClick={this.onChange}>
@@ -300,12 +373,44 @@ class Header extends PureComponent {
                 <UserInfo>
                   <User>{userLastName}</User>
                   <p>
-                    {
-                      user?`${user.name} (${user.number})`:null
-                    }
+                    {user
+                      ? `${user.name}${user.number ? ` (${user.number}))` : ""}`
+                      : null}
                   </p>
                 </UserInfo>
+
                 <UserControl>
+                  {companyList && (
+                    <span
+                      onClick={this.toggleCompanyList}
+                      style={{ marginRight: "50%" }}
+                    >
+                      <Company />
+                      切换公司
+                      <Delta isActive={this.state.companyListVisible} />
+                      {this.state.companyListVisible && (
+                        <CompanyList onClick={this.changeCompany}>
+                          {companyList.map((ele, index) => (
+                            <li
+                              key={ele.id}
+                              className={
+                                ele.id - this.state.selectedCompanyId === 0
+                                  ? "active"
+                                  : null
+                              }
+                              data-id={ele.id}
+                              data-content={ele.content}
+                            >
+                              {ele.content}
+                              {ele.id - this.state.selectedCompanyId === 0 && (
+                                <Selected />
+                              )}
+                            </li>
+                          ))}
+                        </CompanyList>
+                      )}
+                    </span>
+                  )}
                   <span onClick={this.changePassword}>
                     <Password />
                     修改密码
@@ -339,25 +444,34 @@ class Header extends PureComponent {
       </ThemeProvider>
     );
   }
-
+  wrapNode;
   userControlHideTimer;
   showUserControl = e => {
     clearTimeout(this.userControlHideTimer);
+    window.addEventListener("click", this.onBlur);
     this.setState({
       userControlVisible: true
     });
   };
-
   hideUserControl = () => {
     this.userControlHideTimer = setTimeout(
       () =>
         this.setState({
-          userControlVisible: false
+          userControlVisible: false,
+          companyListVisible: false
         }),
       1000
     );
   };
-
+  onBlur = e => {
+    if (!this.wrapNode.contains(e.target)) {
+      clearTimeout(this.userControlHideTimer);
+      this.setState({
+        userControlVisible: false,
+        companyListVisible: false
+      });
+    }
+  };
   onChange = () => {
     this.props.onChange && this.props.onChange(!this.state.isOpen);
     this.setState({
@@ -369,10 +483,25 @@ class Header extends PureComponent {
   logOut = () => {
     this.logOutForm.submit();
   };
-  
-  changePassword = () =>{
-    console.log('unset event')
-  }
+
+  changePassword = () => {
+    console.log("unset event");
+  };
+
+  toggleCompanyList = () => {
+    this.setState({
+      companyListVisible: !this.state.companyListVisible
+    });
+  };
+  changeCompany = e => {
+    const { onCompanyChange } = this.props;
+    const { id, content } = e.target.dataset;
+    onCompanyChange && onCompanyChange(id, content);
+    this.setState({
+      selectedCompanyId: id,
+      companyListVisible: false
+    });
+  };
 }
 
 Header.propTypes = {
@@ -385,6 +514,7 @@ Header.propTypes = {
   theme: PropTypes.object,
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
-  defaultValue: PropTypes.bool
+  defaultValue: PropTypes.bool,
+  companyList: PropTypes.array
 };
 export default Header;

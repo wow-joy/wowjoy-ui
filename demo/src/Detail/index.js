@@ -92,7 +92,12 @@ const PROPS = {
       )
     }
   ],
-  defaultActiveKey: 'home1'
+  defaultActiveKey: 'home1',
+  companyList: [
+    {content: '树兰(杭州)医院' ,id:1},
+    {content: '医院1' ,id:2},
+    {content: '医院2' ,id:3},
+  ]
   // isblur: true
 };
 
