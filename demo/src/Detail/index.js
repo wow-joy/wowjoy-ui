@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Components, { div } from "@src";
+import Components, { NavContent } from "@src";
 import styled from "styled-components";
 import { ReactComponent as Home } from "@svg/home.svg";
-const X = props => <div>{props.value}</div>;
 
 const PROPS = {
   user: {
@@ -10,72 +9,64 @@ const PROPS = {
   },
   navList: [
     {
-      content: (
-        <div>
-          <Home /> 首页
-        </div>
-      ),
-      key: 'home1',
+      content: [<Home />, "首页x"],
+      id: "home1",
       // onClick: '',
       // subList: [],
-      // subViewType: 'pop',
+      // subViewType: "pop",
       subList: [
         {
-          content: <div rank={1}>参数设置</div>
+          content: <div>参数设置</div>,
+          id: "home11"
         }
       ]
     },
     {
-      content: (
-        <div>
-          <Home /> 招聘管理
-        </div>
-      ),
-      to: './list'
+      content: [<Home />, "招聘管理"],
+      id: "home2",
+      to: "./list"
     },
     {
-      content: (
-        <div>
-          <Home /> 招聘管理
-        </div>
-      ),
+      content: [<Home />, "招聘管理"],
+      id: "home3",
       // subViewType: 'pop',
-      // isActive: true,
+      defaultIsOpen: true,
       subList: [
         {
-          content: <div rank={1}>参数设置</div>,
+          content: <div>参数设置</div>,
           subViewType: "pop",
+          id: "pop",
           subList: [
-            { content: <div rank={2}>职级序列与职级</div> },
-            { content: <div rank={2}>岗位类型与岗位</div> },
-            { content: <div rank={2}>岗位类型与岗位1</div> },
-            { content: <div rank={2}>岗位类型与岗位2</div> },
-            { content: <div rank={2}>岗位类型与岗位3</div> },
-            { content: <div rank={2}>岗位类型与岗位31</div> },
-            { content: <div rank={2}>岗位类型与岗位32</div> },
-            { content: <div rank={2}>岗位类型与岗位33</div> },
-            { content: <div rank={2}>岗位类型与岗位34</div> },
-            { content: <div rank={2}>岗位类型与岗位35</div> },
-            { content: <div rank={2}>岗位类型与岗位36</div> },
-            { content: <div rank={2}>岗位类型与岗位37</div> },
-            { content: <div rank={2}>岗位类型与岗位38</div> },
-            { content: <div rank={2}>岗位类型与岗位39</div> },
-            { content: <div rank={2}>岗位类型与岗位30</div> },
-            { content: <div rank={2}>岗位类型与岗位13</div> },
-            { content: <div rank={2}>岗位类型与岗位23</div> },
-            { content: <div rank={2}>岗位类型与岗位33</div> },
-            { content: <div rank={2}>岗位类型与岗位43</div> },
-            { content: <div rank={2}>岗位类型与岗位53</div> },
-            { content: <div rank={2}>岗位类型与岗位63</div> },
-            { content: <div rank={2}>岗位类型与岗位73</div> },
-            { content: <div rank={2}>岗位类型与岗位83</div> },
-            { content: <div rank={2}>岗位类型与岗位93</div> },
-            { content: <div rank={2}>岗位类型与岗位03</div> },
-            { content: <div rank={2}>岗位类型与岗位103</div> },
-            { content: <div rank={2}>岗位类型与岗位203</div> },
-            { content: <div rank={2}>岗位类型与岗位303</div> },
-            { content: <div rank={2}>岗位类型与岗位403</div> },
-            { content: <div rank={2}>岗位类型与岗位4</div> }
+            { content: <div>职级序列与职级</div>, id: "xx" },
+            { content: <div>岗位类型与岗位</div> },
+            { content: <div>岗位类型与岗位1</div> },
+            { content: <div>岗位类型与岗位2</div> },
+            { content: <div>岗位类型与岗位3</div> },
+            { content: <div>岗位类型与岗位31</div> },
+            { content: <div>岗位类型与岗位32</div> },
+            { content: <div>岗位类型与岗位33</div> },
+            { content: <div>岗位类型与岗位34</div> },
+            { content: <div>岗位类型与岗位35</div> },
+            { content: <div>岗位类型与岗位36</div> },
+            { content: <div>岗位类型与岗位37</div> },
+            { content: <div>岗位类型与岗位38</div> },
+            { content: <div>岗位类型与岗位39</div> },
+            { content: <div>岗位类型与岗位30</div> },
+            { content: <div>岗位类型与岗位13</div> },
+            { content: <div>岗位类型与岗位23</div> },
+            { content: <div>岗位类型与岗位33</div> },
+            { content: <div>岗位类型与岗位43</div> },
+            { content: <div>岗位类型与岗位53</div> },
+            { content: <div>岗位类型与岗位63</div> },
+            { content: <div>岗位类型与岗位73</div> },
+            { content: <div>岗位类型与岗位83</div> },
+            { content: <div>岗位类型与岗位93</div> },
+            { content: <div>岗位类型与岗位03</div> },
+            { content: <div>岗位类型与岗位103</div> },
+            { content: <div>岗位类型与岗位203</div> },
+            { content: <div>岗位类型与岗位303</div> },
+            { content: <div>岗位类型与岗位403</div> },
+            { content: <div>岗位类型与岗位4</div> }
           ]
         },
         {
@@ -85,24 +76,22 @@ const PROPS = {
       ]
     },
     {
-      content: (
-        <div>
-          <Home /> 招聘管理
-        </div>
-      )
+      id: "home4",
+      content: [<Home />, "招聘管理"]
     }
   ],
-  defaultActiveKey: 'home1',
+  defaultActiveKey: "home4",
   companyList: [
-    {content: '树兰(杭州)医院' ,id:1},
-    {content: '医院1' ,id:2},
-    {content: '医院2' ,id:3},
-  ]
+    { content: "树兰(杭州)医院", id: 101 },
+    { content: "医院1", id: 201 },
+    { content: "医院2", id: 301 }
+  ],
   // isblur: true
+  onChange: (...args) => console.log(args)
 };
 
 class Detail extends Component {
-  state = { visible: true };
+  state = { visible: true, showLeft: true };
   componentDidMount() {}
   render() {
     const { match } = this.props;
@@ -114,13 +103,27 @@ class Detail extends Component {
     const ComponentItem = Components[name];
     if (ComponentItem) {
       return (
-        <div style={{ width: "230px" }}>
-          <ComponentItem {...PROPS}>ComponentItem</ComponentItem>
+        <div>
+          <ComponentItem
+            {...PROPS}
+            header={<Components.Header onChange={this.toggleLeft} />}
+            asideLeft={<Components.Nav size={"small"} {...PROPS} />}
+            asideRight={3}
+            showLeft={this.state.showLeft}
+            leftSize={"small"}
+          >
+            ComponentItem
+          </ComponentItem>
         </div>
       );
     }
     return <div>ComponentItem not found</div>;
   }
+  toggleLeft = () => {
+    this.setState({
+      showLeft: !this.state.showLeft
+    });
+  };
 }
 
 export default Detail;

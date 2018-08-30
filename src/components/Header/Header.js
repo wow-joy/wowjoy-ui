@@ -5,19 +5,12 @@ import { ReactComponent as Password } from "../../static/medias/svg/password.svg
 import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
 import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
 import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
-import { Pop } from "wowjoy-component";
 const Wrap = styled.header`
   display: flex;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
   background: ${p => p.theme.mainColor};
   padding: 0 21px 0 27px;
   color: ${p => p.theme.fontColor};
-  z-index: 10;
   ${p => (p.isblur ? `box-shadow: 0 1px 3px 0 rgba(225,225,225,0.50);` : ``)};
   ${p => p.defaultStyles};
 `;
@@ -25,6 +18,12 @@ const Left = styled.div`
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  & > span {
+    font-size: 0;
+    svg {
+      vertical-align: middle;
+    }
+  }
 `;
 const OpenIcon = styled(
   require("../../static/medias/svg/nav_open.svg").ReactComponent
@@ -472,8 +471,8 @@ class Header extends PureComponent {
       });
     }
   };
-  onChange = () => {
-    this.props.onChange && this.props.onChange(!this.state.isOpen);
+  onChange = e => {
+    this.props.onChange && this.props.onChange(e, !this.state.isOpen);
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -515,6 +514,7 @@ Header.propTypes = {
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
   defaultValue: PropTypes.bool,
-  companyList: PropTypes.array
+  companyList: PropTypes.array,
+  onCompanyChange: PropTypes.array
 };
 export default Header;

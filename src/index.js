@@ -1,25 +1,23 @@
+import Header from "./components/Header";
+// Type1 as Header_1,
 
-import Header, {
-  // Type1 as Header_1,
-} from "./components/Header";
- 
-import Nav, {
-  // Type1 as Nav_1,
-  NavItem
-} from "./components/Nav";
- 
+import Nav, { NavContent } from "./components/Nav";
+// Type1 as Nav_1,
+import Layout from "./components/Layout";
+
 const Components = {
   Header,
   // Header_1
   Nav,
   // Nav_1
-  NavItem,
+  NavContent,
+  Layout
 };
 export {
   Header,
   // Header_1
   Nav,
   // Nav_1
-  NavItem,
+  Layout
 };
 export default Components;

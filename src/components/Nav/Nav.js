@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { SlideDown, PopOut } from "wowjoy-component";
+import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
+// import { SlideDown, PopOut, ScrollBox } from "../../../test_component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
-import NavItem from "./NavItem";
+import NavContent from "./NavContent";
 const Wrap = styled.nav`
   display: flex;
-  width: 100%;
+  width: 230px;
   height: 100%;
   flex-direction: column;
   background: #fff;
@@ -15,19 +16,83 @@ const Wrap = styled.nav`
   font-size: 14px;
   color: #333;
   svg {
-    margin-right: 37px;
+    margin-right: 28px;
     width: 19px;
     height: 19px;
     path: {
       fill: #666;
     }
   }
+  ${p =>
+    p.size === "small" &&
+    `
+    width: 180px;
+    svg{
+      margin-right: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  `} .wjc-slieDown-subContent>.active {
+    & > .wjc-popOut-content,
+    & > .wjc-slieDown-content {
+      color: #06aea6;
+      position: relative;
+      &::before {
+        position: absolute;
+        height: 26px;
+        content: "";
+        display: block;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: currentColor;
+        margin: auto;
+      }
+    }
+  }
   ${props => props.defaultStyles};
 `;
 
 const SubMenuSlideDown = styled(SlideDown)`
-  & > div:first-child:hover {
+  .wjc-slieDown-content:hover {
     background: #e1f0ef;
+  }
+  .wjc-slieDown-subContent {
+    background: #f5f7f8;
+  }
+
+  &.active > .wjc-slieDown-content {
+    color: #06aea6;
+    position: relative;
+    &::before {
+      position: absolute;
+      height: 26px;
+      content: "";
+      display: block;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: currentColor;
+      margin: auto;
+    }
+  }
+  .wj-nav-item-content {
+    flex-grow: 1;
+  }
+  .wj-nav-item-content.hasSubList {
+    flex-grow: 0;
+  }
+  .wj-nav-item__3 > .wjc-slieDown-content > .wj-nav-item-content {
+    &::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 50%;
+      margin-right: 11px;
+    }
   }
 `;
 const SubMenuPopOut = styled(PopOut)`
@@ -39,21 +104,11 @@ const SubMenuPopOut = styled(PopOut)`
       background: #e1f0ef;
     }
   }
-  &.active > div {
-    /* color: ${p => (p.theme && p.theme.mainColor) || "#06aea6"}; */
-    /* &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      width: 4px;
-      height: 26px;
-      background: currentColor;
-    } */
+  &.open > .wjc-popOut-content {
+    color: #06aea6;
   }
-  .popOut-content__pop > div {
+
+  .wjc-popOut-subContent > div {
     background: #fff;
     box-shadow: 0 1px 6px 0 rgba(153, 153, 153, 0.5);
     width: 200px;
@@ -62,74 +117,197 @@ const SubMenuPopOut = styled(PopOut)`
     padding-bottom: 2px;
     color: #333;
   }
+  .wj-nav-item__3.active > div {
+    color: #06aea6;
+    &::before {
+      display: none;
+    }
+  }
+  .wj-nav-item__3 > div > .wj-nav-item-content {
+    padding-left: 31px;
+  }
 `;
-const SubList = styled.ul`
-  width: 200px;
-  max-height: 300px;
-  overflow-y: scroll;
-  background: #fff;
-  box-shadow: 0 1px 6px 0 rgba(153, 153, 153, 0.5);
+
+const Content = styled(NavContent)`
+  ${p => {
+    switch (p.rank) {
+      case 2:
+        return `
+        font-weight: normal;
+        height: 40px;
+        padding-left: ${p.size === "small" ? "47px" : "73px"};
+      `;
+      case 3:
+        return `
+        font-weight: normal;
+        height: 30px;
+        padding-left: ${p.size === "small" ? "47px" : "73px"};
+      `;
+      default:
+        return `
+        padding-left: ${p.size === "small" ? "16px" : "27px"};
+        `;
+    }
+  }};
 `;
 const SubMenu = props => {
   if (props.type === "pop") {
     return <SubMenuPopOut {...props} />;
   }
-  return <SubMenuSlideDown {...props} />;
+  return (
+    <SubMenuSlideDown
+      onBlur={e =>
+        !!document.querySelector(".wj-nav-item__1").parentNode.contains(e.target)
+      }
+      {...props}
+    />
+  );
 };
 
-const getSubMenu = (list, number, clickHandle, value) => {
-  return list.map((item, index) => (
-    <SubMenu
-      content={
-        <NavItem
-          data={item}
-          onClick={clickHandle}
-          to={item.to}
-          rank={number}
-          isActive={value && value === item.key}
-        >
-          {item.content}
-        </NavItem>
-      }
-      key={item.key || index}
-      type={item.subViewType}
-      className={`wj-nav-item__${number}`}
-      isActive={item.isActive}
-      defaultIsActive={item.defaultIsActive}
-    >
-      {item.subList
-        ? getSubMenu(item.subList, number + 1, clickHandle, value)
-        : null}
-    </SubMenu>
-  ));
+const GetSubMenu = ({
+  navList,
+  num,
+  clickHandle,
+  onTransitionEnd,
+  onChange,
+  valuePath,
+  size
+}) => {
+  const value = valuePath[0];
+  const loop = (list, number) => {
+    return list.map((item, index) => (
+      <SubMenu
+        size={size}
+        key={item.id}
+        type={item.subViewType}
+        className={`wj-nav-item__${number} ${(() => {
+          if (item.subViewType === "pop") {
+            return value && valuePath.includes(item.id) ? "active" : "";
+          }
+          return value && value === item.id ? "active" : "";
+        })()}`}
+        isActive={item.isOpen}
+        defaultIsActive={item.defaultIsOpen}
+        onTransitionEnd={onTransitionEnd}
+        onChange={onChange(item.subViewType)}
+        content={
+          <Content
+            data={item}
+            onClick={item.subList ? undefined : clickHandle}
+            to={item.to}
+            rank={number}
+            size={size}
+            className={`wj-nav-item-content ${
+              value && value === item.id ? "wj-nav-item-content__active" : ""
+            } ${item.subList ? "hasSubList" : ""}`}
+          >
+            {item.content}
+          </Content>
+        }
+      >
+        {item.subList ? loop(item.subList, number + 1) : null}
+      </SubMenu>
+    ));
+  };
+  return loop(navList, num);
 };
+
+const getValuePath = (navList, value) => {
+  const path = [];
+  const loop = list => {
+    for (const item of list) {
+      if (item.id === value) {
+        path.push(item.id);
+        return true;
+      }
+      if (item.subList && loop(item.subList)) {
+        path.push(item.id);
+        return true;
+      }
+    }
+  };
+  loop(navList);
+  return path;
+};
+
 class Nav extends PureComponent {
+  state = {
+    overflow: ""
+  };
+
   render() {
     const {
       className,
       defaultStyles,
       children,
+      size,
       navList,
-      keyName,
       value
     } = this.props;
+
+    const valuePath = getValuePath(navList, value);
+
     return (
-      <Wrap defaultStyles={defaultStyles} className={className}>
-        {getSubMenu(navList, 1, this.clickHandle, value)}
+      <Wrap defaultStyles={defaultStyles} className={className} size={size}>
+        <ScrollBox
+          defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
+            this.state.overflow === "visible"
+              ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
+              : ""
+          }`}
+          maxHeight={"100%"}
+          visible
+          hoverControl
+        >
+          <GetSubMenu
+            navList={navList}
+            num={1}
+            clickHandle={this.clickHandle}
+            onChange={this.toggleSubMenu}
+            onTransitionEnd={this.onTransitionEnd}
+            valuePath={valuePath}
+            size={size}
+          />
+        </ScrollBox>
       </Wrap>
     );
   }
   clickHandle = (e, itemData) => {
     const { onChange } = this.props;
-    onChange&&onChange(itemData.key || '',itemData)
+    onChange && onChange(itemData.id || "", itemData);
+  };
+  toggleSubMenu = type => value => {
+    if (type === "pop" && value) {
+      this.setState({
+        overflow: "visible"
+      });
+    } else {
+      this.setState({
+        overflow: "auto"
+      });
+    }
+  };
+  onTransitionEnd = (...args) => {
+    if(this.props.noScroll){
+      return 
+    }
+    this.forceUpdate();
   };
 }
 
 Nav.propTypes = {
   className: PropTypes.string,
-  defaultStyles: PropTypes.string
+  defaultStyles: PropTypes.string,
+  onChange: PropTypes.func,
+  size: PropTypes.string,
+  navList: PropTypes.array,
+  value: PropTypes.string,
+  defaultValue: PropTypes.string,
+  noScroll: PropTypes.bool,
 };
-export default withRouter(ControllSwitchHoc({
-  value: "activeKey",
-  defaultValue: "defaultActiveKey"
-})(Nav));
+export default withRouter(
+  ControllSwitchHoc({
+    value: "activeId",
+    defaultValue: "defaultActiveId"
+  })(Nav)
+);
