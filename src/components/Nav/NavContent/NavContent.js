@@ -12,9 +12,6 @@ const Wrap = styled.div`
   line-height: 1;
   svg {
     vertical-align: middle;
-    path {
-      fill: currentColor;
-    }
   }
   ${p => p.defaultStyles};
 `;

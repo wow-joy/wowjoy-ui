@@ -145,7 +145,7 @@ const User = styled.div`
   text-align: center;
   border-radius: 50%;
   position: relative;
-  z-index: 0;
+  z-index: 11;
   color: #fff;
   &::after {
     content: "";
@@ -190,6 +190,7 @@ const UserControlWrap = styled.div.attrs({
   right: 0;
   background: #fff;
   transform-origin: 98% -20px;
+  z-index:10;
   ${p =>
     p.visible
       ? `
@@ -305,7 +306,7 @@ class Header extends PureComponent {
     isOpen:
       this.props.defaultValue !== undefined ? this.props.defaultValue : true,
     companyListVisible: false,
-    selectedCompanyId: null
+    selectedCompanyId: this.props.defaultCompany
   };
 
   render() {
@@ -368,16 +369,15 @@ class Header extends PureComponent {
               onMouseLeave={this.hideUserControl}
             >
               {userLastName}
-              <UserControlWrap visible={this.state.userControlVisible}>
+              <UserControlWrap visible={this.state.userControlVisible} className={'wj-user-control__wrap'}>
                 <UserInfo>
                   <User>{userLastName}</User>
                   <p>
                     {user
-                      ? `${user.name}${user.number ? ` (${user.number}))` : ""}`
+                      ? `${user.name}${user.number ? ` (${user.number}))` : null}`
                       : null}
                   </p>
                 </UserInfo>
-
                 <UserControl>
                   {companyList && (
                     <span
@@ -514,6 +514,7 @@ Header.propTypes = {
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
   defaultValue: PropTypes.bool,
+  defaultCompany: PropTypes.string,
   companyList: PropTypes.array,
   onCompanyChange: PropTypes.array
 };

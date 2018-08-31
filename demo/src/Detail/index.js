@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Components, { NavContent } from "@src";
+import Components from "@src";
 import styled from "styled-components";
 import { ReactComponent as Home } from "@svg/home.svg";
 
@@ -89,7 +89,6 @@ const PROPS = {
   // isblur: true
   onChange: (...args) => console.log(args)
 };
-
 class Detail extends Component {
   state = { visible: true, showLeft: true };
   componentDidMount() {}
@@ -107,10 +106,10 @@ class Detail extends Component {
           <ComponentItem
             {...PROPS}
             header={<Components.Header onChange={this.toggleLeft} />}
-            asideLeft={<Components.Nav size={"small"} {...PROPS} />}
+            asideLeft={<Components.Nav  {...PROPS} />}
             asideRight={3}
             showLeft={this.state.showLeft}
-            leftSize={"small"}
+            // leftSize={"small"}
           >
             ComponentItem
           </ComponentItem>

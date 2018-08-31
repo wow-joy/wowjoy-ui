@@ -1,3 +1,15 @@
+## 0.3.1 (2018/8/31)
+
+### feature
+
+- Header组件新增defaultCompany api,wj-user-control\_\_wra classApi
+- Nav组件样式优化
+- 新增1个svg图标
+
+### docs
+
+- Header组件文档更新
+
 ## 0.3.0 (2018/8/30)
 
 ### feature

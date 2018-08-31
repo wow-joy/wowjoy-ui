@@ -8347,8 +8347,8 @@ worker-farm@^1.5.2:
     errno "~0.1.7"
 
 wowjoy-component@^2.3.2:
-  version "2.3.14"
-  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-2.3.14.tgz#4d29955a8692671988909a288aa46341b065cb31"
+  version "2.3.15"
+  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-2.3.15.tgz#0af550e4aeda039115dbf2a21f218aea3d5f0868"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

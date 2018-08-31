@@ -12,9 +12,6 @@ import {Nav} from 'wowjoy-ui'
 import { ReactComponent as Home } from "wowjoy-ui/static/medias/home.svg";
 
 const PROPS = {
-  user: {
-    name: "abc"
-  },
   navList: [
     {
       content: [<Home />, "首页"],

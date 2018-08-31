@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
-// import { SlideDown, PopOut, ScrollBox } from "../../../test_component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
+
 const Wrap = styled.nav`
   display: flex;
   width: 230px;
@@ -19,7 +19,7 @@ const Wrap = styled.nav`
     margin-right: 28px;
     width: 19px;
     height: 19px;
-    path: {
+    path {
       fill: #666;
     }
   }
@@ -34,7 +34,7 @@ const Wrap = styled.nav`
     }
   `} .wjc-slieDown-subContent>.active {
     & > .wjc-popOut-content,
-    & > .wjc-slieDown-content {
+    & > .wjc-slideDown-content {
       color: #06aea6;
       position: relative;
       &::before {
@@ -51,18 +51,30 @@ const Wrap = styled.nav`
       }
     }
   }
+  .childActive:not(.open):not(.active) > .wjc-popOut-content,
+  .childActive:not(.open):not(.active) > .wjc-slideDown-content {
+    color: #06aea6;
+    &::before {
+      display: none;
+    }
+    svg {
+      path {
+        fill: #06aea6;
+      }
+    }
+  }
   ${props => props.defaultStyles};
 `;
 
 const SubMenuSlideDown = styled(SlideDown)`
-  .wjc-slieDown-content:hover {
+  .wjc-slideDown-content:hover {
     background: #e1f0ef;
   }
   .wjc-slieDown-subContent {
     background: #f5f7f8;
   }
 
-  &.active > .wjc-slieDown-content {
+  &.active > .wjc-slideDown-content {
     color: #06aea6;
     position: relative;
     &::before {
@@ -84,7 +96,11 @@ const SubMenuSlideDown = styled(SlideDown)`
   .wj-nav-item-content.hasSubList {
     flex-grow: 0;
   }
-  .wj-nav-item__3 > .wjc-slieDown-content > .wj-nav-item-content {
+  .wj-nav-item__3{
+    color: #666;
+  }
+  .wj-nav-item__3 > .wjc-slideDown-content > .wj-nav-item-content {
+
     &::before {
       content: "";
       width: 4px;
@@ -117,7 +133,16 @@ const SubMenuPopOut = styled(PopOut)`
     padding-bottom: 2px;
     color: #333;
   }
-  .wj-nav-item__3.active > div {
+  &.childActive > .wjc-popOut-content {
+    color: #06aea6;
+    &::before {
+      display: none;
+    }
+  }
+  .wj-nav-item__3{
+    color: #333;
+  }
+  .wj-nav-item__3.active > div:first-child {
     color: #06aea6;
     &::before {
       display: none;
@@ -125,6 +150,10 @@ const SubMenuPopOut = styled(PopOut)`
   }
   .wj-nav-item__3 > div > .wj-nav-item-content {
     padding-left: 31px;
+    height: 30px;
+    &::before {
+      display: none;
+    }
   }
 `;
 
@@ -140,7 +169,7 @@ const Content = styled(NavContent)`
       case 3:
         return `
         font-weight: normal;
-        height: 30px;
+        height: 40px;
         padding-left: ${p.size === "small" ? "47px" : "73px"};
       `;
       default:
@@ -157,7 +186,9 @@ const SubMenu = props => {
   return (
     <SubMenuSlideDown
       onBlur={e =>
-        !!document.querySelector(".wj-nav-item__1").parentNode.contains(e.target)
+        !!document
+          .querySelector(".wj-nav-item__1")
+          .parentNode.contains(e.target)
       }
       {...props}
     />
@@ -180,12 +211,10 @@ const GetSubMenu = ({
         size={size}
         key={item.id}
         type={item.subViewType}
-        className={`wj-nav-item__${number} ${(() => {
-          if (item.subViewType === "pop") {
-            return value && valuePath.includes(item.id) ? "active" : "";
-          }
-          return value && value === item.id ? "active" : "";
-        })()}`}
+        className={`wj-nav-item__${number} ${
+          value && value === item.id ? "active" : ""
+        } ${value && valuePath.includes(item.id) ? "childActive" : ""}
+        `}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
         onTransitionEnd={onTransitionEnd}
@@ -288,8 +317,8 @@ class Nav extends PureComponent {
     }
   };
   onTransitionEnd = (...args) => {
-    if(this.props.noScroll){
-      return 
+    if (this.props.noScroll) {
+      return;
     }
     this.forceUpdate();
   };
@@ -303,7 +332,7 @@ Nav.propTypes = {
   navList: PropTypes.array,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
-  noScroll: PropTypes.bool,
+  noScroll: PropTypes.bool
 };
 export default withRouter(
   ControllSwitchHoc({
