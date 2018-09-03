@@ -190,7 +190,7 @@ const UserControlWrap = styled.div.attrs({
   right: 0;
   background: #fff;
   transform-origin: 98% -20px;
-  z-index:10;
+  z-index: 10;
   ${p =>
     p.visible
       ? `
@@ -369,13 +369,16 @@ class Header extends PureComponent {
               onMouseLeave={this.hideUserControl}
             >
               {userLastName}
-              <UserControlWrap visible={this.state.userControlVisible} className={'wj-user-control__wrap'}>
+              <UserControlWrap
+                visible={this.state.userControlVisible}
+                className={"wj-user-control__wrap"}
+              >
                 <UserInfo>
                   <User>{userLastName}</User>
                   <p>
                     {user
-                      ? `${user.name}${user.number ? ` (${user.number}))` : null}`
-                      : null}
+                      ? `${user.name}${user.number ? ` (${user.number}))` : ""}`
+                      : ""}
                   </p>
                 </UserInfo>
                 <UserControl>
