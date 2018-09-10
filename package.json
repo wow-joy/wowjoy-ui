@@ -1,6 +1,6 @@
 {
   "name": "wowjoy-ui",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "wowjoy-ui React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,7 +21,7 @@
     "test:watch": "nwb test-react --server"
   },
   "peerDependencies": {
-    "@svgr/webpack": "^2.0.0",
+    "@svgr/webpack": "^2.x",
     "react": "16.x",
     "react-dom": "16.x",
     "react-router-dom": "4.x",

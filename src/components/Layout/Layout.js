@@ -16,7 +16,7 @@ const Wrap = styled(LayoutBase)`
     height: 64px;
     z-index: 10;
   }
-  & > aside[position="left"] {
+  & > .wj-aside__left {
     flex-shrink: 0;
     background: #fff;
     max-height: calc(100vh - 64px);
@@ -27,7 +27,7 @@ const Wrap = styled(LayoutBase)`
         ? `margin-left: 0`
         : `margin-left:${p.leftSize === "small" ? "-180px" : "-230px"}`};
   }
-  & > aside[position="right"] {
+  & > .wj-aside__right {
     flex-shrink: 0;
     background: #fff;
     max-height: calc(100vh - 64px);
