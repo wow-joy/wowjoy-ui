@@ -8,6 +8,7 @@ module.exports = {
   },
   webpack: {
     aliases: {
+      "@test": path.resolve("test_component"),
       "@src": path.resolve("src"),
       "@lib": path.resolve("lib"),
       "@es": path.resolve("es"),

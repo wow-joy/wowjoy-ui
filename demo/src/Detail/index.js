@@ -25,6 +25,9 @@ class Detail extends Component {
         <div>
           <ComponentItem
             {...PROPS}
+            {...this.state}
+            type="question"
+            btnsText={['知道了']}
           >
             ComponentItem
           </ComponentItem>
