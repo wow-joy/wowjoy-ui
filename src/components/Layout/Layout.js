@@ -5,9 +5,13 @@ import { Layout as LayoutBase } from "wowjoy-component";
 
 const Wrap = styled(LayoutBase)`
   padding-top: 64px;
-  display: flex;
-  width: 100%;
   background: #f4f5f6;
+  width: 100%;
+
+  & > main {
+    display: flex;
+  }
+
   & > header {
     position: fixed;
     top: 0;
@@ -16,7 +20,7 @@ const Wrap = styled(LayoutBase)`
     height: 64px;
     z-index: 10;
   }
-  & > .wj-aside__left {
+  & .wj-aside__left {
     flex-shrink: 0;
     background: #fff;
     max-height: calc(100vh - 64px);
@@ -27,12 +31,12 @@ const Wrap = styled(LayoutBase)`
         ? `margin-left: 0`
         : `margin-left:${p.leftSize === "small" ? "-180px" : "-230px"}`};
   }
-  & > .wj-aside__right {
+  & .wj-aside__right {
     flex-shrink: 0;
     background: #fff;
     max-height: calc(100vh - 64px);
   }
-  & > article {
+  & > main > article {
     flex-grow: 1;
     margin: 0 20px;
     margin-bottom: 0;
@@ -44,7 +48,7 @@ const Wrap = styled(LayoutBase)`
 class Layout extends PureComponent {
   render() {
     const { children } = this.props;
-    return <Wrap main={children} {...this.props} />;
+    return <Wrap center={children} {...this.props} />;
   }
 }
 
