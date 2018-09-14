@@ -10,7 +10,7 @@ const PROPS = {
   onChange: (...args)=>console.log(args)
 };
 class Detail extends Component {
-  state = { visible: true, showLeft: true };
+  state = { visible: false, showLeft: true };
   componentDidMount() {}
   render() {
     const { match } = this.props;
@@ -23,6 +23,8 @@ class Detail extends Component {
     if (ComponentItem) {
       return (
         <div>
+          <div onClick={()=>this.setState({visible: true})} style={{width: '100px', height: '100px', background: '#000',}}>1</div>
+          <div onClick={()=>this.setState({visible: true})} style={{width: '100px', height: '100px', background: '#000',}}>2</div>
           <ComponentItem
             {...PROPS}
             {...this.state}
