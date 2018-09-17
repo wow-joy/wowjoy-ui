@@ -60,6 +60,17 @@ class Dialog extends PureComponent {
 
 Dialog.propTypes = {
   className: PropTypes.string,
-  defaultStyles: PropTypes.string
+  defaultStyles: PropTypes.string,
+  getContainer: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  autoClose: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  translate: PropTypes.string,
+  visible:PropTypes.bool,
+  layer: PropTypes.bool,
+  header: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  title: PropTypes.string,
+  btns: PropTypes.array,
+  btnsText: PropTypes.array,
+  onBtnsClick: PropTypes.func,
+  showCloseBtn: PropTypes.bool,
 };
 export default Dialog;

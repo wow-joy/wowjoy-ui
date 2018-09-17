@@ -221,6 +221,7 @@ const GetSubMenu = ({
         onChange={onChange(item.subViewType)}
         content={
           <Content
+            key={item.id}
             data={item}
             onClick={item.subList ? undefined : clickHandle}
             to={item.to}
