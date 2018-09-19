@@ -308,7 +308,14 @@ class Header extends PureComponent {
     companyListVisible: false,
     selectedCompanyId: this.props.defaultCompany
   };
-
+  componentWillReceiveProps(nextProps) {
+    const { defaultCompany } = this.nextProps;
+    if (defaultCompany - this.state.selectedCompanyId !== 0) {
+      this.setState({
+        selectedCompanyId: defaultCompany
+      });
+    }
+  }
   render() {
     const {
       className,
