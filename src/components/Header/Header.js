@@ -309,8 +309,8 @@ class Header extends PureComponent {
     selectedCompanyId: this.props.defaultCompany
   };
   componentWillReceiveProps(nextProps) {
-    const { defaultCompany } = this.nextProps;
-    if (defaultCompany - this.state.selectedCompanyId !== 0) {
+    const { defaultCompany } = nextProps;
+    if (defaultCompany !== this.state.selectedCompanyId) {
       this.setState({
         selectedCompanyId: defaultCompany
       });
@@ -403,7 +403,7 @@ class Header extends PureComponent {
                             <li
                               key={ele.id}
                               className={
-                                ele.id - this.state.selectedCompanyId === 0
+                                ele.id === this.state.selectedCompanyId
                                   ? "active"
                                   : null
                               }
@@ -411,7 +411,7 @@ class Header extends PureComponent {
                               data-content={ele.content}
                             >
                               {ele.content}
-                              {ele.id - this.state.selectedCompanyId === 0 && (
+                              {ele.id === this.state.selectedCompanyId && (
                                 <Selected />
                               )}
                             </li>
@@ -526,6 +526,6 @@ Header.propTypes = {
   defaultValue: PropTypes.bool,
   defaultCompany: PropTypes.string,
   companyList: PropTypes.array,
-  onCompanyChange: PropTypes.array
+  onCompanyChange: PropTypes.func
 };
 export default Header;
