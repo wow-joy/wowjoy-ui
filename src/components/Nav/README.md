@@ -9,7 +9,7 @@ Nav 组件
 ```
 import React from 'react'
 import {Nav} from 'wowjoy-ui'
-import { ReactComponent as Home } from "wowjoy-ui/static/medias/home.svg";
+import { ReactComponent as Home } from "wowjoy-ui/es/static/medias/svg/home.svg";
 
 const PROPS = {
   navList: [

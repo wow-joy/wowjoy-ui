@@ -20,7 +20,7 @@ const Foo = () => <Header></Header>
 | className       | 顶层样式 class                       | string |        |
 | defaultStyles   | 顶层默认样式                         | string |        |
 | children        | 内容                                 |  node  |        |
-| logo            | 内容                                 |  node  |        |
+| logo            | logo                                 |  node  |        |
 | title           | 标题                                 |  node  |        |
 | newsCount       | 信息数量                             | number |        |
 | user            | 用户信息                             | object |        |
