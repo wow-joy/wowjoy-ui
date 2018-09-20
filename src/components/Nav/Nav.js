@@ -96,11 +96,10 @@ const SubMenuSlideDown = styled(SlideDown)`
   .wj-nav-item-content.hasSubList {
     flex-grow: 0;
   }
-  .wj-nav-item__3{
+  .wj-nav-item__3 {
     color: #666;
   }
   .wj-nav-item__3 > .wjc-slideDown-content > .wj-nav-item-content {
-
     &::before {
       content: "";
       width: 4px;
@@ -139,7 +138,7 @@ const SubMenuPopOut = styled(PopOut)`
       display: none;
     }
   }
-  .wj-nav-item__3{
+  .wj-nav-item__3 {
     color: #333;
   }
   .wj-nav-item__3.active > div:first-child {
@@ -196,7 +195,7 @@ const SubMenu = props => {
 };
 
 const GetSubMenu = ({
-  navList,
+  navList = [],
   num,
   clickHandle,
   onTransitionEnd,
@@ -242,7 +241,7 @@ const GetSubMenu = ({
   return loop(navList, num);
 };
 
-const getValuePath = (navList, value) => {
+const getValuePath = (navList = [], value) => {
   const path = [];
   const loop = list => {
     for (const item of list) {

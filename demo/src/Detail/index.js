@@ -7,7 +7,7 @@ const PROPS = {
   total: 1000,
   pageSizeList: [10, 20, 30],
   defaultPageSize: 10,
-  onChange: (...args)=>console.log(args)
+  onChange: (...args) => console.log(args)
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
@@ -22,18 +22,9 @@ class Detail extends Component {
     const ComponentItem = Components[name];
     if (ComponentItem) {
       return (
-        <div>
-          <div onClick={()=>this.setState({visible: true})} style={{width: '100px', height: '100px', background: '#000',}}>1</div>
-          <div onClick={()=>this.setState({visible: true})} style={{width: '100px', height: '100px', background: '#000',}}>2</div>
-          <ComponentItem
-            {...PROPS}
-            {...this.state}
-            type="question"
-            btnsText={['知道了']}
-          >
-            ComponentItem
-          </ComponentItem>
-        </div>
+        <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}>
+          ComponentItem
+        </ComponentItem>
       );
     }
     return <div>ComponentItem not found</div>;
