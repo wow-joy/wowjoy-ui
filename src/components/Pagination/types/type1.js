@@ -3,6 +3,9 @@ const styles = `
     border: 1px solid #e6e6e6;
     margin-left: 4px;
   }
+  .wj-page-next{
+    margin-left: 4px;
+  }
 `
 
 const initSetting = {

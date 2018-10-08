@@ -1,9 +1,11 @@
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Layout from "./components/Layout";
-import Pagination, {Pagination1} from "./components/Pagination";
+import Pagination, { Pagination1 } from "./components/Pagination";
 import Dialog, { DialogDark, DialogConfirm } from "./components/Dialog";
 import Btn, { Btn1, Btn2, Btn3, BtnDisabled } from "./components/Btn";
+import Table from "./components/Table";
+import { CheckBox } from "./components/Form";
 
 const Components = {
   Header,
@@ -18,7 +20,9 @@ const Components = {
   Btn1,
   Btn2,
   Btn3,
-  BtnDisabled
+  BtnDisabled,
+  Table,
+  CheckBox
 };
 export {
   Header,
@@ -33,6 +37,8 @@ export {
   Btn1,
   Btn2,
   Btn3,
-  BtnDisabled
+  BtnDisabled,
+  Table,
+  CheckBox
 };
 export default Components;

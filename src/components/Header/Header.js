@@ -384,7 +384,7 @@ class Header extends PureComponent {
                   <User>{userLastName}</User>
                   <p>
                     {user
-                      ? `${user.name}${user.number ? ` (${user.number}))` : ""}`
+                      ? `${user.name}${user.number ? ` (${user.number})` : ""}`
                       : ""}
                   </p>
                 </UserInfo>

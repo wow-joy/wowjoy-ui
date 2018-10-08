@@ -4,10 +4,42 @@ import styled from "styled-components";
 import { ReactComponent as Home } from "@svg/home.svg";
 
 const PROPS = {
-  total: 1000,
-  pageSizeList: [10, 20, 30],
-  defaultPageSize: 10,
-  onChange: (...args) => console.log(args)
+  columns: [
+    {
+      title: "name",
+      render: (rowEle, rowIndex) => rowEle.name,
+      id: 11
+    },
+    {
+      title: "id",
+      render: (rowEle, rowIndex) => rowEle.id,
+      id: 22
+    },
+    {
+      title: "des",
+      render: (rowEle, rowIndex) => rowEle.des,
+      id: 33
+    }
+  ],
+  data: [
+    {
+      name: "xx1",
+      id: 111,
+      des: "xx_1"
+    },
+    {
+      name: "xx2",
+      id: 222,
+      des: "xx_2"
+    },
+    {
+      name: "xx3",
+      id: 333,
+      des: "xx_3"
+    }
+  ],
+  sort: (a, b) => b.des.match(/\d/)[0] - a.des.match(/\d/)[0],
+  filter: ele => ele.name === 'xx3'
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
@@ -21,11 +53,14 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     if (ComponentItem) {
-      return (
+      return [
+        <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}>
+          ComponentItem
+        </ComponentItem>,
         <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}>
           ComponentItem
         </ComponentItem>
-      );
+      ];
     }
     return <div>ComponentItem not found</div>;
   }

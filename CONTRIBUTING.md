@@ -1,3 +1,18 @@
+
+## 0.6.0 (2018/10/08)
+
+### feature
+
+- upgrade wowjoy-component@v2.5.0
+- 增加ScrollBox对webkit的优化
+
+## 0.5.6 (2018/9/21)
+
+### bugfix
+
+- 修复 Header 组件 '))' bug
+
+
 ## 0.5.4 (2018/9/20)
 
 ### feature
