@@ -1,3 +1,26 @@
+## 0.7.0 (2018/10/17)
+
+### feature
+
+- rewrite ControllSwitchHoc ,优化命名传递
+- 优化 ControllSwitchHoc 改变而引发的命名替换
+- pagination 组件增加每页数量改变事件 并允许外设每页数量
+
+### bugfix
+
+- 修复 pagination onChange,onPageSizeChange 的空判断
+
+## 0.6.4 (2018/10/9)
+
+### bugfix
+
+- 修复 nav 异常跳转
+
+## 0.6.2 (2018/10/9)
+
+### bugfix
+
+- 修复 路径异常
 
 ## 0.6.1 (2018/10/9)
 
@@ -10,14 +33,13 @@
 ### feature
 
 - upgrade wowjoy-component@v2.5.0
-- 增加ScrollBox对webkit的优化
+- 增加 ScrollBox 对 webkit 的优化
 
 ## 0.5.6 (2018/9/21)
 
 ### bugfix
 
 - 修复 Header 组件 '))' bug
-
 
 ## 0.5.4 (2018/9/20)
 

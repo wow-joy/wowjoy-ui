@@ -39,7 +39,10 @@ const PROPS = {
     }
   ],
   sort: (a, b) => b.des.match(/\d/)[0] - a.des.match(/\d/)[0],
-  filter: ele => ele.name === 'xx3'
+  filter: ele => ele.name === 'xx3',
+  total: 300,
+  pageSizeList: [10, 20, 30],
+  pageSize: 10
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };

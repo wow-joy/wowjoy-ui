@@ -34,7 +34,7 @@ class NavItem extends PureComponent {
     if (onClick && onClick(e, data) === false) {
       return;
     }
-    this.linkTo(e);
+    if (this.props.to) this.linkTo(e);
   };
   linkTo = e => {
     this.props.history.push(this.props.to);

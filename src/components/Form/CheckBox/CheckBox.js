@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { CheckBox as CheckBoxBase } from "@test";
+import { CheckBox as CheckBoxBase } from "wowjoy-component";
 const Wrap = styled(CheckBoxBase)`
   margin-right: 10px;
   color: ${p => p.theme.mainColor || "#06aea6"};

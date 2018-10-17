@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Table as TableBase } from "@test";
+import { Table as TableBase } from "wowjoy-component";
 import { CheckBox } from "../Form";
 import { ControllSwitchHoc } from "wowjoy-component/es/tools";
 const Wrap = styled(TableBase)`

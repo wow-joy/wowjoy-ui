@@ -5,6 +5,7 @@ import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
+const isChrome = /(Chrome|Safari)/i.test(window.navigator.userAgent) ;
 
 const Wrap = styled.nav`
   display: flex;
@@ -320,7 +321,9 @@ class Nav extends PureComponent {
     if (this.props.noScroll) {
       return;
     }
-    this.forceUpdate();
+    if(!isChrome){
+      this.forceUpdate();
+    }
   };
 }
 
