@@ -1,3 +1,14 @@
+## 0.7.2 (2018/10/26)
+
+### bugfix
+
+- 修复 ControllSwitchHoc 变更引发的异常
+## 0.7.1 (2018/10/19)
+
+### bugfix
+
+- 修复 pagination onChange, pageSize 丢失
+
 ## 0.7.0 (2018/10/17)
 
 ### feature

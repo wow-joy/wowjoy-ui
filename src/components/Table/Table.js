@@ -39,7 +39,7 @@ const Wrap = styled(TableBase)`
 `;
 class Table extends PureComponent {
   onSelectedChange = (rowEle, rowIndex) => e => {
-    const { onChange, value = [] } = this.props;
+    const { onChange, selected = [] } = this.props;
     if (rowEle instanceof Array) {
       onChange(rowEle.map(ele => ele.id), "all", -1, e);
       return;
@@ -50,21 +50,21 @@ class Table extends PureComponent {
       }
       return [...arr, item];
     };
-    onChange(toggleArr(value, rowEle.id), rowEle, rowIndex, e);
+    onChange(toggleArr(selected, rowEle.id), rowEle, rowIndex, e);
   };
 
   addColumns = columns => {
-    const { value = [], page, pageSize, data } = this.props;
+    const { selected = [], page, pageSize, data } = this.props;
     const sliceData =
       page && size
         ? data.slice(page * pageSize, page * pageSize + pageSize)
         : data;
     const fullSelect = (() => {
-      if (value.length === 0) {
+      if (selected.length === 0) {
         return false;
       }
 
-      if (sliceData.some(ele => !value.includes(ele.id))) {
+      if (sliceData.some(ele => !selected.includes(ele.id))) {
         return "half-active";
       }
       return true;
@@ -82,7 +82,7 @@ class Table extends PureComponent {
         render: (rowEle, rowIndex) => (
           <CheckBox
             onChange={this.onSelectedChange(rowEle, rowIndex)}
-            value={value.includes(rowEle.id)}
+            value={selected.includes(rowEle.id)}
           />
         ),
         id: "checkBox"
@@ -137,7 +137,7 @@ Table.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   selection: PropTypes.bool,
-  value: PropTypes.array,
+  selected: PropTypes.array,
   onChange: PropTypes.func
 };
 

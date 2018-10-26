@@ -201,10 +201,10 @@ const GetSubMenu = ({
   clickHandle,
   onTransitionEnd,
   onChange,
-  valuePath,
+  activePath,
   size
 }) => {
-  const value = valuePath[0];
+  const activeId = activePath[0];
   const loop = (list, number) => {
     return list.map((item, index) => (
       <SubMenu
@@ -212,8 +212,8 @@ const GetSubMenu = ({
         key={item.id}
         type={item.subViewType}
         className={`wj-nav-item__${number} ${
-          value && value === item.id ? "active" : ""
-        } ${value && valuePath.includes(item.id) ? "childActive" : ""}
+          activeId && activeId === item.id ? "active" : ""
+        } ${activeId && activePath.includes(item.id) ? "childActive" : ""}
         `}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
@@ -228,7 +228,7 @@ const GetSubMenu = ({
             rank={number}
             size={size}
             className={`wj-nav-item-content ${
-              value && value === item.id ? "wj-nav-item-content__active" : ""
+              activeId && activeId === item.id ? "wj-nav-item-content__active" : ""
             } ${item.subList ? "hasSubList" : ""}`}
           >
             {item.content}
@@ -242,11 +242,11 @@ const GetSubMenu = ({
   return loop(navList, num);
 };
 
-const getValuePath = (navList = [], value) => {
+const getValuePath = (navList = [], activeId) => {
   const path = [];
   const loop = list => {
     for (const item of list) {
-      if (item.id === value) {
+      if (item.id === activeId) {
         path.push(item.id);
         return true;
       }
@@ -272,10 +272,10 @@ class Nav extends PureComponent {
       children,
       size,
       navList,
-      value
+      activeId
     } = this.props;
 
-    const valuePath = getValuePath(navList, value);
+    const activePath = getValuePath(navList, activeId);
 
     return (
       <Wrap defaultStyles={defaultStyles} className={className} size={size}>
@@ -295,7 +295,7 @@ class Nav extends PureComponent {
             clickHandle={this.clickHandle}
             onChange={this.toggleSubMenu}
             onTransitionEnd={this.onTransitionEnd}
-            valuePath={valuePath}
+            activePath={activePath}
             size={size}
           />
         </ScrollBox>
@@ -306,8 +306,8 @@ class Nav extends PureComponent {
     const { onChange } = this.props;
     onChange && onChange(itemData.id || "", itemData);
   };
-  toggleSubMenu = type => value => {
-    if (type === "pop" && value) {
+  toggleSubMenu = type => activeId => {
+    if (type === "pop" && activeId) {
       this.setState({
         overflow: "visible"
       });
@@ -333,8 +333,8 @@ Nav.propTypes = {
   onChange: PropTypes.func,
   size: PropTypes.string,
   navList: PropTypes.array,
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
+  activeId: PropTypes.string,
+  defaultActiveId: PropTypes.string,
   noScroll: PropTypes.bool
 };
 export default withRouter(

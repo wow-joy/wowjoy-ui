@@ -8403,9 +8403,9 @@ worker-farm@^1.5.2:
   dependencies:
     errno "~0.1.7"
 
-wowjoy-component@^2.5.2:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-2.6.1.tgz#f02081b167b89cb17bbef3403cf42551472fb21e"
+wowjoy-component@2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-2.6.2.tgz#32ee75c029e891112b32969f468ac130d1d403e5"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
