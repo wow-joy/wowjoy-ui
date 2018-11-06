@@ -1,8 +1,20 @@
+## 0.7.3 (2018/11/6)
+
+### feature
+
+- table 新增 onRowClick 事件
+- select 增加 class api
+
+### bugfix
+
+- 修复 文本错误: 退出登陆 => 退出登录
+
 ## 0.7.2 (2018/10/26)
 
 ### bugfix
 
 - 修复 ControllSwitchHoc 变更引发的异常
+
 ## 0.7.1 (2018/10/19)
 
 ### bugfix

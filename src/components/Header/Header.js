@@ -426,7 +426,7 @@ class Header extends PureComponent {
                   </span>
                   <span onClick={this.logOut}>
                     <LogOut />
-                    退出登陆
+                    退出登录
                   </span>
                   <form
                     action="/logout"
