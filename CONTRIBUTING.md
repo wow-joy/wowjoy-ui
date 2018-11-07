@@ -1,3 +1,9 @@
+## 0.7.4 (2018/11/7)
+
+### bugfix
+
+- table fix data error
+
 ## 0.7.3 (2018/11/6)
 
 ### feature

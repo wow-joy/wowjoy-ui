@@ -5,6 +5,10 @@ import { ReactComponent as Password } from "../../static/medias/svg/password.svg
 import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
 import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
 import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
+import { ReactComponent as NavOpen } from "../../static/medias/svg/nav_open.svg";
+import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.svg";
+import { ReactComponent as WowjoyLogo } from "../../static/medias/svg/wowjoy_logo.svg";
+import { ReactComponent as News } from "../../static/medias/svg/news.svg";
 const Wrap = styled.header`
   display: flex;
   align-items: center;
@@ -25,9 +29,7 @@ const Left = styled.div`
     }
   }
 `;
-const OpenIcon = styled(
-  require("../../static/medias/svg/nav_open.svg").ReactComponent
-)`
+const OpenIcon = styled(NavOpen)`
   width: 18px;
   height: auto;
   cursor: pointer;
@@ -35,9 +37,7 @@ const OpenIcon = styled(
     fill: ${p => p.theme.fontColor};
   }
 `;
-const CloseIcon = styled(
-  require("../../static/medias/svg/nav_close.svg").ReactComponent
-)`
+const CloseIcon = styled(NavClose)`
   width: 18px;
   height: auto;
   cursor: pointer;
@@ -74,9 +74,7 @@ const Right = styled.div`
   display: flex;
   align-items: center;
 `;
-const WowjoyIcon = styled(
-  require("../../static/medias/svg/wowjoy_logo.svg").ReactComponent
-)`
+const WowjoyIcon = styled(WowjoyLogo)`
   width: 22px;
   height: auto;
   path {
@@ -93,9 +91,7 @@ const NewsIconBox = styled.span`
     vertical-align: middle;
   }
 `;
-const NewsIcon = styled(
-  require("../../static/medias/svg/news.svg").ReactComponent
-)`
+const NewsIcon = styled(News)`
   width: 20px;
   height: auto;
   path {

@@ -98,7 +98,8 @@ class Table extends PureComponent {
       data,
       columns,
       selection = true,
-      filter
+      filter,
+      onRowClick
     } = this.props;
 
     return (
@@ -107,6 +108,7 @@ class Table extends PureComponent {
         className={className}
         data={data}
         columns={selection ? this.addColumns(columns) : columns}
+        onRowClick
       >
         {children}
       </Wrap>
@@ -138,7 +140,8 @@ Table.propTypes = {
   columns: PropTypes.array.isRequired,
   selection: PropTypes.bool,
   selected: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onRowClick: PropTypes.func
 };
 
 export default ControllSwitchHoc({
