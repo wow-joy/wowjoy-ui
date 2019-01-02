@@ -1,3 +1,17 @@
+## 0.8.1 (2019/1/2)
+
+### bugfix
+
+- Header 组件 公司切换 bug 修复
+
+### feature
+
+- Header 组件 新增 api company, 并增加受控模式
+
+### doc
+
+- 更新 Header 组件文档
+
 ## 0.8.0 (2019/1/2)
 
 ### feature
