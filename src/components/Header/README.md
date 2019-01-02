@@ -8,7 +8,7 @@ Header 组件
 
 ```
 import React from 'react'
-import Header from 'wowjoy-ui'
+import {Header} from 'wowjoy-ui'
 
 const Foo = () => <Header></Header>
 ```
@@ -28,7 +28,8 @@ const Foo = () => <Header></Header>
 | isblur          | 是否处于失焦状态                     |  bool  |        |
 | onChange        | 左侧图标状态改变事件                 |  func  |        |
 | defaultValue    | 左侧图标初始状态                     |  bool  |        |
-| defaultCompany  | 公司初始选中的 id                    | string |        |
+| Company         | 公司始选中的 id (受控)               | string |        |
+| defaultCompany  | 公司初始选中的 id (非受控)           | string |        |
 | companyList     | 公司列表 `[{id, content}]`           | array  |        |
 | onCompanyChange | 公司改变事件 params: `(id, content)` |  func  |        |
 

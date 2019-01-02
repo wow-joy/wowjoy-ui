@@ -9,6 +9,8 @@ import { ReactComponent as NavOpen } from "../../static/medias/svg/nav_open.svg"
 import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.svg";
 import { ReactComponent as WowjoyLogo } from "../../static/medias/svg/wowjoy_logo.svg";
 import { ReactComponent as News } from "../../static/medias/svg/news.svg";
+import { ControllSwitchHoc } from "wowjoy-component/es/tools";
+
 const Wrap = styled.header`
   display: flex;
   align-items: center;
@@ -301,17 +303,9 @@ class Header extends PureComponent {
     userControlVisible: false,
     isOpen:
       this.props.defaultValue !== undefined ? this.props.defaultValue : true,
-    companyListVisible: false,
-    selectedCompanyId: this.props.defaultCompany
+    companyListVisible: false
   };
-  componentWillReceiveProps(nextProps) {
-    const { defaultCompany } = nextProps;
-    if (defaultCompany !== this.state.selectedCompanyId) {
-      this.setState({
-        selectedCompanyId: defaultCompany
-      });
-    }
-  }
+
   render() {
     const {
       className,
@@ -323,7 +317,8 @@ class Header extends PureComponent {
       user,
       theme,
       isblur,
-      companyList
+      companyList,
+      company
     } = this.props;
     const userLastName = user ? user.name.substr(-1) : "";
     const defaultTheme = isblur
@@ -398,18 +393,12 @@ class Header extends PureComponent {
                           {companyList.map((ele, index) => (
                             <li
                               key={ele.id}
-                              className={
-                                ele.id === this.state.selectedCompanyId
-                                  ? "active"
-                                  : null
-                              }
+                              className={ele.id === company ? "active" : null}
                               data-id={ele.id}
                               data-content={ele.content}
                             >
                               {ele.content}
-                              {ele.id === this.state.selectedCompanyId && (
-                                <Selected />
-                              )}
+                              {ele.id === company && <Selected />}
                             </li>
                           ))}
                         </CompanyList>
@@ -503,7 +492,6 @@ class Header extends PureComponent {
     const { id, content } = e.target.dataset;
     onCompanyChange && onCompanyChange(id, content);
     this.setState({
-      selectedCompanyId: id,
       companyListVisible: false
     });
   };
@@ -520,8 +508,13 @@ Header.propTypes = {
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
   defaultValue: PropTypes.bool,
+  company: PropTypes.string,
   defaultCompany: PropTypes.string,
   companyList: PropTypes.array,
   onCompanyChange: PropTypes.func
 };
-export default Header;
+export default ControllSwitchHoc({
+  onChange: "onCompanyChange",
+  value: "company",
+  defaultValue: "defaultCompany"
+})(Header);

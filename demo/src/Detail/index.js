@@ -39,13 +39,18 @@ const PROPS = {
     }
   ],
   sort: (a, b) => b.des.match(/\d/)[0] - a.des.match(/\d/)[0],
-  filter: ele => ele.name === 'xx3',
+  filter: ele => ele.name === "xx3",
   total: 300,
   pageSizeList: [10, 20, 30],
-  pageSize: 10
+  pageSize: 10,
+
+  
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
+  companyChange = (id, content) => {
+    alert("切换到id为" + id + "公司");
+  };
   componentDidMount() {}
   render() {
     const { match } = this.props;
@@ -56,14 +61,20 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     if (ComponentItem) {
-      return [
-        <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}>
-          ComponentItem
-        </ComponentItem>,
-        <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}>
-          ComponentItem
-        </ComponentItem>
-      ];
+      return <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}
+      user={{
+        name: "用户名",
+        number: "工号10086"
+      }}
+      companyList={[
+        { content: "公司1", id: "1" },
+        { content: <span>公司2</span>, id: "2" }
+      ]}
+      company={'2'}
+      onCompanyChange={this.companyChange}
+      >
+        ComponentItem
+      </ComponentItem>;
     }
     return <div>ComponentItem not found</div>;
   }
