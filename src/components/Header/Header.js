@@ -306,6 +306,10 @@ class Header extends PureComponent {
     companyListVisible: false
   };
 
+  componentWillUnmount() {
+    window.removeEventListener("click", this.onBlur);
+  }
+  
   render() {
     const {
       className,
@@ -448,23 +452,24 @@ class Header extends PureComponent {
     });
   };
   hideUserControl = () => {
-    this.userControlHideTimer = setTimeout(
-      () =>
-        this.setState({
-          userControlVisible: false,
-          companyListVisible: false
-        }),
-      1000
-    );
+    this.userControlHideTimer = setTimeout(this.hide, 1000);
   };
   onBlur = e => {
-    if (!this.wrapNode.contains(e.target)) {
-      clearTimeout(this.userControlHideTimer);
-      this.setState({
-        userControlVisible: false,
-        companyListVisible: false
-      });
+    if (!this.wrapNode) {
+      console.error("Blur error: this.wrapNode is ", this.wrapNode);
+      window.removeEventListener("click", this.onBlur);
     }
+    if (!this.wrapNode.contains(e.target)) {
+      this.hide();
+    }
+  };
+  hide = () => {
+    clearTimeout(this.userControlHideTimer);
+    window.removeEventListener("click", this.onBlur);
+    this.setState({
+      userControlVisible: false,
+      companyListVisible: false
+    });
   };
   onChange = e => {
     this.props.onChange && this.props.onChange(e, !this.state.isOpen);
