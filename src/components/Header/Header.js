@@ -376,7 +376,7 @@ class Header extends PureComponent {
                 className={"wj-user-control__wrap"}
               >
                 <UserInfo>
-                  <User>{userLastName}</User>
+                  <User onClick={this.props.onUserNameClick}>{userLastName}</User>
                   <p>
                     {user
                       ? `${user.name}${user.number ? ` (${user.number})` : ""}`
@@ -516,7 +516,8 @@ Header.propTypes = {
   company: PropTypes.string,
   defaultCompany: PropTypes.string,
   companyList: PropTypes.array,
-  onCompanyChange: PropTypes.func
+  onCompanyChange: PropTypes.func,
+  onUserNameClick: PropTypes.func,
 };
 export default ControllSwitchHoc({
   onChange: "onCompanyChange",

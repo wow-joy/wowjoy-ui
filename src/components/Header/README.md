@@ -32,6 +32,7 @@ const Foo = () => <Header></Header>
 | defaultCompany  | 公司初始选中的 id (非受控)           | string |        |
 | companyList     | 公司列表 `[{id, content}]`           | array  |        |
 | onCompanyChange | 公司改变事件 params: `(id, content)` |  func  |        |
+| onUserNameClick | 弹出框的用户名点击事件               |  func  |        |
 
 ## classApi
 

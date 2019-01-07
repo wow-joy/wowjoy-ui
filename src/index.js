@@ -6,6 +6,7 @@ import Dialog, { DialogDark, DialogConfirm } from "./components/Dialog";
 import Btn, { Btn1, Btn2, Btn3, BtnDisabled } from "./components/Btn";
 import Table from "./components/Table";
 import Toast from "./components/Toast";
+import Input from "./components/Input";
 import { CheckBox } from "./components/Form";
 
 const Components = {
@@ -24,7 +25,8 @@ const Components = {
   BtnDisabled,
   Table,
   CheckBox,
-  Toast
+  Toast,
+  Input
 };
 export {
   Header,
@@ -42,6 +44,7 @@ export {
   BtnDisabled,
   Table,
   CheckBox,
-  Toast
+  Toast,
+  Input
 };
 export default Components;

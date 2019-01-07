@@ -4,47 +4,8 @@ import styled from "styled-components";
 import { ReactComponent as Home } from "@svg/home.svg";
 
 const PROPS = {
-  columns: [
-    {
-      title: "name",
-      render: (rowEle, rowIndex) => rowEle.name,
-      id: 11
-    },
-    {
-      title: "id",
-      render: (rowEle, rowIndex) => rowEle.id,
-      id: 22
-    },
-    {
-      title: "des",
-      render: (rowEle, rowIndex) => rowEle.des,
-      id: 33
-    }
-  ],
-  data: [
-    {
-      name: "xx1",
-      id: 111,
-      des: "xx_1"
-    },
-    {
-      name: "xx2",
-      id: 222,
-      des: "xx_2"
-    },
-    {
-      name: "xx3",
-      id: 333,
-      des: "xx_3"
-    }
-  ],
-  sort: (a, b) => b.des.match(/\d/)[0] - a.des.match(/\d/)[0],
-  filter: ele => ele.name === "xx3",
-  total: 300,
-  pageSizeList: [10, 20, 30],
-  pageSize: 10,
-
-  
+  viewType: "password",
+  errorMsg:'xxx'
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
@@ -61,20 +22,7 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     if (ComponentItem) {
-      return <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]}
-      user={{
-        name: "用户名",
-        number: "工号10086"
-      }}
-      companyList={[
-        { content: "公司1", id: "1" },
-        { content: <span>公司2</span>, id: "2" }
-      ]}
-      company={'2'}
-      onCompanyChange={this.companyChange}
-      >
-        ComponentItem
-      </ComponentItem>;
+      return <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]} />;
     }
     return <div>ComponentItem not found</div>;
   }
