@@ -1,7 +1,20 @@
+## 0.9.0 (2019/1/7)
+
+### feature
+
+- Header 组件增加了名字点击事件
+- 新增 Input 组件, 新增 captcha, password Type
+
+### doc
+
+- 更新 Header 组件文档
+- 新增 Input 组件文档
+
 ## 0.8.2 (2019/1/3)
+
 ### bugfix
 
-- Header 组件 onblur增加了前置判断和事件移除
+- Header 组件 onblur 增加了前置判断和事件移除
 
 ## 0.8.1 (2019/1/2)
 
