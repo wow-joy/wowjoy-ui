@@ -1,16 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styled, { keyframes, ThemeProvider } from "styled-components";
-import { ReactComponent as Password } from "../../static/medias/svg/password.svg";
-import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
-import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
-import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
+import styled, { ThemeProvider } from "styled-components";
+
 import { ReactComponent as NavOpen } from "../../static/medias/svg/nav_open.svg";
 import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.svg";
 import { ReactComponent as WowjoyLogo } from "../../static/medias/svg/wowjoy_logo.svg";
 import { ReactComponent as News } from "../../static/medias/svg/news.svg";
 import { ControllSwitchHoc } from "wowjoy-component/es/tools";
-
+import MsgList from "./MsgList";
+import AppList from "./AppList";
+import UserInfo from "./UserInfo";
 const Wrap = styled.header`
   display: flex;
   align-items: center;
@@ -71,10 +70,41 @@ const Center = styled.div`
   margin-left: 53px;
   margin-right: 108px;
 `;
-const Right = styled.div`
+const Right = styled.ul`
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  height: 50px;
+  & > li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      & > .wj-header-dropdown {
+        z-index: 10;
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+`;
+
+const ControlWrap = styled.div.attrs({ className: "wj-header-dropdown" })`
+  cursor: auto;
+  opacity: 0;
+  transform: scale(0);
+  box-shadow: 0 1px 4px 0 rgba(132, 132, 132, 0.5);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  transform-origin: 100% 0;
+  z-index: -1;
+  transition: 0.3s linear;
 `;
 const WowjoyIcon = styled(WowjoyLogo)`
   width: 22px;
@@ -87,8 +117,6 @@ const NewsIconBox = styled.span`
   width: 20px;
   position: relative;
   display: inline-block;
-  margin-left: 26px;
-  margin-right: 22px;
   svg {
     vertical-align: middle;
   }
@@ -105,35 +133,15 @@ const Badge = styled.i`
   position: absolute;
   right: 0;
   top: 0;
-  transform: translate(50%, -50%) scale(0.5, 0.5);
-  width: 24px;
-  height: 24px;
-  font-size: 16px;
-  line-height: 24px;
+  transform: translate(50%, -50%);
+  padding: 0 5px;
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
   text-align: center;
   color: #fff;
   background: #f36969;
-  border-radius: 50%;
-`;
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
+  border-radius: 8px;
 `;
 const User = styled.div`
   width: 32px;
@@ -156,160 +164,16 @@ const User = styled.div`
     background-color: ${p => (!p.deep || p.isblur ? "#06aea6" : "#007872")};
     z-index: -1;
   }
-  ${p =>
-    p.hasHoverEvent
-      ? `
-      cursor: pointer;
-      height: 48px;
-      margin-bottom: -16px;
-      &:hover{
-        &::after{
-          background-color: #079C95;
-        }
-      }
-    `
-      : null};
-`;
-const UserControlWrap = styled.div.attrs({
-  onAnimationStart: p => e => (e.target.style.display = "block"),
-  onAnimationEnd: p => {
-    return e => {
-      e.target.style.display = p.visible ? "block" : "none";
-    };
-  }
-})`
-  cursor: auto;
-  display: none;
-  opacity: 0;
-  width: 200px;
-  box-shadow: 0 1px 4px 0 rgba(132, 132, 132, 0.5);
-  position: absolute;
-  top: 48px;
-  right: 0;
-  background: #fff;
-  transform-origin: 98% -20px;
-  z-index: 10;
-  ${p =>
-    p.visible
-      ? `
-      display: block !important;
-      animation: ${fadeIn} 0.4s forwards;
-    `
-      : `
-      animation: ${fadeOut} 0.4s forwards;
-    `};
-`;
-const UserInfo = styled.div`
-  background: #f5f7f8;
-  height: 76px;
-  padding: 9px 0 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    color: #666;
-    font-size: 12px;
-    line-height: 14px;
-    margin-top: 9px;
-  }
-`;
-
-const UserControl = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: flex-end;
-  span {
-    position: relative;
-    height: 40px;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    line-height: 14px;
-    font-size: 12px;
-    cursor: pointer;
-    user-select: none;
-    svg {
-      margin-right: 9px;
-      width: 16px;
-      height: auto;
-      path {
-        fill: #666;
-      }
-    }
-    &:hover {
-      color: #06aea6;
-      svg {
-        path {
-          fill: #06aea6;
-        }
-      }
-    }
-  }
-`;
-const Delta = styled.i`
-  display: inline-block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border-left: 4px solid currentColor;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  transform: rotate(${p => (p.isActive ? "90deg" : "0deg")});
-  transition: 0.3s;
-`;
-const CompanyList = styled.ul`
-  position: absolute;
-  top: 0;
-  right: 100%;
-  margin-right: 2px;
-  background: #ffffff;
-  box-shadow: 0 1px 4px 0 rgba(132, 132, 132, 0.5);
-  width: 160px;
-  li {
-    color: #666;
-    height: 32px;
-    padding: 0 10px;
-    line-height: 32px;
-    font-size: 12px;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    svg {
-      width: 10px;
-    }
-    &:hover {
-      background: #fffbe0;
-    }
-    &.active {
-      color: #06aea6;
-      svg {
-        path {
-          fill: currentColor;
-        }
-      }
-    }
-  }
 `;
 class Header extends PureComponent {
   state = {
-    userControlVisible: false,
     isOpen:
-      this.props.defaultValue !== undefined ? this.props.defaultValue : true,
-    companyListVisible: false
+      this.props.defaultValue !== undefined ? this.props.defaultValue : true
   };
 
-  componentWillUnmount() {
-    window.removeEventListener("click", this.onBlur);
+  get newsCount() {
+    return (this.props.newsList || []).length;
   }
-  
   render() {
     const {
       className,
@@ -317,14 +181,17 @@ class Header extends PureComponent {
       children,
       logo,
       title,
-      newsCount,
+      appList,
+      newsList,
       user,
       theme,
       isblur,
       companyList,
-      company
+      company,
+      onCompanyChange,
+      onChangePassword,
+      onUserNameClick
     } = this.props;
-    const userLastName = user ? user.name.substr(-1) : "";
     const defaultTheme = isblur
       ? {
           mainColor: "#fff",
@@ -334,13 +201,24 @@ class Header extends PureComponent {
           mainColor: "#06aea6",
           fontColor: "#fff"
         };
+    const userLastName = user ? user.name.substr(-1) : "";
+
+    const UserInfoProps = {
+      onCompanyChange,
+      onChangePassword,
+      onUserNameClick,
+      user,
+      companyList,
+      company,
+      userLastName
+    };
+    const { newsCount } = this;
     return (
       <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
         <Wrap
           defaultStyles={defaultStyles}
           className={className}
           isblur={isblur}
-          innerRef={el => (this.wrapNode = el)}
         >
           <Left>
             <span onClick={this.onChange}>
@@ -358,146 +236,45 @@ class Header extends PureComponent {
           </Left>
           <Center>{children}</Center>
           <Right>
-            <WowjoyIcon />
-            <NewsIconBox>
-              <NewsIcon />
-              <Badge count={newsCount}> {newsCount}</Badge>
-            </NewsIconBox>
-            <User
-              deep
-              isblur={isblur}
-              hasHoverEvent
-              onMouseEnter={this.showUserControl}
-              onMouseLeave={this.hideUserControl}
-            >
-              {userLastName}
-              <UserControlWrap
-                visible={this.state.userControlVisible}
-                className={"wj-user-control__wrap"}
-              >
-                <UserInfo>
-                  <User onClick={this.props.onUserNameClick}>{userLastName}</User>
-                  <p>
-                    {user
-                      ? `${user.name}${user.number ? ` (${user.number})` : ""}`
-                      : ""}
-                  </p>
-                </UserInfo>
-                <UserControl>
-                  {companyList && (
-                    <span
-                      onClick={this.toggleCompanyList}
-                      style={{ marginRight: "50%" }}
-                    >
-                      <Company />
-                      切换公司
-                      <Delta isActive={this.state.companyListVisible} />
-                      {this.state.companyListVisible && (
-                        <CompanyList onClick={this.changeCompany}>
-                          {companyList.map((ele, index) => (
-                            <li
-                              key={ele.id}
-                              className={ele.id === company ? "active" : null}
-                              data-id={ele.id}
-                              data-content={ele.content}
-                            >
-                              {ele.content}
-                              {ele.id === company && <Selected />}
-                            </li>
-                          ))}
-                        </CompanyList>
-                      )}
-                    </span>
-                  )}
-                  <span onClick={this.changePassword}>
-                    <Password />
-                    修改密码
-                  </span>
-                  <span onClick={this.logOut}>
-                    <LogOut />
-                    退出登录
-                  </span>
-                  <form
-                    action="/logout"
-                    method="post"
-                    ref={el => {
-                      this.logOutForm = el;
-                    }}
-                    style={{ display: "none" }}
-                  >
-                    <input
-                      name="_csrf"
-                      value={window._csrf && window._csrf.token}
-                    />
-                    <input
-                      name="_csrf_header"
-                      value={window._csrf && window._csrf.name}
-                    />
-                  </form>
-                </UserControl>
-              </UserControlWrap>
-            </User>
+            <li>
+              <WowjoyIcon />
+              {appList &&
+                appList.length && (
+                  <ControlWrap>
+                    <AppList list={appList} />
+                  </ControlWrap>
+                )}
+            </li>
+            <li>
+              <NewsIconBox>
+                <NewsIcon />
+                <Badge count={newsCount}> {newsCount}</Badge>
+              </NewsIconBox>
+              {newsList &&
+                newsList.length && (
+                  <ControlWrap>
+                    <MsgList list={newsList} currentDate={new Date()} />
+                  </ControlWrap>
+                )}
+            </li>
+            <li>
+              <User deep isblur={isblur}>
+                {userLastName}
+              </User>
+              <ControlWrap className={"wj-user-control__wrap"}>
+                <UserInfo {...UserInfoProps} />
+              </ControlWrap>
+            </li>
           </Right>
         </Wrap>
       </ThemeProvider>
     );
   }
-  wrapNode;
-  userControlHideTimer;
-  showUserControl = e => {
-    clearTimeout(this.userControlHideTimer);
-    window.addEventListener("click", this.onBlur);
-    this.setState({
-      userControlVisible: true
-    });
-  };
-  hideUserControl = () => {
-    this.userControlHideTimer = setTimeout(this.hide, 1000);
-  };
-  onBlur = e => {
-    if (!this.wrapNode) {
-      console.error("Blur error: this.wrapNode is ", this.wrapNode);
-      window.removeEventListener("click", this.onBlur);
-    }
-    if (!this.wrapNode.contains(e.target)) {
-      this.hide();
-    }
-  };
-  hide = () => {
-    clearTimeout(this.userControlHideTimer);
-    window.removeEventListener("click", this.onBlur);
-    this.setState({
-      userControlVisible: false,
-      companyListVisible: false
-    });
-  };
+
   onChange = e => {
     this.props.onChange && this.props.onChange(e, !this.state.isOpen);
     this.setState({
       isOpen: !this.state.isOpen
-    });
-  };
-
-  logOutForm;
-  logOut = () => {
-    this.logOutForm.submit();
-  };
-
-  changePassword = () => {
-    console.log("unset event");
-  };
-
-  toggleCompanyList = () => {
-    this.setState({
-      companyListVisible: !this.state.companyListVisible
-    });
-  };
-  changeCompany = e => {
-    const { onCompanyChange } = this.props;
-    const { id, content } = e.target.dataset;
-    onCompanyChange && onCompanyChange(id, content);
-    this.setState({
-      companyListVisible: false
     });
   };
 }
@@ -518,6 +295,7 @@ Header.propTypes = {
   companyList: PropTypes.array,
   onCompanyChange: PropTypes.func,
   onUserNameClick: PropTypes.func,
+  onChangePassword: PropTypes.func
 };
 export default ControllSwitchHoc({
   onChange: "onCompanyChange",

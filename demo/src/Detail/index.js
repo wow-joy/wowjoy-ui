@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import Components from "@src";
 import styled from "styled-components";
-import { ReactComponent as Home } from "@svg/home.svg";
+import home,{ ReactComponent as Home } from "@svg/home.svg";
 
 const PROPS = {
   viewType: "password",
-  errorMsg:'xxx'
+  user: {
+    name: "xxx",
+    number: "123"
+  },
+
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
