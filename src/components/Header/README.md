@@ -45,3 +45,28 @@ const Foo = () => <Header></Header>
 | wj-header-dropdown\_\app   | 下拉菜单内容-应用系统      |
 | wj-header-dropdown\_\_msg  | 下拉菜单内容-消息通知      |
 | wj-header-company-list     | 下拉菜单-用户信息-公司列表 |
+
+## icon export
+
+图片具体样式请查看 io 页
+
+```
+import {
+  APIStore,
+  Authority,
+  Cockpit,
+  Developer,
+  Device,
+  Doctor,
+  HR,
+  Mail,
+  Material,
+  Nursing,
+  Outpatient,
+  PACS,
+  Process,
+  Quality,
+  SMS
+} from 'wowjoy-ui/es/header';
+
+```
