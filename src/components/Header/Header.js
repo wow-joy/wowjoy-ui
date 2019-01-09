@@ -16,6 +16,7 @@ const Wrap = styled.header`
   background: ${p => p.theme.mainColor};
   padding: 0 21px 0 27px;
   color: ${p => p.theme.fontColor};
+  height: 64px;
   ${p => (p.isblur ? `box-shadow: 0 1px 3px 0 rgba(225,225,225,0.50);` : ``)};
   ${p => p.defaultStyles};
 `;
@@ -74,7 +75,7 @@ const Right = styled.ul`
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 100%;
   & > li {
     display: flex;
     align-items: center;

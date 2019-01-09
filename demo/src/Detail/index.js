@@ -26,7 +26,7 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     if (ComponentItem) {
-      return <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]} />;
+      return <Components.Layout header={<ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]} />}></Components.Layout>
     }
     return <div>ComponentItem not found</div>;
   }
