@@ -1,6 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
+import { ReactComponent as MsgBase } from "../../static/medias/svg/msg.svg";
+import { ReactComponent as TimeBase } from "../../static/medias/svg/time.svg";
+import None from "./None";
+
 const Wrap = styled.div`
   width: 285px;
 `;
@@ -21,9 +26,16 @@ const Footer = styled.div`
   height: 40px;
   text-align: center;
   cursor: pointer;
+  & > svg {
+    width: 10px;
+    height: 10px;
+    path {
+      fill: #999;
+    }
+  }
 `;
 const List = styled.ul``;
-const Msg = styled.li`
+const News = styled.li`
   position: relative;
   color: #666;
   height: 64px;
@@ -34,6 +46,7 @@ const Msg = styled.li`
   flex-direction: column;
   justify-content: space-between;
   line-height: 1;
+  cursor: pointer;
   h6 {
     word-break: break-all;
     overflow: hidden;
@@ -43,6 +56,8 @@ const Msg = styled.li`
   p {
     color: #999;
     font-size: 12px;
+    display: flex;
+    align-items: center;
   }
   &::after {
     position: absolute;
@@ -57,15 +72,32 @@ const Msg = styled.li`
     display: none;
   }
 `;
+const Msg = styled(MsgBase)`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+const Time = styled(TimeBase)`
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  path {
+    fill: #999;
+  }
+`;
 const TEXT = {
   title: "消息通知",
   justNow: "刚刚",
   minutesAgo: "分钟前",
   hoursAgo: "小时前",
-  gotoMsgCenter: "进入消息中心 >>"
+  gotoMsgCenter: "进入消息中心 ",
+  none: "暂无消息"
 };
 
-class MsgList extends PureComponent {
+class NewsList extends PureComponent {
   get TEXT() {
     const { TEXT: propTEXT } = this.props;
     if (propTEXT) {
@@ -77,20 +109,31 @@ class MsgList extends PureComponent {
     return TEXT;
   }
   render() {
-    const { list: msgList, currentDate, gotoMsgCenter } = this.props;
+    const { list: newsList=[], currentDate, gotoMsgCenter } = this.props;
     const { TEXT } = this;
     return (
-      <Wrap className={"wj-header-dropdown-msg"}>
+      <Wrap className={"wj-header-dropdown-news"}>
         <Header>{TEXT.title}</Header>
-        <List>
-          {msgList.map((ele, index) => (
-            <Msg key={index} onClick={ele.onClick}>
-              <h6>{ele.content}</h6>
-              <p>{getDeltaTime(currentDate, ele.time)}</p>
-            </Msg>
-          ))}
-        </List>
-        <Footer onClick={gotoMsgCenter}>{TEXT.gotoMsgCenter}</Footer>
+        {newsList.length > 0 ? (
+          <List>
+            {newsList.map((ele, index) => (
+              <News key={index} onClick={ele.onClick} id={ele.id}>
+                <Msg />
+                <h6>{ele.content}</h6>
+                <p>
+                  <Time />
+                  {getDeltaTime(currentDate, ele.time)}
+                </p>
+              </News>
+            ))}
+          </List>
+        ) : (
+          <None>{TEXT.none}</None>
+        )}
+        <Footer onClick={gotoMsgCenter}>
+          {TEXT.gotoMsgCenter}
+          <Go />
+        </Footer>
       </Wrap>
     );
   }
@@ -109,11 +152,11 @@ function getDeltaTime(localDate, loadDate) {
   return loadDate.toLocaleDateString().replace(/\//g, ".");
 }
 
-MsgList.propTypes = {
+NewsList.propTypes = {
   TEXT: PropTypes.object,
   list: PropTypes.array,
   currentDate: PropTypes.object,
   gotoMsgCenter: PropTypes.func
 };
 
-export default MsgList;
+export default NewsList;

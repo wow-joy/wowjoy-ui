@@ -7,7 +7,7 @@ import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.sv
 import { ReactComponent as WowjoyLogo } from "../../static/medias/svg/wowjoy_logo.svg";
 import { ReactComponent as News } from "../../static/medias/svg/news.svg";
 import { ControllSwitchHoc } from "wowjoy-component/es/tools";
-import MsgList from "./MsgList";
+import NewsList from "./NewsList";
 import AppList from "./AppList";
 import UserInfo from "./UserInfo";
 const Wrap = styled.header`
@@ -133,7 +133,8 @@ const Badge = styled.i`
   display: ${p => (p.count ? "block" : "none")};
   position: absolute;
   right: 0;
-  top: 0;
+  top: 50%;
+  margin-top: -10px;
   transform: translate(50%, -50%);
   padding: 0 5px;
   font-size: 12px;
@@ -218,7 +219,7 @@ class Header extends PureComponent {
       <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
         <Wrap
           defaultStyles={defaultStyles}
-          className={className}
+          className={"wj-header-wrap " + className}
           isblur={isblur}
         >
           <Left>
@@ -239,24 +240,22 @@ class Header extends PureComponent {
           <Right>
             <li>
               <WowjoyIcon />
-              {appList &&
-                appList.length && (
-                  <ControlWrap>
-                    <AppList list={appList} />
-                  </ControlWrap>
-                )}
+              {
+                <ControlWrap>
+                  <AppList list={appList} />
+                </ControlWrap>
+              }
             </li>
             <li>
               <NewsIconBox>
                 <NewsIcon />
                 <Badge count={newsCount}> {newsCount}</Badge>
               </NewsIconBox>
-              {newsList &&
-                newsList.length && (
-                  <ControlWrap>
-                    <MsgList list={newsList} currentDate={new Date()} />
-                  </ControlWrap>
-                )}
+              {
+                <ControlWrap>
+                  <NewsList list={newsList} currentDate={new Date()} />
+                </ControlWrap>
+              }
             </li>
             <li>
               <User deep isblur={isblur}>
@@ -285,6 +284,8 @@ Header.propTypes = {
   defaultStyles: PropTypes.string,
   logo: PropTypes.node,
   title: PropTypes.node,
+  appList: PropTypes.array,
+  newsList: PropTypes.array,
   newsCount: PropTypes.number,
   user: PropTypes.object,
   theme: PropTypes.object,

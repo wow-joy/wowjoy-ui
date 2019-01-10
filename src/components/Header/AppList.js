@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import None from "./None";
+import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
+
 const Wrap = styled.div`
   width: 300px;
 `;
@@ -12,6 +15,13 @@ const Footer = styled.div`
   height: 40px;
   text-align: center;
   cursor: pointer;
+  & > svg {
+    width: 10px;
+    height: 10px;
+    path {
+      fill: #999;
+    }
+  }
 `;
 const List = styled.ul`
   background: #fff;
@@ -49,7 +59,8 @@ const App = styled.li`
   }
 `;
 const TEXT = {
-  viewMore: "查看更多系统 >>"
+  viewMore: "查看更多系统 ",
+  none: "暂无应用"
 };
 
 class AppList extends PureComponent {
@@ -64,19 +75,32 @@ class AppList extends PureComponent {
     return TEXT;
   }
   render() {
-    const { list: appList, viewMore } = this.props;
+    const { list: appList = [], viewMore } = this.props;
     const { TEXT } = this;
     return (
       <Wrap className={"wj-header-dropdown__app"}>
-        <List>
-          {appList.map((ele, index) => (
-            <App key={index} onClick={ele.onClick} title={ele.content}>
-              {ele.icon}
-              <p>{ele.content}</p>
-            </App>
-          ))}
-        </List>
-        <Footer onClick={viewMore}>{TEXT.viewMore}</Footer>
+        {appList.length > 0 ? (
+          <List>
+            {appList.map((ele, index) => (
+              <App
+                key={index}
+                onClick={ele.onClick}
+                title={ele.content}
+                id={ele.id}
+              >
+                {ele.icon}
+                <p>{ele.content}</p>
+              </App>
+            ))}
+          </List>
+        ) : (
+          <None>{TEXT.none}</None>
+        )}
+
+        <Footer onClick={viewMore}>
+          {TEXT.viewMore}
+          <Go />
+        </Footer>
       </Wrap>
     );
   }

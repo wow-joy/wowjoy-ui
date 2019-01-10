@@ -10,6 +10,7 @@ const PROPS = {
     number: "123"
   },
 
+
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
