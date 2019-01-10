@@ -1,16 +1,28 @@
 import React, { Component } from "react";
 import Components from "@src";
 import styled from "styled-components";
-import home,{ ReactComponent as Home } from "@svg/home.svg";
-
+import home, { ReactComponent as Home } from "@svg/home.svg";
+import APIStore from "@static/medias/images/APIStore.png";
 const PROPS = {
   viewType: "password",
   user: {
     name: "xxx",
     number: "123"
   },
-
-
+  appList: [
+    {
+      icon: <img src = {APIStore} />,
+      id: 1,
+      content: "x"
+    }
+  ],
+  newsList: [
+    {
+      id: 1,
+      content: "x",
+      time: new Date("2019-1-2")
+    }
+  ]
 };
 class Detail extends Component {
   state = { visible: false, showLeft: true };
@@ -27,7 +39,13 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     if (ComponentItem) {
-      return <Components.Layout header={<ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]} />}></Components.Layout>
+      return (
+        <Components.Layout
+          header={
+            <ComponentItem {...PROPS} {...this.state} btnsText={["知道了"]} />
+          }
+        />
+      );
     }
     return <div>ComponentItem not found</div>;
   }

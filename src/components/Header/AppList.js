@@ -47,6 +47,8 @@ const App = styled.li`
     margin-left: 7%;
   }
   img {
+    display: block;
+    margin: auto;
     width: 40px;
     height: 40px;
   }

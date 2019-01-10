@@ -11,6 +11,26 @@ import React from 'react'
 import {Header} from 'wowjoy-ui'
 
 const Foo = () => <Header></Header>
+
+// with appList newsList
+import APIStore from "wowjoy-ui/es/header";
+
+const Foo = () => <Header
+ appList: [
+    {
+      icon: <img src = {APIStore} />,
+      id: 1,
+      content: "x"
+    }
+  ],
+  newsList: [
+    {
+      id: 1,
+      content: "x",
+      time: new Date("2019-1-2")
+    }
+  ]
+></Header>
 ```
 
 ## APIs

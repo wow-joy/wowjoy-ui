@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
     "name": "wowjoy-ui",
-    "version": "0.8.0",
+    "version": "0.9.3",
     "description": "wowjoy-ui React component",
     "main": "lib/index.js",
     "module": "es/index.js",
