@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
-const isChrome = /(Chrome|Safari)/i.test(window.navigator.userAgent) ;
+const isChrome = /(Chrome|Safari)/i.test(window.navigator.userAgent);
 
 const Wrap = styled.nav`
   display: flex;
@@ -24,19 +24,27 @@ const Wrap = styled.nav`
       fill: #666;
     }
   }
+
   ${p =>
     p.size === "small" &&
-    `
-    width: 180px;
+    `width: 180px;
     svg{
       margin-right: 16px;
       width: 16px;
       height: 16px;
+    }`} .wj-nav-item-content__active {
+    & > svg {
+      color: #000;
+      path {
+        fill: ${p => p.theme.mainColor};
+      }
     }
-  `} .wjc-slieDown-subContent>.active {
+  }
+
+  .wjc-slieDown-subContent > .active {
     & > .wjc-popOut-content,
     & > .wjc-slideDown-content {
-      color: #06aea6;
+      color: ${p => p.theme.mainColor};
       position: relative;
       &::before {
         position: absolute;
@@ -54,13 +62,13 @@ const Wrap = styled.nav`
   }
   .childActive:not(.open):not(.active) > .wjc-popOut-content,
   .childActive:not(.open):not(.active) > .wjc-slideDown-content {
-    color: #06aea6;
+    color: ${p => p.theme.mainColor};
     &::before {
       display: none;
     }
     svg {
       path {
-        fill: #06aea6;
+        fill: ${p => p.theme.mainColor};
       }
     }
   }
@@ -76,7 +84,7 @@ const SubMenuSlideDown = styled(SlideDown)`
   }
 
   &.active > .wjc-slideDown-content {
-    color: #06aea6;
+    color: ${p => p.theme.mainColor};
     position: relative;
     &::before {
       position: absolute;
@@ -121,7 +129,7 @@ const SubMenuPopOut = styled(PopOut)`
     }
   }
   &.open > .wjc-popOut-content {
-    color: #06aea6;
+    color: ${p => p.theme.mainColor};
   }
 
   .wjc-popOut-subContent > div {
@@ -134,7 +142,7 @@ const SubMenuPopOut = styled(PopOut)`
     color: #333;
   }
   &.childActive > .wjc-popOut-content {
-    color: #06aea6;
+    color: ${p => p.theme.mainColor};
     &::before {
       display: none;
     }
@@ -143,7 +151,7 @@ const SubMenuPopOut = styled(PopOut)`
     color: #333;
   }
   .wj-nav-item__3.active > div:first-child {
-    color: #06aea6;
+    color: ${p => p.theme.mainColor};
     &::before {
       display: none;
     }
@@ -228,7 +236,9 @@ const GetSubMenu = ({
             rank={number}
             size={size}
             className={`wj-nav-item-content ${
-              activeId && activeId === item.id ? "wj-nav-item-content__active" : ""
+              activeId && activeId === item.id
+                ? "wj-nav-item-content__active"
+                : ""
             } ${item.subList ? "hasSubList" : ""}`}
           >
             {item.content}
@@ -272,34 +282,40 @@ class Nav extends PureComponent {
       children,
       size,
       navList,
-      activeId
+      activeId,
+      theme
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);
+    const defaultTheme = {
+      mainColor: "#06aea6"
+    };
 
     return (
-      <Wrap defaultStyles={defaultStyles} className={className} size={size}>
-        <ScrollBox
-          defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
-            this.state.overflow === "visible"
-              ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
-              : ""
-          }`}
-          maxHeight={"100%"}
-          visible
-          hoverControl
-        >
-          <GetSubMenu
-            navList={navList}
-            num={1}
-            clickHandle={this.clickHandle}
-            onChange={this.toggleSubMenu}
-            onTransitionEnd={this.onTransitionEnd}
-            activePath={activePath}
-            size={size}
-          />
-        </ScrollBox>
-      </Wrap>
+      <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
+        <Wrap defaultStyles={defaultStyles} className={className} size={size}>
+          <ScrollBox
+            defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
+              this.state.overflow === "visible"
+                ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
+                : ""
+            }`}
+            maxHeight={"100%"}
+            visible
+            hoverControl
+          >
+            <GetSubMenu
+              navList={navList}
+              num={1}
+              clickHandle={this.clickHandle}
+              onChange={this.toggleSubMenu}
+              onTransitionEnd={this.onTransitionEnd}
+              activePath={activePath}
+              size={size}
+            />
+          </ScrollBox>
+        </Wrap>
+      </ThemeProvider>
     );
   }
   clickHandle = (e, itemData) => {
@@ -321,7 +337,7 @@ class Nav extends PureComponent {
     if (this.props.noScroll) {
       return;
     }
-    if(!isChrome){
+    if (!isChrome) {
       this.forceUpdate();
     }
   };
