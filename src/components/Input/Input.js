@@ -28,7 +28,7 @@ const InputBase = styled.input`
     color: #999;
   }
   &:focus {
-    border-color: #53bde7;
+    border-color: ${p=>p.theme.mainColor};
   }
   &:disabled {
     border-color: #e8e8e8;

@@ -5,6 +5,8 @@ import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
 import { ReactComponent as Password } from "../../static/medias/svg/password.svg";
 import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
 import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
+import { DialogDark } from "../Dialog";
+import Input from "../Input";
 const Wrap = styled.div`
   width: 200px;
 `;
@@ -164,16 +166,48 @@ const CompanyList = styled.ul`
   }
 `;
 
+const Label = styled.label`
+  display: flex;
+  font-size: 14px;
+  color: #666666;
+  margin-top: 20px;
+  align-items: center;
+  &:first-child {
+    margin-top: 0;
+  }
+  & > span {
+    width: 90px;
+    text-align: right;
+    margin-right: 20px;
+    &::before {
+      content: "*";
+      color: #f67676;
+      font-size: 14px;
+    }
+  }
+`;
+
 const TEXT = {
   from: "所属医院：",
   changeCompany: "切换公司",
   changePassword: "修改密码",
-  logout: "退出登录"
+  logout: "退出登录",
+  oldPassword: "旧密码",
+  pleaseEnterOldPassword: "请输入旧密码",
+  newPassword: "新密码",
+  pleaseEnterNewPassword: "请输入新密码",
+  repeatePassword: "确认新密码",
+  pleaseEnterRepeatePassword: "请再次输入新密码",
+  ok: "确认",
+  cancel: "取消"
 };
 class UserInfo extends PureComponent {
+  state = {
+    showChangePassword: false
+  };
   get currentCompany() {
-    if(!this.props.companyList){
-      return false
+    if (!this.props.companyList) {
+      return false;
     }
     return this.props.companyList.find(ele => ele.id === this.props.company);
   }
@@ -194,7 +228,20 @@ class UserInfo extends PureComponent {
 
   changePassword = () => {
     const { onChangePassword } = this.props;
-    onChangePassword && onChangePassword();
+    if (onChangePassword && onChangePassword() === false) {
+      return;
+    }
+    this.showChangePassword();
+  };
+  showChangePassword = () => {
+    this.setState({
+      showChangePassword: true
+    });
+  };
+  closeChangePassword = () => {
+    this.setState({
+      showChangePassword: false
+    });
   };
   changeCompany = (id, content) => e => {
     const { onCompanyChange } = this.props;
@@ -270,6 +317,56 @@ class UserInfo extends PureComponent {
             />
           </form>
         </UserControl>
+        <DialogDark
+          defaultStyles={`
+          .wjc-dialog-btns{
+            text-align: left;
+            padding-left: 120px;
+            span{
+              text-align: center;
+              min-width: 100px;
+              margin: 0 10px;
+            }
+          }
+          `}
+          title={TEXT.changePassword}
+          onClose={this.closeChangePassword}
+          visible={this.state.showChangePassword}
+          btnsText={[TEXT.ok, TEXT.cancel]}
+        >
+          <Label>
+            <span>{TEXT.oldPassword}</span>
+            <Input
+              type={"password"}
+              placeholder={TEXT.pleaseEnterOldPassword}
+              errorMsg={"xxx"}
+              defaultStyles={`
+              &.wrap__error{
+                margin-bottom: 0;
+              }
+              .wj-input-msg__error{
+                padding: 0;
+                margin-top: 2px;
+                height: 16px;
+              }
+              `}
+            />
+          </Label>
+          <Label>
+            <span>{TEXT.newPassword}</span>
+            <Input
+              type={"password"}
+              placeholder={TEXT.pleaseEnterNewPassword}
+            />
+          </Label>
+          <Label>
+            <span>{TEXT.repeatePassword}</span>
+            <Input
+              type={"password"}
+              placeholder={TEXT.pleaseEnterRepeatePassword}
+            />
+          </Label>
+        </DialogDark>
       </Wrap>
     );
   }
