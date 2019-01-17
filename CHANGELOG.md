@@ -1,3 +1,9 @@
+## 0.10.1 (2019/1/17)
+
+### bugfix
+
+- styled-components@4.x 引发的 nav 组件 bug。 替换成兼容写法后续提交 issue
+
 ## 0.10.0 (2019/1/17)
 
 ### feature
