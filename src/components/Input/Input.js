@@ -28,7 +28,7 @@ const InputBase = styled.input`
     color: #999;
   }
   &:focus {
-    border-color: ${p=>p.theme.mainColor};
+    border-color: ${p => p.theme.mainColor};
   }
   &:disabled {
     border-color: #e8e8e8;
@@ -67,7 +67,6 @@ class Input extends PureComponent {
     Reflect.deleteProperty(props, "errorMsg");
     Reflect.deleteProperty(props, "viewType");
     Reflect.deleteProperty(props, "TEXT");
-    console.log(errorMsg ? "base__error" : "");
     return (
       <Wrap
         defaultStyles={defaultStyles}

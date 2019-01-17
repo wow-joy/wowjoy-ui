@@ -5,10 +5,7 @@ import home, { ReactComponent as Home } from "@svg/home.svg";
 import APIStore from "@static/medias/images/APIStore.png";
 const PROPS = {
   viewType: "password",
-  user: {
-    name: "xxx",
-    number: "123"
-  },
+  
   appList: [
     {
       icon: <img src = {APIStore} />,

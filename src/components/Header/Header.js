@@ -192,7 +192,8 @@ class Header extends PureComponent {
       company,
       onCompanyChange,
       onChangePassword,
-      onUserNameClick
+      onUserNameClick,
+      changePasswordUrl
     } = this.props;
     const defaultTheme = isblur
       ? {
@@ -212,7 +213,8 @@ class Header extends PureComponent {
       user,
       companyList,
       company,
-      userLastName
+      userLastName,
+      changePasswordUrl
     };
     const { newsCount } = this;
     return (
@@ -297,7 +299,8 @@ Header.propTypes = {
   companyList: PropTypes.array,
   onCompanyChange: PropTypes.func,
   onUserNameClick: PropTypes.func,
-  onChangePassword: PropTypes.func
+  onChangePassword: PropTypes.func,
+  changePasswordUrl: PropTypes.string
 };
 export default ControllSwitchHoc({
   onChange: "onCompanyChange",

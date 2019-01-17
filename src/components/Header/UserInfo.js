@@ -6,7 +6,8 @@ import { ReactComponent as Password } from "../../static/medias/svg/password.svg
 import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
 import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
 import { DialogDark } from "../Dialog";
-import Input from "../Input";
+import InputBase from "../Input";
+import { $fetch, getApi } from "../../config";
 const Wrap = styled.div`
   width: 200px;
 `;
@@ -186,6 +187,16 @@ const Label = styled.label`
     }
   }
 `;
+const Input = styled(InputBase)`
+  &.wrap__error {
+    margin-bottom: 0;
+  }
+  .wj-input-msg__error {
+    padding: 0;
+    margin-top: 2px;
+    height: 16px;
+  }
+`;
 
 const TEXT = {
   from: "所属医院：",
@@ -196,14 +207,25 @@ const TEXT = {
   pleaseEnterOldPassword: "请输入旧密码",
   newPassword: "新密码",
   pleaseEnterNewPassword: "请输入新密码",
+  pleaseEnterRightNewPassword: "请输入格式正确的新密码",
   repeatePassword: "确认新密码",
   pleaseEnterRepeatePassword: "请再次输入新密码",
+  inconsistentWithTwoPassword: "两次密码不一致",
   ok: "确认",
-  cancel: "取消"
+  cancel: "取消",
+  unEnter: {
+    oldPassword: "您还未输入旧密码",
+    newPassword: "您还未输入新密码",
+    repeatePassword: "您还未确认新密码"
+  }
 };
 class UserInfo extends PureComponent {
   state = {
-    showChangePassword: false
+    showChangePassword: false,
+    errorMsg: {},
+    oldPassword: "",
+    newPassword: "",
+    repeatePassword: ""
   };
   get currentCompany() {
     if (!this.props.companyList) {
@@ -240,12 +262,126 @@ class UserInfo extends PureComponent {
   };
   closeChangePassword = () => {
     this.setState({
-      showChangePassword: false
+      showChangePassword: false,
+      errorMsg: {},
+      oldPassword: "",
+      newPassword: "",
+      repeatePassword: ""
     });
   };
   changeCompany = (id, content) => e => {
     const { onCompanyChange } = this.props;
     onCompanyChange && onCompanyChange(id, content);
+  };
+  changeHandle = name => e => {
+    this.setState({
+      [name]: e.target.value,
+      errorMsg: {
+        ...this.state.errorMsg,
+        [name]: undefined,
+        repeatePassword: undefined
+      }
+    });
+  };
+  blurHandle = name => e => {
+    const { value } = e.target;
+    const checkResult = this.check(name, value);
+    if (checkResult === TEXT.inconsistentWithTwoPassword) {
+      this.setState({
+        errorMsg: {
+          ...this.state.errorMsg,
+          repeatePassword: checkResult || undefined
+        }
+      });
+    } else {
+      this.setState({
+        errorMsg: {
+          ...this.state.errorMsg,
+          [name]: checkResult || undefined
+        }
+      });
+    }
+  };
+  check = (name, value) => {
+    const { newPassword, repeatePassword } = this.state;
+    switch (name) {
+      case "oldPassword":
+        if (value === "") {
+          return TEXT.pleaseEnterOldPassword;
+        }
+        return false;
+      case "newPassword":
+        if (value === "") {
+          return TEXT.pleaseEnterNewPassword;
+        }
+        if (
+          !(/[a-z]/gi.test(value) && /[0-9]/g.test(value) && value.length >= 8)
+        ) {
+          return TEXT.pleaseEnterRightNewPassword;
+        }
+      case "repeatePassword":
+        if (value === "") {
+          return TEXT.pleaseEnterRepeatePassword;
+        }
+      default:
+        if (newPassword && repeatePassword && newPassword !== repeatePassword) {
+          return TEXT.inconsistentWithTwoPassword;
+        }
+        return false;
+    }
+  };
+  getInputProps = name => {
+    return {
+      value: this.state[name],
+      onChange: this.changeHandle(name),
+      errorMsg: this.state.errorMsg[name],
+      onBlur: this.blurHandle(name)
+    };
+  };
+  submit = (e, index) => {
+    if (index === 0) {
+      if (Object.values(this.state.errorMsg).some(ele => ele)) {
+        return false;
+      }
+      if (
+        ["oldPassword", "newPassword", "repeatePassword"].some(ele => {
+          if (this.state[ele] === "") {
+            this.setState({
+              errorMsg: {
+                ...this.state.errorMsg,
+                [ele]: TEXT.unEnter[ele]
+              }
+            });
+            return true;
+          }
+        })
+      ) {
+        return false;
+      }
+      this.put_changePassword();
+      return false;
+    }
+  };
+  put_changePassword = () => {
+    const { user, changePasswordUrl } = this.props;
+    const { mdid, auid } = user || {};
+    return $fetch
+      .post(changePasswordUrl || getApi("changePassword", "dev"), {
+        body: JSON.stringify({
+          mdid: mdid,
+          newPassword: this.state.newPassword,
+          oldPassword: this.state.oldPassword,
+          auid: auid
+        })
+      })
+      .then(res => {
+        if (res.responseCode === "0") {
+          alert("success");
+          this.closeChangePassword();
+        } else {
+          alert(res.responseMessage);
+        }
+      });
   };
   render() {
     const {
@@ -255,7 +391,7 @@ class UserInfo extends PureComponent {
       company,
       userLastName
     } = this.props;
-    const { currentCompany, TEXT } = this;
+    const { currentCompany, TEXT, getInputProps } = this;
     return (
       <Wrap className={"wj-header-dropdown__user"}>
         <Main>
@@ -333,45 +469,52 @@ class UserInfo extends PureComponent {
           onClose={this.closeChangePassword}
           visible={this.state.showChangePassword}
           btnsText={[TEXT.ok, TEXT.cancel]}
+          onBtnsClick={this.submit}
         >
-          <Label>
-            <span>{TEXT.oldPassword}</span>
-            <Input
-              type={"password"}
-              placeholder={TEXT.pleaseEnterOldPassword}
-              errorMsg={"xxx"}
-              defaultStyles={`
-              &.wrap__error{
-                margin-bottom: 0;
-              }
-              .wj-input-msg__error{
-                padding: 0;
-                margin-top: 2px;
-                height: 16px;
-              }
-              `}
-            />
-          </Label>
-          <Label>
-            <span>{TEXT.newPassword}</span>
-            <Input
-              type={"password"}
-              placeholder={TEXT.pleaseEnterNewPassword}
-            />
-          </Label>
-          <Label>
-            <span>{TEXT.repeatePassword}</span>
-            <Input
-              type={"password"}
-              placeholder={TEXT.pleaseEnterRepeatePassword}
-            />
-          </Label>
+          <form>
+            <Label>
+              <span>{TEXT.oldPassword}</span>
+              <Input
+                type={"password"}
+                autoComplete="current-password"
+                placeholder={TEXT.pleaseEnterOldPassword}
+                {...getInputProps("oldPassword")}
+              />
+            </Label>
+            <Label>
+              <span>{TEXT.newPassword}</span>
+              <Input
+                type={"password"}
+                autoComplete="new-password"
+                placeholder={TEXT.pleaseEnterNewPassword}
+                {...getInputProps("newPassword")}
+              />
+            </Label>
+            <Label>
+              <span>{TEXT.repeatePassword}</span>
+              <Input
+                type={"password"}
+                autoComplete="new-password"
+                placeholder={TEXT.pleaseEnterRepeatePassword}
+                {...getInputProps("repeatePassword")}
+              />
+            </Label>
+          </form>
         </DialogDark>
       </Wrap>
     );
   }
 }
 
-UserInfo.propTypes = {};
+UserInfo.propTypes = {
+  onUserNameClick: PropTypes.func,
+  user: PropTypes.object,
+  companyList: PropTypes.array,
+  company: PropTypes.string,
+  userLastName: PropTypes.string,
+  mdid: PropTypes.string,
+  auid: PropTypes.string,
+  changePasswordUrl: PropTypes.string
+};
 
 export default UserInfo;
