@@ -363,10 +363,10 @@ class UserInfo extends PureComponent {
     }
   };
   put_changePassword = () => {
-    const { user, changePasswordUrl } = this.props;
+    const { user, changePasswordUrl, env = "dev" } = this.props;
     const { mdid, auid } = user || {};
     return $fetch
-      .post(changePasswordUrl || getApi("changePassword", "dev"), {
+      .post(changePasswordUrl || getApi("changePassword", env), {
         body: JSON.stringify({
           mdid: mdid,
           newPassword: this.state.newPassword,
