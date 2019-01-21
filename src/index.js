@@ -8,7 +8,6 @@ import Table from "./components/Table";
 import Toast from "./components/Toast";
 import Input from "./components/Input";
 import { CheckBox } from "./components/Form";
-
 const Components = {
   Header,
   Nav,

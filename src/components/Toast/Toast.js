@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { pop } from "wowjoy-component/lib/tools";
 import { ReactComponent as LoadingBase } from "../../static/medias/svg/loading.svg";
 const rotate = keyframes`
@@ -10,6 +10,10 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg)
   }
+`;
+
+const animation = css`
+  animation: ${rotate} 1s linear infinite;
 `;
 const Wrap = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -28,8 +32,7 @@ const Loading = styled(LoadingBase)`
   display: block;
   width: 24px;
   height: 24px;
-  animation: ${rotate} 1s linear infinite;
-  margin: 12px auto;
+  ${animation} margin: 12px auto;
 `;
 
 class Toast extends PureComponent {
@@ -57,11 +60,15 @@ class Toast extends PureComponent {
     });
   render() {
     const { className, defaultStyles, children } = this.props;
-    return <Wrap className={className}>{children}</Wrap>;
+    return (
+      <Wrap className={className} defaultStyles={defaultStyles}>
+        {children}
+      </Wrap>
+    );
   }
 }
 
-Toast.prototype = {
+Toast.propTypes = {
   className: PropTypes.string,
   defaultStyles: PropTypes.string
 };

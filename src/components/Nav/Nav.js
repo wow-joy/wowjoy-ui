@@ -219,9 +219,9 @@ const GetSubMenu = ({
         size={size}
         key={item.id}
         type={item.subViewType}
-        className={`wj-nav-item__${number}${
-          activeId && activeId === item.id ? " active" : ""
-        }${activeId && activePath.includes(item.id) ? " childActive" : ""}
+        className={`wj-nav-item__${number} ${
+          activeId && activeId === item.id ? "active" : ""
+        } ${activeId && activePath.includes(item.id) ? "childActive" : ""}
         `}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
