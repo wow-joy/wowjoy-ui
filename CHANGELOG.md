@@ -1,3 +1,9 @@
+## 0.10.2 (2019/1/21)
+
+### bugfix
+
+- styled-components@4.x 引发的 animation bug。
+
 ## 0.10.1 (2019/1/17)
 
 ### bugfix
