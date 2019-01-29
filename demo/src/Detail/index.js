@@ -37,7 +37,7 @@ class Detail extends Component {
     );
     this.name = name;
     const ComponentItem = Components[name];
-    return <ComponentItem>123</ComponentItem>;
+    return <ComponentItem  viewType={'captcha'} errorMsg={'123'}></ComponentItem>;
   }
   toggleLeft = () => {
     this.setState({

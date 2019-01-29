@@ -39,7 +39,6 @@ const InputBase = styled.input`
   &.base__error {
     border-color: #f36969;
     background: #fffcfa;
-    color: #f36969;
   }
 `;
 const Error = styled.div`

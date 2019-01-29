@@ -10,6 +10,7 @@ import { ControllSwitchHoc } from "wowjoy-component/es/tools";
 import NewsList from "./NewsList";
 import AppList from "./AppList";
 import UserInfo from "./UserInfo";
+
 const Wrap = styled.header`
   display: flex;
   align-items: center;
