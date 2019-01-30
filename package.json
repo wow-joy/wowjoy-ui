@@ -1,6 +1,6 @@
 {
   "name": "wowjoy-ui",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "wowjoy-ui React component",
   "main": "lib/index.js",
   "module": "es/index.js",
