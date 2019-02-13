@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import None from "./None";
 import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
-
+import { Link, withRouter } from "react-router-dom";
+import Toast from "../Toast";
 const Wrap = styled.div`
   width: 300px;
 `;
-const Footer = styled.div`
+const Footer = styled.a`
+  display: block;
   background: #f5f7f8;
   font-size: 12px;
   color: #999;
@@ -23,6 +25,15 @@ const Footer = styled.div`
     }
   }
 `;
+const Frame = styled.iframe`
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+`;
+
 const List = styled.ul`
   background: #fff;
   display: flex;
@@ -76,22 +87,66 @@ class AppList extends PureComponent {
     }
     return TEXT;
   }
+  gotoOtherApp = baseUrl => () => {
+    const url = "https://" + baseUrl;
+    this.beforeOpen(url).then(res => {
+      const nodeA = document.createElement("a");
+      nodeA.href = url;
+      nodeA.target = "_blank";
+      nodeA.setAttribute("rol", "noopener noreferrer");
+      nodeA.click();
+    });
+  };
+  beforeOpen = url =>
+    new Promise(res => {
+      if (this.isCacheUrl(url)) {
+        res();
+        return;
+      }
+      this.frame.src = url;
+      const loading = Toast.loading({
+        container: this.wrap
+      });
+      setTimeout(() => {
+        res();
+        this.cacheUrl(url);
+        loading.destroy();
+      }, 3000);
+    });
+  isCacheUrl = url => {
+    const viewedUrl = sessionStorage.getItem("viewedUrl") || [];
+    if (viewedUrl.includes(url)) {
+      return true;
+    }
+    return false;
+  };
+  cacheUrl = url => {
+    const viewedUrl = sessionStorage.getItem("viewedUrl") || [];
+    if (!this.isCacheUrl(url)) {
+      viewedUrl.push(url);
+      sessionStorage.setItem("viewedUrl", JSON.stringify(viewedUrl));
+    }
+  };
+
   render() {
-    const { list: appList = [], viewMore } = this.props;
+    const { list: appList = [], moreLink } = this.props;
     const { TEXT } = this;
     return (
-      <Wrap className={"wj-header-dropdown__app"}>
+      <Wrap className={"wj-header-dropdown__app"} ref={el => (this.wrap = el)}>
+        <Frame ref={el => (this.frame = el)} />
         {appList.length > 0 ? (
           <List>
             {appList.map((ele, index) => (
               <App
                 key={index}
-                onClick={ele.onClick}
-                title={ele.content}
+                title={ele.title}
                 id={ele.id}
+                onClick={this.gotoOtherApp(ele.to)}
               >
-                {ele.icon}
+                {/* <Link to={ele.to} target={"_blank"} rol={"noreferrer noopener"}> */}
+                <img src={ele.icon} />
                 <p>{ele.content}</p>
+                {/* </Link> */}
               </App>
             ))}
           </List>
@@ -99,7 +154,7 @@ class AppList extends PureComponent {
           <None>{TEXT.none}</None>
         )}
 
-        <Footer onClick={viewMore}>
+        <Footer href={moreLink} target={"_blank"} rol={"noreferrer noopener"}>
           {TEXT.viewMore}
           <Go />
         </Footer>
@@ -111,7 +166,7 @@ class AppList extends PureComponent {
 AppList.propTypes = {
   TEXT: PropTypes.object,
   list: PropTypes.array,
-  viewMore: PropTypes.func
+  moreLink: PropTypes.string
 };
 
-export default AppList;
+export default withRouter(AppList);

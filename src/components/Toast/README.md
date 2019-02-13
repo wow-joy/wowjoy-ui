@@ -36,7 +36,7 @@ const option = {
 }
 
 /* create */
-const openToast = Toast.open(name, content{
+const openToast = Toast.open(name, content,{
     ...options
 })
 

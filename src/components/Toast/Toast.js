@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import { pop } from "wowjoy-component/lib/tools";
 import { ReactComponent as LoadingBase } from "../../static/medias/svg/loading.svg";
+import { ReactComponent as Success } from "../../static/medias/svg/done_line.svg";
+import { ReactComponent as Error } from "../../static/medias/svg/wrong_line.svg";
+import { ReactComponent as Warning } from "../../static/medias/svg/waring_line.svg";
+import { ReactComponent as Info } from "../../static/medias/svg/information_line.svg";
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -35,6 +39,27 @@ const Loading = styled(LoadingBase)`
   ${animation} margin: 12px auto;
 `;
 
+const MsgContent = styled.div`
+  height: 52px;
+  padding: 0 60px;
+  font-size: 14px;
+  border-radius: 3px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${p => p.color};
+  color: #fff;
+  & > svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    path {
+      fill: #fff;
+    }
+  }
+`;
+
 class Toast extends PureComponent {
   static open = (name, content, options) => {
     const symbol = Symbol.for(name);
@@ -48,7 +73,7 @@ class Toast extends PureComponent {
     });
     return Toast[symbol];
   };
-  static loading = options =>
+  static loading = (options = {}) =>
     pop([
       <LoadingContent key={0} haveLayer={options.layer !== false}>
         {options.content}
@@ -56,6 +81,51 @@ class Toast extends PureComponent {
       <Loading key={1} />
     ])({
       layer: true,
+      ...options
+    });
+
+  static success = (content, options = {}) =>
+    pop(
+      <MsgContent color={"#3ac9a8"}>
+        <Success />
+        {content}
+      </MsgContent>
+    )({
+      layer: false,
+      autoClose: 3000,
+      ...options
+    });
+  static error = (content, options = {}) =>
+    pop(
+      <MsgContent color={"#f36969"}>
+        <Error />
+        {content}
+      </MsgContent>
+    )({
+      layer: false,
+      autoClose: 3000,
+      ...options
+    });
+  static warning = (content, options = {}) =>
+    pop(
+      <MsgContent color={"#ff9b54"}>
+        <Warning />
+        {content}
+      </MsgContent>
+    )({
+      layer: false,
+      autoClose: 3000,
+      ...options
+    });
+  static info = (content, options = {}) =>
+    pop(
+      <MsgContent color={"#45a8e6"}>
+        <Info />
+        {content}
+      </MsgContent>
+    )({
+      layer: false,
+      autoClose: 3000,
       ...options
     });
   render() {

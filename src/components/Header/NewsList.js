@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
 import { ReactComponent as MsgBase } from "../../static/medias/svg/msg.svg";
 import { ReactComponent as TimeBase } from "../../static/medias/svg/time.svg";
+import { Link } from "react-router-dom";
 import None from "./None";
 
 const Wrap = styled.div`
@@ -18,7 +19,8 @@ const Header = styled.h4`
   height: 40px;
   cursor: default;
 `;
-const Footer = styled.div`
+const Footer = styled.a`
+  display: block;
   background: #f5f7f8;
   font-size: 12px;
   color: #999;
@@ -109,7 +111,7 @@ class NewsList extends PureComponent {
     return TEXT;
   }
   render() {
-    const { list: newsList=[], currentDate, gotoMsgCenter } = this.props;
+    const { list: newsList = [], currentDate, moreLink } = this.props;
     const { TEXT } = this;
     return (
       <Wrap className={"wj-header-dropdown-news"}>
@@ -118,19 +120,21 @@ class NewsList extends PureComponent {
           <List>
             {newsList.map((ele, index) => (
               <News key={index} onClick={ele.onClick} id={ele.id}>
-                <Msg />
-                <h6>{ele.content}</h6>
-                <p>
-                  <Time />
-                  {getDeltaTime(currentDate, ele.time)}
-                </p>
+                <a href={ele.to} target={"_blank"} rol={"noreferrer noopener"}>
+                  <Msg />
+                  <h6>{ele.content}</h6>
+                  <p>
+                    <Time />
+                    {getDeltaTime(currentDate, ele.time)}
+                  </p>
+                </a>
               </News>
             ))}
           </List>
         ) : (
           <None>{TEXT.none}</None>
         )}
-        <Footer onClick={gotoMsgCenter}>
+        <Footer href={moreLink} target={"_blank"} rol={"noreferrer noopener"}>
           {TEXT.gotoMsgCenter}
           <Go />
         </Footer>
@@ -156,7 +160,7 @@ NewsList.propTypes = {
   TEXT: PropTypes.object,
   list: PropTypes.array,
   currentDate: PropTypes.object,
-  gotoMsgCenter: PropTypes.func
+  moreLink: PropTypes.string
 };
 
 export default NewsList;

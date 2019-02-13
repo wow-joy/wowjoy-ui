@@ -2,7 +2,7 @@ Arguments:
   C:\Program Files\nodejs\node.exe C:\Users\work\.yarn\bin\yarn.js publish
 
 PATH: 
-  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
+  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Program Files\Git\cmd;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
 
 Yarn version: 
   1.12.1
@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
     "name": "wowjoy-ui",
-    "version": "0.10.0",
+    "version": "0.11.2",
     "description": "wowjoy-ui React component",
     "main": "lib/index.js",
     "module": "es/index.js",

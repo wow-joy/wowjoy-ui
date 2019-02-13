@@ -10,6 +10,7 @@ import { ControllSwitchHoc } from "wowjoy-component/es/tools";
 import NewsList from "./NewsList";
 import AppList from "./AppList";
 import UserInfo from "./UserInfo";
+import { $fetch, apis } from "../../config";
 
 const Wrap = styled.header`
   display: flex;
@@ -20,6 +21,14 @@ const Wrap = styled.header`
   height: 64px;
   ${p => (p.isblur ? `box-shadow: 0 1px 3px 0 rgba(225,225,225,0.50);` : ``)};
   ${p => p.defaultStyles};
+`;
+const Frame = styled.iframe`
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
 `;
 const Left = styled.div`
   flex-shrink: 0;
@@ -168,12 +177,111 @@ const User = styled.div`
     z-index: -1;
   }
 `;
+const baseUrls = {
+  dev: "https://dev-individual-workbench.rubikstack.com",
+  test: "https://test-individual-workbench.rubikstack.com",
+  pro: "https://individual-workbench.shulan.com"
+};
 class Header extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.baseUrls = props.baseUrls || baseUrls;
+  }
+
   state = {
     isOpen:
-      this.props.defaultValue !== undefined ? this.props.defaultValue : true
+      this.props.defaultValue !== undefined ? this.props.defaultValue : true,
+    newsList: [],
+    appList: [],
+    logo: ""
   };
 
+  componentDidMount() {
+    const { mdid, userId, iaid } = this.props.user || {};
+
+    this.get_hospitalInfo({ mdid })
+      .then(logo => {
+        this.setState({
+          logo
+        });
+      })
+      .catch(err => console.error(err));
+    this.get_newsList({ userId, iaid })
+      .then(newsList =>
+        this.setState({
+          newsList
+        })
+      )
+      .catch(err => console.error(err));
+    this.get_appList({
+      userId,
+      mdid
+    })
+      .then(appList =>
+        this.setState({
+          appList
+        })
+      )
+      .catch(err => console.error(err));
+  }
+
+  get_newsList = ({ userId, iaid }) => {
+    return $fetch
+      .get(apis.newsList, {
+        params: {
+          userId,
+          iaid,
+          status: "1101-01"
+        }
+      })
+      .then(res => {
+        if (res.responseCode === "0") {
+          const { messageList } = res.responseData;
+          const { env = "dev" } = this.props;
+          return messageList.map(ele => ({
+            id: ele.messageId,
+            to:
+              this.baseUrls[env] +
+              `/page/messageDetail?messageId=${ele.messageId}`,
+            content: ele.messageSubject,
+            time: new Date(ele.updateTime)
+          }));
+        }
+      }).catch(err=>console.error(err));
+  };
+  get_appList = ({ userId, mdid }) => {
+    return $fetch
+      .get(apis.appList, {
+        params: {
+          userId,
+          mdid
+        }
+      })
+      .then(res => {
+        if (res.responseCode === "0") {
+          const { applicationList: appList } = res.responseData;
+          return appList.map(ele => ({
+            title: ele.name,
+            icon: ele.logo,
+            content: ele.descLong,
+            id: ele.id,
+            to: ele.address
+          }));
+        }
+      }).catch(err=>console.error(err));
+  };
+  get_hospitalInfo = ({ mdid }) => {
+    return $fetch
+      .get(apis.hospitalInfo, {
+        params: { mdid }
+      })
+      .then(res => {
+        if (res.responseCode === "0") {
+          const { hospital } = res.responseData;
+          return hospital.logoImage;
+        }
+      }).catch(err=>console.error(err));
+  };
   get newsCount() {
     return (this.props.newsList || []).length;
   }
@@ -182,20 +290,20 @@ class Header extends PureComponent {
       className,
       defaultStyles,
       children,
-      logo,
       title,
-      appList,
-      newsList,
       user,
       theme,
       isblur,
+      logo: propsLogo,
       companyList,
       company,
       onCompanyChange,
       onChangePassword,
       onUserNameClick,
-      changePasswordUrl
+      changePasswordUrl,
+      env = "dev"
     } = this.props;
+    const { appList, newsList, logo } = this.state;
     const defaultTheme = isblur
       ? {
           mainColor: "#fff",
@@ -218,6 +326,7 @@ class Header extends PureComponent {
       changePasswordUrl
     };
     const { newsCount } = this;
+
     return (
       <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
         <Wrap
@@ -225,18 +334,13 @@ class Header extends PureComponent {
           className={"wj-header-wrap " + className}
           isblur={isblur}
         >
+          <Frame src={this.baseUrls[env]} />
+
           <Left>
             <span onClick={this.onChange}>
               {this.state.isOpen ? <CloseIcon /> : <OpenIcon />}
             </span>
-            <Logo
-              src={
-                logo ||
-                require(isblur
-                  ? "../../static/medias/images/shulan-green.png"
-                  : "../../static/medias/images/shulan-white.png")
-              }
-            />
+            <Logo src={propsLogo || logo} />
             <Title>{title}</Title>
           </Left>
           <Center>{children}</Center>
@@ -245,7 +349,10 @@ class Header extends PureComponent {
               <WowjoyIcon />
               {
                 <ControlWrap>
-                  <AppList list={appList} />
+                  <AppList
+                    list={appList}
+                    moreLink={this.baseUrls[env] + "/page/MyApps"}
+                  />
                 </ControlWrap>
               }
             </li>
@@ -256,7 +363,11 @@ class Header extends PureComponent {
               </NewsIconBox>
               {
                 <ControlWrap>
-                  <NewsList list={newsList} currentDate={new Date()} />
+                  <NewsList
+                    list={newsList}
+                    currentDate={new Date()}
+                    moreLink={this.baseUrls[env] + "/page/messageCenter"}
+                  />
                 </ControlWrap>
               }
             </li>
@@ -286,10 +397,9 @@ Header.propTypes = {
   className: PropTypes.string,
   defaultStyles: PropTypes.string,
   logo: PropTypes.node,
+  env: PropTypes.oneOf(["dev", "test", "pro"]),
+  baseUrls: PropTypes.object,
   title: PropTypes.node,
-  appList: PropTypes.array,
-  newsList: PropTypes.array,
-  newsCount: PropTypes.number,
   user: PropTypes.object,
   theme: PropTypes.object,
   isblur: PropTypes.bool,

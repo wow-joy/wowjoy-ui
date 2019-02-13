@@ -6,6 +6,8 @@
  *  @param options.params  // 请求体(params)
  *  @param noCache @default true  // 不进行请求存储拦截
  */
+const baseUrl = "/unified/ui";
+
 const $fetch = {
   base: (url, options, noCache = true) => {
     const { params } = options;
@@ -37,7 +39,7 @@ const $fetch = {
       };
     }
 
-    return fetch(url, options)
+    return fetch(baseUrl + url, options)
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
           // refresh();
@@ -92,15 +94,12 @@ const $fetch = {
     });
   }
 };
-const basePath = {
-  dev: "dev-gateway.rubikstack.com/ms-base-org",
-  test: "test-gateway.rubikstack.com/ms-base-org",
-  pro: "gateway.rubikstack.com/ms-base-org"
-};
+
 const apis = {
-  changePassword: "/v1/base/app-platform/org/modifypassword"
+  changePassword: "/ms-base-org/v1/base/app-platform/org/modifypassword",
+  newsList: "/ms-message-platform/v1/base/message/platform/message/list",
+  appList: "/ui-individual-workbench/base/personal/platform/appList",
+  hospitalInfo: "/ms-base-org/v1/base/org/hospital/info"
 };
-const getApi = (name, env = "dev") => {
-  return basePath[env] + apis[name];
-};
-export { $fetch, basePath, apis, getApi };
+
+export { $fetch, basePath, apis };

@@ -7,7 +7,8 @@ import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
 import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
 import { DialogDark } from "../Dialog";
 import InputBase from "../Input";
-import { $fetch, getApi } from "../../config";
+import { $fetch, apis } from "../../config";
+import Toast from "../Toast/Toast";
 const Wrap = styled.div`
   width: 200px;
 `;
@@ -211,6 +212,7 @@ const TEXT = {
   repeatePassword: "确认新密码",
   pleaseEnterRepeatePassword: "请再次输入新密码",
   inconsistentWithTwoPassword: "两次密码不一致",
+  newPasswordLimit: "3-16个字符",
   ok: "确认",
   cancel: "取消",
   unEnter: {
@@ -314,9 +316,7 @@ class UserInfo extends PureComponent {
         if (value === "") {
           return TEXT.pleaseEnterNewPassword;
         }
-        if (
-          !(/[a-z]/gi.test(value) && /[0-9]/g.test(value) && value.length >= 8)
-        ) {
+        if (!(value.length <= 16 && value.length >= 3)) {
           return TEXT.pleaseEnterRightNewPassword;
         }
       case "repeatePassword":
@@ -358,28 +358,28 @@ class UserInfo extends PureComponent {
       ) {
         return false;
       }
-      this.put_changePassword();
+      this.post_changePassword();
       return false;
     }
   };
-  put_changePassword = () => {
-    const { user, changePasswordUrl, env = "dev" } = this.props;
-    const { mdid, auid } = user || {};
+  post_changePassword = () => {
+    const { user, changePasswordUrl } = this.props;
+    const { mdid, userId: auid } = user || {};
     return $fetch
-      .post(changePasswordUrl || getApi("changePassword", env), {
+      .post(changePasswordUrl || apis.changePassword, {
         body: JSON.stringify({
-          mdid: mdid,
+          mdid,
+          auid,
           newPassword: this.state.newPassword,
-          oldPassword: this.state.oldPassword,
-          auid: auid
+          oldPassword: this.state.oldPassword
         })
       })
       .then(res => {
         if (res.responseCode === "0") {
-          alert("success");
+          Toast.success("修改成功");
           this.closeChangePassword();
         } else {
-          alert(res.responseMessage);
+          Toast.error(res.responseMessage, { container: this.dialog });
         }
       });
   };
@@ -465,6 +465,7 @@ class UserInfo extends PureComponent {
             }
           }
           `}
+          ref={el => (this.dialog = el)}
           title={TEXT.changePassword}
           onClose={this.closeChangePassword}
           visible={this.state.showChangePassword}
@@ -486,7 +487,8 @@ class UserInfo extends PureComponent {
               <Input
                 type={"password"}
                 autoComplete="new-password"
-                placeholder={TEXT.pleaseEnterNewPassword}
+                placeholder={TEXT.newPasswordLimit}
+                max={16}
                 {...getInputProps("newPassword")}
               />
             </Label>
