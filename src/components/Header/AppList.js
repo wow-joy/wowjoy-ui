@@ -145,7 +145,7 @@ class AppList extends PureComponent {
               >
                 {/* <Link to={ele.to} target={"_blank"} rol={"noreferrer noopener"}> */}
                 <img src={ele.icon} />
-                <p>{ele.content}</p>
+                <p>{ele.title}</p>
                 {/* </Link> */}
               </App>
             ))}

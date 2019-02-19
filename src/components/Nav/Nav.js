@@ -219,10 +219,7 @@ const GetSubMenu = ({
         size={size}
         key={item.id}
         type={item.subViewType}
-        className={`wj-nav-item__${number}${
-          activeId && activeId === item.id ? " active" : ""
-        }${activeId && activePath.includes(item.id) ? " childActive" : ""}
-        `}
+        className={`wj-nav-item__${number} ${activeId && activeId === item.id ? "active" : ""} ${activeId && activePath.includes(item.id) ? "childActive" : ""}`}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
         onTransitionEnd={onTransitionEnd}
@@ -235,11 +232,7 @@ const GetSubMenu = ({
             to={item.to}
             rank={number}
             size={size}
-            className={`wj-nav-item-content ${
-              activeId && activeId === item.id
-                ? "wj-nav-item-content__active"
-                : ""
-            } ${item.subList ? "hasSubList" : ""}`}
+            className={`wj-nav-item-content ${activeId && activeId === item.id? "wj-nav-item-content__active": ""} ${item.subList ? "hasSubList" : ""}`}
           >
             {item.content}
           </Content>
