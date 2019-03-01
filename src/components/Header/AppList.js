@@ -108,9 +108,9 @@ class AppList extends PureComponent {
         container: this.wrap
       });
       setTimeout(() => {
-        res();
         this.cacheUrl(url);
         loading.destroy();
+        res();
       }, 3000);
     });
   isCacheUrl = url => {
@@ -141,12 +141,16 @@ class AppList extends PureComponent {
                 key={index}
                 title={ele.title}
                 id={ele.id}
-                onClick={this.gotoOtherApp(ele.to)}
+                // onClick={this.gotoOtherApp(ele.to)}
               >
-                {/* <Link to={ele.to} target={"_blank"} rol={"noreferrer noopener"}> */}
-                <img src={ele.icon} />
-                <p>{ele.title}</p>
-                {/* </Link> */}
+                <a
+                  to={"https://" + ele.to}
+                  target={"_blank"}
+                  rol={"noreferrer noopener"}
+                >
+                  <img src={ele.icon} />
+                  <p>{ele.title}</p>
+                </a>
               </App>
             ))}
           </List>

@@ -99,7 +99,8 @@ const apis = {
   changePassword: "/ms-base-org/v1/base/app-platform/org/modifypassword",
   newsList: "/ms-message-platform/v1/base/message/platform/message/list",
   appList: "/ui-individual-workbench/base/personal/platform/appList",
-  hospitalInfo: "/ms-base-org/v1/base/org/hospital/info"
+  hospitalInfo: "/ms-base-org/v1/base/org/hospital/info",
+  staffsDetail: "/ms-base-org/v1/base/app-platform/staffs-detail"
 };
 
 export { $fetch, basePath, apis };

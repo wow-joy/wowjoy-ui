@@ -59,8 +59,8 @@ const CloseIcon = styled(NavClose)`
 `;
 
 const Logo = styled.img`
-  width: 117px;
-  height: auto;
+  width: auto;
+  height: 50px;
   margin-left: 34px;
   display: inline-block;
   user-select: none;
@@ -199,30 +199,80 @@ class Header extends PureComponent {
   componentDidMount() {
     const { mdid, userId, iaid } = this.props.user || {};
 
-    this.get_hospitalInfo({ mdid })
-      .then(logo => {
-        this.setState({
-          logo
-        });
+    mdid &&
+      this.get_hospitalInfo({ mdid })
+        .then(logo => {
+          this.setState({
+            logo
+          });
+        })
+        .catch(err => console.error(err));
+
+    userId &&
+      iaid &&
+      this.get_newsList({ userId, iaid })
+        .then(newsList =>
+          this.setState({
+            newsList
+          })
+        )
+        .catch(err => console.error(err));
+
+    userId &&
+      mdid &&
+      this.get_appList({
+        userId,
+        mdid
       })
-      .catch(err => console.error(err));
-    this.get_newsList({ userId, iaid })
-      .then(newsList =>
-        this.setState({
-          newsList
+        .then(appList =>
+          this.setState({
+            appList
+          })
+        )
+        .catch(err => console.error(err));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { mdid, userId, iaid } = this.props.user || {};
+    const { mdid: nextMdid, userId: nextUserId, iaid: nextIaid } =
+      nextProps.user || {};
+
+    nextMdid &&
+      nextMdid !== mdid &&
+      this.get_hospitalInfo({ mdid })
+        .then(logo => {
+          this.setState({
+            logo
+          });
         })
-      )
-      .catch(err => console.error(err));
-    this.get_appList({
-      userId,
-      mdid
-    })
-      .then(appList =>
-        this.setState({
-          appList
-        })
-      )
-      .catch(err => console.error(err));
+        .catch(err => console.error(err));
+
+    userId &&
+      nextUserId !== userId &&
+      iaid &&
+      nextIaid !== iaid &&
+      this.get_newsList({ userId, iaid })
+        .then(newsList =>
+          this.setState({
+            newsList
+          })
+        )
+        .catch(err => console.error(err));
+
+    userId &&
+      nextUserId !== userId &&
+      mdid &&
+      nextMdid !== mdid &&
+      this.get_appList({
+        userId,
+        mdid
+      })
+        .then(appList =>
+          this.setState({
+            appList
+          })
+        )
+        .catch(err => console.error(err));
   }
 
   get_newsList = ({ userId, iaid }) => {
@@ -247,7 +297,8 @@ class Header extends PureComponent {
             time: new Date(ele.updateTime)
           }));
         }
-      }).catch(err=>console.error(err));
+      })
+      .catch(err => console.error(err));
   };
   get_appList = ({ userId, mdid }) => {
     return $fetch
@@ -260,7 +311,7 @@ class Header extends PureComponent {
       .then(res => {
         if (res.responseCode === "0") {
           const { applicationList: appList } = res.responseData;
-          return appList.map(ele => ({
+          return appList.filter(ele=>ele.isAuth==='1').map(ele => ({
             title: ele.name,
             icon: ele.logo,
             content: ele.descLong,
@@ -268,7 +319,8 @@ class Header extends PureComponent {
             to: ele.address
           }));
         }
-      }).catch(err=>console.error(err));
+      })
+      .catch(err => console.error(err));
   };
   get_hospitalInfo = ({ mdid }) => {
     return $fetch
@@ -280,7 +332,8 @@ class Header extends PureComponent {
           const { hospital } = res.responseData;
           return hospital.logoImage;
         }
-      }).catch(err=>console.error(err));
+      })
+      .catch(err => console.error(err));
   };
   get newsCount() {
     return (this.props.newsList || []).length;
@@ -334,7 +387,7 @@ class Header extends PureComponent {
           className={"wj-header-wrap " + className}
           isblur={isblur}
         >
-          <Frame src={this.baseUrls[env]} />
+          {/* <Frame src={this.baseUrls[env]} /> */}
 
           <Left>
             <span onClick={this.onChange}>

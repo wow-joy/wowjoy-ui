@@ -38,6 +38,7 @@ const Footer = styled.a`
 `;
 const List = styled.ul``;
 const News = styled.li`
+  list-style: none;
   position: relative;
   color: #666;
   height: 64px;

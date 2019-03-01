@@ -59,6 +59,7 @@ const Main = styled.div`
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     word-break: break-all;
+    text-align: center
   }
 `;
 
@@ -222,18 +223,59 @@ const TEXT = {
   }
 };
 class UserInfo extends PureComponent {
-  state = {
-    showChangePassword: false,
-    errorMsg: {},
-    oldPassword: "",
-    newPassword: "",
-    repeatePassword: ""
-  };
-  get currentCompany() {
-    if (!this.props.companyList) {
-      return false;
+  constructor(props) {
+    super(props);
+    const { user: initUser = {} } = props;
+    if (initUser.userId && initUser.mdid) {
+      this.post_StaffsDetail(initUser.mdid, initUser.userId);
     }
-    return this.props.companyList.find(ele => ele.id === this.props.company);
+    this.state = {
+      showChangePassword: false,
+      errorMsg: {},
+      oldPassword: "",
+      newPassword: "",
+      repeatePassword: "",
+      defaultCompany: "",
+      defaultNumber: ""
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { user = {} } = this.props;
+    const { user: nextUser = {} } = nextProps;
+    if (user.userId !== nextUser.userId || user.mdid !== nextUser.mdid) {
+      this.post_StaffsDetail(mdid, userId);
+    }
+  }
+  post_StaffsDetail = (mdid, userId) => {
+    $fetch
+      .post(apis.staffsDetail, {
+        body: JSON.stringify({
+          mdid: mdid,
+          auids: [userId]
+        })
+      })
+      .then(res => {
+        if (res.responseCode === "0") {
+          const data = res.responseData.staffList[0] || {};
+          this.setState({
+            defaultCompany: data.companyFullName,
+            defaultNumber: data.staffNumber
+          });
+        }
+      })
+      .catch(err => console.error(err));
+  };
+  get number() {
+    return (this.props.user || {}).number || this.state.defaultNumber;
+  }
+  get currentCompany() {
+    return this.props.companyList
+      ? (
+          this.props.companyList.find(ele => ele.id === this.props.company) ||
+          {}
+        ).content
+      : this.state.defaultCompany;
   }
   get TEXT() {
     const { TEXT: propTEXT } = this.props;
@@ -391,20 +433,16 @@ class UserInfo extends PureComponent {
       company,
       userLastName
     } = this.props;
-    const { currentCompany, TEXT, getInputProps } = this;
+    const { currentCompany, TEXT, getInputProps, number } = this;
     return (
       <Wrap className={"wj-header-dropdown__user"}>
         <Main>
           <User onClick={onUserNameClick}>{userLastName}</User>
-          <div>
-            {user
-              ? `${user.name}${user.number ? ` (${user.number})` : ""}`
-              : ""}
-          </div>
+          <div>{user ? `${user.name}${number ? ` (${number})` : ""}` : ""}</div>
           {currentCompany && (
-            <p title={currentCompany.content}>
+            <p title={currentCompany}>
               {TEXT.from}
-              {currentCompany.content}
+              {currentCompany}
             </p>
           )}
         </Main>
