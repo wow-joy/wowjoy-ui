@@ -144,7 +144,7 @@ class AppList extends PureComponent {
                 // onClick={this.gotoOtherApp(ele.to)}
               >
                 <a
-                  to={"https://" + ele.to}
+                  href={ele.to}
                   target={"_blank"}
                   rol={"noreferrer noopener"}
                 >

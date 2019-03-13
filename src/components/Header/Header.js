@@ -177,15 +177,11 @@ const User = styled.div`
     z-index: -1;
   }
 `;
-const baseUrls = {
-  dev: "https://dev-individual-workbench.rubikstack.com",
-  test: "https://test-individual-workbench.rubikstack.com",
-  pro: "https://individual-workbench.shulan.com"
-};
+
 class Header extends PureComponent {
   constructor(props) {
     super(props);
-    this.baseUrls = props.baseUrls || baseUrls;
+
   }
 
   state = {
@@ -193,7 +189,8 @@ class Header extends PureComponent {
       this.props.defaultValue !== undefined ? this.props.defaultValue : true,
     newsList: [],
     appList: [],
-    logo: ""
+    logo: "",
+    moreSystem: ""
   };
 
   componentDidMount() {
@@ -224,9 +221,10 @@ class Header extends PureComponent {
         userId,
         mdid
       })
-        .then(appList =>
+        .then(({appList, moreSystem}) =>
           this.setState({
-            appList
+            appList,
+            moreSystem
           })
         )
         .catch(err => console.error(err));
@@ -267,9 +265,10 @@ class Header extends PureComponent {
         userId,
         mdid
       })
-        .then(appList =>
+        .then(({appList, moreSystem}) =>
           this.setState({
-            appList
+            appList,
+            moreSystem
           })
         )
         .catch(err => console.error(err));
@@ -290,9 +289,7 @@ class Header extends PureComponent {
           const { env = "dev" } = this.props;
           return messageList.map(ele => ({
             id: ele.messageId,
-            to:
-              this.baseUrls[env] +
-              `/page/messageDetail?messageId=${ele.messageId}`,
+            to: this.state.moreSystem + `/page/messageDetail?messageId=${ele.messageId}`,
             content: ele.messageSubject,
             time: new Date(ele.updateTime)
           }));
@@ -310,14 +307,17 @@ class Header extends PureComponent {
       })
       .then(res => {
         if (res.responseCode === "0") {
-          const { applicationList: appList } = res.responseData;
-          return appList.filter(ele=>ele.isAuth==='1').map(ele => ({
-            title: ele.name,
-            icon: ele.logo,
-            content: ele.descLong,
-            id: ele.id,
-            to: ele.address
-          }));
+          const { applicationList: appList, moreSystem } = res.responseData;
+          return {
+            appList: appList.filter(ele => ele.isAuth === "1").map(ele => ({
+              title: ele.name,
+              icon: ele.logo,
+              content: ele.descLong,
+              id: ele.id,
+              to: ele.address
+            })),
+            moreSystem: moreSystem
+          };
         }
       })
       .catch(err => console.error(err));
@@ -354,9 +354,8 @@ class Header extends PureComponent {
       onChangePassword,
       onUserNameClick,
       changePasswordUrl,
-      env = "dev"
     } = this.props;
-    const { appList, newsList, logo } = this.state;
+    const { appList, moreSystem, newsList, logo } = this.state;
     const defaultTheme = isblur
       ? {
           mainColor: "#fff",
@@ -404,7 +403,7 @@ class Header extends PureComponent {
                 <ControlWrap>
                   <AppList
                     list={appList}
-                    moreLink={this.baseUrls[env] + "/page/MyApps"}
+                    moreLink={moreSystem + "/page/MyApps"}
                   />
                 </ControlWrap>
               }
@@ -419,7 +418,7 @@ class Header extends PureComponent {
                   <NewsList
                     list={newsList}
                     currentDate={new Date()}
-                    moreLink={this.baseUrls[env] + "/page/messageCenter"}
+                    moreLink={moreSystem + "/page/messageCenter"}
                   />
                 </ControlWrap>
               }
@@ -450,8 +449,6 @@ Header.propTypes = {
   className: PropTypes.string,
   defaultStyles: PropTypes.string,
   logo: PropTypes.node,
-  env: PropTypes.oneOf(["dev", "test", "pro"]),
-  baseUrls: PropTypes.object,
   title: PropTypes.node,
   user: PropTypes.object,
   theme: PropTypes.object,
