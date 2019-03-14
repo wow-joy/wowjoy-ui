@@ -30,7 +30,8 @@ const User = styled.span`
     top: 0;
     height: 32px;
     border-radius: 50%;
-    background-color: ${p => (!p.deep || p.isblur ? "#06aea6" : "#007872")};
+    background-color: ${p =>
+      !p.deep || p.isblur ? p.theme.mainColor || "#06aea6" : "#007872"};
     z-index: -1;
   }
 `;
@@ -59,7 +60,7 @@ const Main = styled.div`
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    text-align: center
+    text-align: center;
   }
 `;
 
@@ -92,7 +93,7 @@ const UserControl = styled.div`
       color: #06aea6;
       svg {
         path {
-          fill: #06aea6;
+          fill: ${ p => p.theme.mainColor|| '#06aea6'};
         }
       }
     }
@@ -159,7 +160,7 @@ const CompanyList = styled.ul`
       background: #fffbe0;
     }
     &.active {
-      color: #06aea6;
+      color: ${ p => p.theme.mainColor|| '#06aea6'};
       svg {
         path {
           fill: currentColor;

@@ -4,7 +4,7 @@ const defaultStyles = `
       color: #fff;
     }
     .wjc-dialog-header{
-      background: #06aea6;
+      background: ${p => p.theme.mainColor || "#06aea6"};
       color: #fff;
       width: 100%;
       height: 38px;
@@ -17,6 +17,6 @@ const defaultStyles = `
   `;
 
 const initSetting = {
-  defaultStyles: defaultStyles,
+  defaultStyles: defaultStyles
 };
 export default initSetting;

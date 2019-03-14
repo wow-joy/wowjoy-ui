@@ -64,6 +64,7 @@ const App = styled.li`
     height: 40px;
   }
   p {
+    color: #666;
     margin-top: 12px;
     line-height: 1;
     white-space: nowrap;

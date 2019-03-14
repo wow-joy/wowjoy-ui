@@ -173,7 +173,7 @@ const User = styled.div`
     top: 0;
     height: 32px;
     border-radius: 50%;
-    background-color: ${p => (!p.deep || p.isblur ? "#06aea6" : "#007872")};
+    background-color: ${p => (!p.deep || p.isblur ? (p.theme.mainColor|| '#06aea6') : "#007872")};
     z-index: -1;
   }
 `;

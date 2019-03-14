@@ -50,6 +50,12 @@ const News = styled.li`
   justify-content: space-between;
   line-height: 1;
   cursor: pointer;
+  &>a{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+  }
   h6 {
     word-break: break-all;
     overflow: hidden;
@@ -119,7 +125,7 @@ class NewsList extends PureComponent {
         <Header>{TEXT.title}</Header>
         {newsList.length > 0 ? (
           <List>
-            {newsList.map((ele, index) => (
+            {newsList.slice(0,3).map((ele, index) => (
               <News key={index} onClick={ele.onClick} id={ele.id}>
                 <a href={ele.to} target={"_blank"} rol={"noreferrer noopener"}>
                   <Msg />
