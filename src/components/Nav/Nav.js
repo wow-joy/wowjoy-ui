@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
@@ -77,7 +77,7 @@ const Wrap = styled.nav`
 
 const SubMenuSlideDown = styled(SlideDown)`
   .wjc-slideDown-content:hover {
-    background: #e1f0ef;
+    background: p.theme.lightColor;
   }
   .wjc-slieDown-subContent {
     background: #f5f7f8;
@@ -125,7 +125,7 @@ const SubMenuPopOut = styled(PopOut)`
     color: #333;
     cursor: pointer;
     &:hover {
-      background: #e1f0ef;
+      background: p.theme.lightColor;
     }
   }
   &.open > .wjc-popOut-content {
@@ -219,7 +219,9 @@ const GetSubMenu = ({
         size={size}
         key={item.id}
         type={item.subViewType}
-        className={`wj-nav-item__${number} ${activeId && activeId === item.id ? "active" : ""} ${activeId && activePath.includes(item.id) ? "childActive" : ""}`}
+        className={`wj-nav-item__${number} ${
+          activeId && activeId === item.id ? "active" : ""
+        } ${activeId && activePath.includes(item.id) ? "childActive" : ""}`}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
         onTransitionEnd={onTransitionEnd}
@@ -232,7 +234,11 @@ const GetSubMenu = ({
             to={item.to}
             rank={number}
             size={size}
-            className={`wj-nav-item-content ${activeId && activeId === item.id? "wj-nav-item-content__active": ""} ${item.subList ? "hasSubList" : ""}`}
+            className={`wj-nav-item-content ${
+              activeId && activeId === item.id
+                ? "wj-nav-item-content__active"
+                : ""
+            } ${item.subList ? "hasSubList" : ""}`}
           >
             {item.content}
           </Content>
@@ -280,35 +286,30 @@ class Nav extends PureComponent {
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);
-    const defaultTheme = {
-      mainColor: "#06aea6"
-    };
 
     return (
-      <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
-        <Wrap defaultStyles={defaultStyles} className={className} size={size}>
-          <ScrollBox
-            defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
-              this.state.overflow === "visible"
-                ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
-                : ""
-            }`}
-            maxHeight={"100%"}
-            visible
-            hoverControl
-          >
-            <GetSubMenu
-              navList={navList}
-              num={1}
-              clickHandle={this.clickHandle}
-              onChange={this.toggleSubMenu}
-              onTransitionEnd={this.onTransitionEnd}
-              activePath={activePath}
-              size={size}
-            />
-          </ScrollBox>
-        </Wrap>
-      </ThemeProvider>
+      <Wrap defaultStyles={defaultStyles} className={className} size={size}>
+        <ScrollBox
+          defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
+            this.state.overflow === "visible"
+              ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
+              : ""
+          }`}
+          maxHeight={"100%"}
+          visible
+          hoverControl
+        >
+          <GetSubMenu
+            navList={navList}
+            num={1}
+            clickHandle={this.clickHandle}
+            onChange={this.toggleSubMenu}
+            onTransitionEnd={this.onTransitionEnd}
+            activePath={activePath}
+            size={size}
+          />
+        </ScrollBox>
+      </Wrap>
     );
   }
   clickHandle = (e, itemData) => {

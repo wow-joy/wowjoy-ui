@@ -10,5 +10,5 @@ const initSetting = {
     background: #f0f0f0;
     border-color: #ccc;
   }`
-}
+};
 export default initSetting;

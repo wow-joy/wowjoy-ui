@@ -46,7 +46,6 @@ const Foo = () => <Header
 | newsList         | 消息列表 `[{id: string,onClick: function, content: node, time: dateObj}]` | array  |        |
 | newsCount        | 信息数量                                                                  | number |        |
 | user             | 用户信息                                                                  | object |        |
-| theme            | 主题                                                                      | object |        |
 | isblur           | 是否处于失焦状态                                                          |  bool  |        |
 | onChange         | 左侧图标状态改变事件                                                      |  func  |        |
 | defaultValue     | 左侧图标初始状态                                                          |  bool  |        |

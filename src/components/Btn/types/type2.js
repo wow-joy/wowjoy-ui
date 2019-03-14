@@ -1,7 +1,7 @@
 const initSetting = {
   defaultStyles: `background: #fff;
-  border-color: ${ p => p.theme.mainColor|| '#06aea6'};
-  color: ${ p => p.theme.mainColor|| '#06aea6'};
+  border-color: ${p => p.theme.mainColor};
+  color: ${p => p.theme.mainColor};
   &:hover{
     background: #F0FFFD;
   }

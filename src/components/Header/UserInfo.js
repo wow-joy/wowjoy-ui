@@ -31,7 +31,7 @@ const User = styled.span`
     height: 32px;
     border-radius: 50%;
     background-color: ${p =>
-      !p.deep || p.isblur ? p.theme.mainColor || "#06aea6" : "#007872"};
+      !p.deep || p.isblur ? p.theme.mainColor : "#007872"};
     z-index: -1;
   }
 `;
@@ -90,10 +90,10 @@ const UserControl = styled.div`
       }
     }
     &:hover {
-      color: #06aea6;
+      color: #p.theme.mainColor ;
       svg {
         path {
-          fill: ${ p => p.theme.mainColor|| '#06aea6'};
+          fill: ${ p => p.theme.mainColor};
         }
       }
     }
@@ -160,7 +160,7 @@ const CompanyList = styled.ul`
       background: #fffbe0;
     }
     &.active {
-      color: ${ p => p.theme.mainColor|| '#06aea6'};
+      color: ${ p => p.theme.mainColor};
       svg {
         path {
           fill: currentColor;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 
 import { ReactComponent as NavOpen } from "../../static/medias/svg/nav_open.svg";
 import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.svg";
@@ -173,7 +173,8 @@ const User = styled.div`
     top: 0;
     height: 32px;
     border-radius: 50%;
-    background-color: ${p => (!p.deep || p.isblur ? (p.theme.mainColor|| '#06aea6') : "#007872")};
+    background-color: ${p =>
+      !p.deep || p.isblur ? p.theme.mainColor : p.theme.deepColor};
     z-index: -1;
   }
 `;
@@ -181,7 +182,6 @@ const User = styled.div`
 class Header extends PureComponent {
   constructor(props) {
     super(props);
-
   }
 
   state = {
@@ -221,7 +221,7 @@ class Header extends PureComponent {
         userId,
         mdid
       })
-        .then(({appList, moreSystem}) =>
+        .then(({ appList, moreSystem }) =>
           this.setState({
             appList,
             moreSystem
@@ -265,7 +265,7 @@ class Header extends PureComponent {
         userId,
         mdid
       })
-        .then(({appList, moreSystem}) =>
+        .then(({ appList, moreSystem }) =>
           this.setState({
             appList,
             moreSystem
@@ -289,7 +289,9 @@ class Header extends PureComponent {
           const { env = "dev" } = this.props;
           return messageList.map(ele => ({
             id: ele.messageId,
-            to: this.state.moreSystem + `/page/messageDetail?messageId=${ele.messageId}`,
+            to:
+              this.state.moreSystem +
+              `/page/messageDetail?messageId=${ele.messageId}`,
             content: ele.messageSubject,
             time: new Date(ele.updateTime)
           }));
@@ -345,7 +347,6 @@ class Header extends PureComponent {
       children,
       title,
       user,
-      theme,
       isblur,
       logo: propsLogo,
       companyList,
@@ -353,18 +354,9 @@ class Header extends PureComponent {
       onCompanyChange,
       onChangePassword,
       onUserNameClick,
-      changePasswordUrl,
+      changePasswordUrl
     } = this.props;
     const { appList, moreSystem, newsList, logo } = this.state;
-    const defaultTheme = isblur
-      ? {
-          mainColor: "#fff",
-          fontColor: "#06aea6"
-        }
-      : {
-          mainColor: "#06aea6",
-          fontColor: "#fff"
-        };
     const userLastName = user ? user.name.substr(-1) : "";
 
     const UserInfoProps = {
@@ -380,60 +372,58 @@ class Header extends PureComponent {
     const { newsCount } = this;
 
     return (
-      <ThemeProvider theme={{ ...defaultTheme, ...theme }}>
-        <Wrap
-          defaultStyles={defaultStyles}
-          className={"wj-header-wrap " + className}
-          isblur={isblur}
-        >
-          {/* <Frame src={this.baseUrls[env]} /> */}
+      <Wrap
+        defaultStyles={defaultStyles}
+        className={"wj-header-wrap " + className}
+        isblur={isblur}
+      >
+        {/* <Frame src={this.baseUrls[env]} /> */}
 
-          <Left>
-            <span onClick={this.onChange}>
-              {this.state.isOpen ? <CloseIcon /> : <OpenIcon />}
-            </span>
-            <Logo src={propsLogo || logo} />
-            <Title>{title}</Title>
-          </Left>
-          <Center>{children}</Center>
-          <Right>
-            <li>
-              <WowjoyIcon />
-              {
-                <ControlWrap>
-                  <AppList
-                    list={appList}
-                    moreLink={moreSystem + "/page/MyApps"}
-                  />
-                </ControlWrap>
-              }
-            </li>
-            <li>
-              <NewsIconBox>
-                <NewsIcon />
-                <Badge count={newsCount}> {newsCount}</Badge>
-              </NewsIconBox>
-              {
-                <ControlWrap>
-                  <NewsList
-                    list={newsList}
-                    currentDate={new Date()}
-                    moreLink={moreSystem + "/page/messageCenter"}
-                  />
-                </ControlWrap>
-              }
-            </li>
-            <li>
-              <User deep isblur={isblur}>
-                {userLastName}
-              </User>
-              <ControlWrap className={"wj-user-control__wrap"}>
-                <UserInfo {...UserInfoProps} />
+        <Left>
+          <span onClick={this.onChange}>
+            {this.state.isOpen ? <CloseIcon /> : <OpenIcon />}
+          </span>
+          <Logo src={propsLogo || logo} />
+          <Title>{title}</Title>
+        </Left>
+        <Center>{children}</Center>
+        <Right>
+          <li>
+            <WowjoyIcon />
+            {
+              <ControlWrap>
+                <AppList
+                  list={appList}
+                  moreLink={moreSystem + "/page/MyApps"}
+                />
               </ControlWrap>
-            </li>
-          </Right>
-        </Wrap>
-      </ThemeProvider>
+            }
+          </li>
+          <li>
+            <NewsIconBox>
+              <NewsIcon />
+              <Badge count={newsCount}> {newsCount}</Badge>
+            </NewsIconBox>
+            {
+              <ControlWrap>
+                <NewsList
+                  list={newsList}
+                  currentDate={new Date()}
+                  moreLink={moreSystem + "/page/messageCenter"}
+                />
+              </ControlWrap>
+            }
+          </li>
+          <li>
+            <User deep isblur={isblur}>
+              {userLastName}
+            </User>
+            <ControlWrap className={"wj-user-control__wrap"}>
+              <UserInfo {...UserInfoProps} />
+            </ControlWrap>
+          </li>
+        </Right>
+      </Wrap>
     );
   }
 
@@ -451,7 +441,6 @@ Header.propTypes = {
   logo: PropTypes.node,
   title: PropTypes.node,
   user: PropTypes.object,
-  theme: PropTypes.object,
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
   defaultValue: PropTypes.bool,
