@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Components from "@src";
+// import Components from "@src";
+import Components from "../../../src";
 import styled from "styled-components";
 import home, { ReactComponent as Home } from "@svg/home.svg";
 import APIStore from "@static/medias/images/APIStore.png";
@@ -37,8 +38,11 @@ class Detail extends Component {
     );
     this.name = name;
     const ComponentItem = Components[name];
-    ComponentItem.info('xxx')
-    return <ComponentItem ></ComponentItem>;
+    return (
+      <ComponentItem visible pageSize={1} pageSizeList={[1,2,3,4,5]} total={100}>
+        123
+      </ComponentItem>
+    );
   }
   toggleLeft = () => {
     this.setState({

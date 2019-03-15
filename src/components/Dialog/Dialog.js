@@ -2,11 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Dialog as DialogBase, Pop } from "wowjoy-component";
-const Wrap = styled.div`
-  ${props => props.defaultStyles};
-`;
-const DialogBox = styled(DialogBase)`
-`
+import { Btn1, Btn3 } from "../Btn";
+const DialogBox = styled(DialogBase)``;
+const defaultBtns = [Btn1, Btn3];
 class Dialog extends PureComponent {
   closeHandle = e => {
     const { onClose } = this.props;
@@ -45,7 +43,7 @@ class Dialog extends PureComponent {
           className={"wj-dialog-box"}
           header={header}
           headerText={title}
-          btns={btns}
+          btns={btns || defaultBtns}
           btnsText={btnsText}
           onClick={onBtnsClick}
           onClose={this.closeHandle}
@@ -64,13 +62,13 @@ Dialog.propTypes = {
   getContainer: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   autoClose: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   translate: PropTypes.string,
-  visible:PropTypes.bool,
+  visible: PropTypes.bool,
   layer: PropTypes.bool,
   header: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   title: PropTypes.string,
   btns: PropTypes.array,
   btnsText: PropTypes.array,
   onBtnsClick: PropTypes.func,
-  showCloseBtn: PropTypes.bool,
+  showCloseBtn: PropTypes.bool
 };
 export default Dialog;

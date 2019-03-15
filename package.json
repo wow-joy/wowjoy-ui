@@ -1,6 +1,6 @@
 {
   "name": "wowjoy-ui",
-  "version": "0.11.27",
+  "version": "0.11.28-alpha.1",
   "description": "wowjoy-ui React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -44,6 +44,6 @@
     "react-component"
   ],
   "dependencies": {
-    "wowjoy-component": "^3.0.0"
+    "wowjoy-component": "3.1.6"
   }
 }

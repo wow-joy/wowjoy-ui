@@ -1,11 +1,17 @@
-const initSetting = {
-  defaultStyles: `background: ${p => p.theme.mainColor};
+import BtnBase from "../Btn";
+import styled from "styled-components";
+const Btn1 = styled(BtnBase).attrs({ className: "wj-btn__1" })`
+  background: ${p => {
+    console.log(p, p.theme.mainColor);
+    return p.theme.mainColor;
+  }};
   color: #fff;
-  &:hover{
-    background: #1AC3BB;
+  &:hover {
+    background: ${p => p.theme.mainColor_hover};
   }
-  &:active{
-    background: #3E8A86;
-  }`
-};
-export default initSetting;
+  &:active {
+    background: ${p => p.theme.mainColor_active};
+  }
+`;
+
+export default Btn1;

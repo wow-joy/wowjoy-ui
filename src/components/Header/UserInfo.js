@@ -90,10 +90,10 @@ const UserControl = styled.div`
       }
     }
     &:hover {
-      color: #p.theme.mainColor ;
+      color: ${p => p.theme.mainColor};
       svg {
         path {
-          fill: ${ p => p.theme.mainColor};
+          fill: ${p => p.theme.mainColor};
         }
       }
     }
@@ -160,7 +160,7 @@ const CompanyList = styled.ul`
       background: #fffbe0;
     }
     &.active {
-      color: ${ p => p.theme.mainColor};
+      color: ${p => p.theme.mainColor};
       svg {
         path {
           fill: currentColor;

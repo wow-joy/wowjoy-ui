@@ -1,5 +1,5 @@
 import React from "react";
-import { Btn_2 as Type2 } from "wowjoy-component";
+import { Btn2 as Type2 } from "../../Btn";
 import styled from "styled-components";
 import Dialog from "../Dialog";
 import { ReactComponent as Pointer } from "../../../static/medias/svg/waring_line.svg";

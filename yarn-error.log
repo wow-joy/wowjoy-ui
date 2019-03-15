@@ -1,11 +1,11 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\work\.yarn\bin\yarn.js publish
+  C:\Program Files\nodejs\node.exe C:\Users\work\.yarn\bin\yarn.js upgrade wowjoy-components@3.1.2
 
 PATH: 
-  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Program Files\Git\cmd;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
+  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Program Files\Git\cmd;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
 
 Yarn version: 
-  1.12.1
+  1.13.0
 
 Node version: 
   8.10.0
@@ -14,22 +14,22 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: canceled
-      at Interface.<anonymous> (C:\Users\work\.yarn\lib\cli.js:120807:13)
-      at emitNone (events.js:106:13)
-      at Interface.emit (events.js:208:7)
-      at Interface._ttyWrite (readline.js:775:16)
-      at ReadStream.onkeypress (readline.js:160:10)
+  Error: https://registry.yarnpkg.com/wowjoy-components: Not found
+      at Request.params.callback [as _callback] (C:\Users\work\.yarn\lib\cli.js:66255:18)
+      at Request.self.callback (C:\Users\work\.yarn\lib\cli.js:129397:22)
       at emitTwo (events.js:126:13)
-      at ReadStream.emit (events.js:214:7)
-      at emitKeys (internal/readline.js:420:14)
-      at emitKeys.next (<anonymous>)
-      at ReadStream.onData (readline.js:1011:36)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (C:\Users\work\.yarn\lib\cli.js:130369:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (C:\Users\work\.yarn\lib\cli.js:130291:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
 
 npm manifest: 
   {
     "name": "wowjoy-ui",
-    "version": "0.11.24",
+    "version": "0.11.28-alpha.1",
     "description": "wowjoy-ui React component",
     "main": "lib/index.js",
     "module": "es/index.js",

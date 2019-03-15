@@ -10,7 +10,12 @@
 theme = {
   mainColor: "#06aea6",
   deepColor: "#007872",
-  lightColor: "#e1f0ef"
+  lightColor: "#e1f0ef",
+  fontColor: "#fff",
+  mainColor_hover: "#1AC3BB",
+  mainColor_active: "#3E8A86",
+  lightColor_hover: "#F0FFFD",
+  lightColor_active: "#06AEA6"
 };
 ```
 

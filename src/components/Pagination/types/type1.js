@@ -1,15 +1,15 @@
-const styles = `
-  .wj-page-item{
+import React from "react";
+import PainationBase from "../Pagination";
+import styled from "styled-components";
+
+const PaginationStyle = styled(PainationBase)`
+  .wjc-page-item {
     border: 1px solid #e6e6e6;
     margin-left: 4px;
   }
-  .wj-page-next{
+  .wjc-page-next {
     margin-left: 4px;
   }
-`
-
-const initSetting = {
-  defaultStyles: styles,
-  size: "24px"
-}
-export default initSetting;
+`;
+const Pagination = props => <PaginationStyle {...props} size={"24px"} />;
+export default Pagination;
