@@ -357,7 +357,7 @@ class Header extends PureComponent {
       changePasswordUrl
     } = this.props;
     const { appList, moreSystem, newsList, logo } = this.state;
-    const userLastName = user ? user.name.substr(-1) : "";
+    const userLastName = user ? (user.name||'').substr(-1) : "";
 
     const UserInfoProps = {
       onCompanyChange,

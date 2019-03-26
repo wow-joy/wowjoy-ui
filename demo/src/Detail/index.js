@@ -4,7 +4,7 @@ import Components from "../../../src";
 import styled from "styled-components";
 import home, { ReactComponent as Home } from "@svg/home.svg";
 import APIStore from "@static/medias/images/APIStore.png";
-
+import {ThemeProvider} from 'styled-components';
 const PROPS = {
   viewType: "password",
 

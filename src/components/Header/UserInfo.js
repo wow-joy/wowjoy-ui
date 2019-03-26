@@ -245,7 +245,7 @@ class UserInfo extends PureComponent {
     const { user = {} } = this.props;
     const { user: nextUser = {} } = nextProps;
     if (user.userId !== nextUser.userId || user.mdid !== nextUser.mdid) {
-      this.post_StaffsDetail(mdid, userId);
+      this.post_StaffsDetail(nextUser.mdid, nextUser.userId);
     }
   }
   post_StaffsDetail = (mdid, userId) => {
