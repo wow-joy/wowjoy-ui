@@ -44,6 +44,8 @@
     "react-component"
   ],
   "dependencies": {
+    "babel-plugin-prismjs": "^1.0.2",
+    "prismjs": "^1.16.0",
     "wowjoy-component": "3.1.13"
   }
 }
