@@ -77,7 +77,7 @@ const Wrap = styled.nav`
 
 const SubMenuSlideDown = styled(SlideDown)`
   .wjc-slideDown-content:hover {
-    background: p.theme.lightColor;
+    background: ${p=>p.theme.lightColor};
   }
   .wjc-slieDown-subContent {
     background: #f5f7f8;

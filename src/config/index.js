@@ -103,4 +103,4 @@ const apis = {
   staffsDetail: "/ms-base-org/v1/base/app-platform/staffs-detail"
 };
 
-export { $fetch, basePath, apis };
+export { $fetch, apis };

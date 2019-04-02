@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\work\.yarn\bin\yarn.js upgrade wowjoy-components@3.1.2
+  C:\Program Files\nodejs\node.exe C:\Users\work\.yarn\bin\yarn.js publish
 
 PATH: 
-  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Program Files\Git\cmd;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
+  C:\Users\work\.yarn\bin;C:\Users\work\.config\yarn\global\node_modules\.bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\work\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\studio4\CukeTest;C:\Program Files\Microsoft VS Code Insiders\bin;C:\WINDOWS\System32\OpenSSH;C:\Go\bin;C:\Program Files\Java\jdk-11.0.1\bin;C:\Program Files\Java\jdk-11.0.1\jre\bin;C:\Program Files\Git\cmd;C:\Users\work\.cargo\bin;C:\Users\work\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\work\AppData\Local\Programs\Python\Python36;C:\Users\work\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Users\work\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\work\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Users\work\go\bin;C:\Users\work\.babun
 
 Yarn version: 
   1.13.0
@@ -14,22 +14,22 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/wowjoy-components: Not found
-      at Request.params.callback [as _callback] (C:\Users\work\.yarn\lib\cli.js:66255:18)
-      at Request.self.callback (C:\Users\work\.yarn\lib\cli.js:129397:22)
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\work\.yarn\lib\cli.js:125657:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:775:16)
+      at ReadStream.onkeypress (readline.js:160:10)
       at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (C:\Users\work\.yarn\lib\cli.js:130369:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (C:\Users\work\.yarn\lib\cli.js:130291:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1011:36)
 
 npm manifest: 
   {
     "name": "wowjoy-ui",
-    "version": "0.11.28-alpha.1",
+    "version": "0.11.32",
     "description": "wowjoy-ui React component",
     "main": "lib/index.js",
     "module": "es/index.js",
@@ -73,7 +73,7 @@ npm manifest:
       "react-component"
     ],
     "dependencies": {
-      "wowjoy-component": "^3.0.0"
+      "wowjoy-component": "3.1.9"
     }
   }
 
@@ -8516,10 +8516,10 @@ Lockfile:
     dependencies:
       errno "~0.1.7"
   
-  wowjoy-component@^3.0.0:
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-3.0.0.tgz#ddec42d05a5c03c1345a72ce8c2c53d007431b4c"
-    integrity sha512-LG/SMv4xUJ1c+yXxRBlyFPg4/Q50MO6BDZqFnOMdcfpu9bpwNQm8SU3bOqoe1oYCM6KHEAyGIgI4uDZuLywezA==
+  wowjoy-component@3.1.6:
+    version "3.1.6"
+    resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-3.1.6.tgz#fb4ae2fb8bcbd1361f5b431e7740907deb2148a2"
+    integrity sha512-0ziAyPGhqElX6/tjzalCdNYtu9Rv+3qH0x/eK1jo9emAKTIBcZ64FDLZ30qR8KsZKalITRVz6tLM+eeZctpx0g==
   
   wrap-ansi@^2.0.0:
     version "2.1.0"

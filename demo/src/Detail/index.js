@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Components from "@src";
+// import Components from "@test";
 import Components from "../../../src";
 import styled from "styled-components";
 import home, { ReactComponent as Home } from "@svg/home.svg";
@@ -39,7 +39,7 @@ class Detail extends Component {
     this.name = name;
     const ComponentItem = Components[name];
     return (
-      <ComponentItem visible pageSize={1} pageSizeList={[1,2,3,4,5]} total={100}>
+      <ComponentItem showLeft={false} asideLeft={1} pageSize={1} pageSizeList={[1,2,3,4,5]} total={100}>
         123
       </ComponentItem>
     );
