@@ -5,6 +5,7 @@ import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
 class Demo1 extends Component {
   changeHandle = (id, data) => {
     alert("切换到了id:" + id);
+    return false
   };
   render() {
     return (
@@ -14,7 +15,8 @@ class Demo1 extends Component {
         navList={[
           {
             content: [<Home key={"home"} />, "首页"],
-            id: "home1"
+            id: "home1",
+            to: '/'
           },
           {
             content: "1级常规下拉",
@@ -22,7 +24,9 @@ class Demo1 extends Component {
             subList: [
               {
                 content: <div>常规下拉子项</div>,
-                id: "home21"
+                id: "home21",
+            to: '/'
+
               },
               {
                 content: <div>2级常规下拉</div>,

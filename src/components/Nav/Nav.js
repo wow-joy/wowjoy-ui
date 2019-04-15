@@ -125,7 +125,7 @@ const SubMenuPopOut = styled(PopOut)`
     color: #333;
     cursor: pointer;
     &:hover {
-      background: p.theme.lightColor;
+      background: ${p=> p.theme.lightColor};
     }
   }
   &.open > .wjc-popOut-content {
@@ -314,7 +314,7 @@ class Nav extends PureComponent {
   }
   clickHandle = (e, itemData) => {
     const { onChange } = this.props;
-    onChange && onChange(itemData.id || "", itemData);
+    return onChange && onChange(itemData.id || "", itemData);
   };
   toggleSubMenu = type => activeId => {
     if (type === "pop" && activeId) {
