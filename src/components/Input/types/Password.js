@@ -22,7 +22,7 @@ const TEXT = {
   show: "显示密码"
 };
 
-class Captcha extends PureComponent {
+class Password extends PureComponent {
   state = {
     visible: false
   };
@@ -64,7 +64,7 @@ class Captcha extends PureComponent {
   }
 }
 
-Captcha.propTypes = {
+Password.propTypes = {
   visibleControl: PropTypes.bool
 };
-export default Captcha;
+export default Password;

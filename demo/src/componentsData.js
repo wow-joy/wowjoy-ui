@@ -5,23 +5,27 @@ export default [
   },
   {
     name: "Btn",
-    description: "",
+    description: "按钮",
   },
   {
     name: "Layout",
-    description: "",
+    description: "布局",
   },
   {
     name: "Header",
-    description: "",
+    description: "公共头部",
   },
   {
     name: "Nav",
-    description: "",
+    description: "侧边导航栏",
+  },
+  {
+    name: "Input",
+    description: "输入框",
   },
   {
     name: "Dialog",
-    description: "",
+    description: "弹出框",
   },
   {
     name: "Pagination",
