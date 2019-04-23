@@ -42,7 +42,7 @@ const Loading = styled(LoadingBase)`
 const MsgContent = styled.div`
   height: 52px;
   padding: 0 60px;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 3px;
   opacity: 0.8;
   display: flex;
