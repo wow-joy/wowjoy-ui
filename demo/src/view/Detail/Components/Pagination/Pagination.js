@@ -96,10 +96,11 @@ class Demo1 extends Component {
         <Description>
           <h2>描述</h2>
           <p>
-            1. 分页器<br />
+            1. 分页器
+            <br />
           </p>
         </Description>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 0)
             .map((ele, index) => (
@@ -112,7 +113,7 @@ class Demo1 extends Component {
               </CodeDemo>
             ))}
         </Column>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 1)
             .map((ele, index) => (
@@ -172,7 +173,8 @@ class Demo1 extends Component {
                 name: "total",
                 description: (
                   <p>
-                    总数，<b>必填项</b>
+                    总数，
+                    <b>必填项</b>
                   </p>
                 ),
                 type: "number",
@@ -182,7 +184,8 @@ class Demo1 extends Component {
                 name: "pageSize",
                 description: (
                   <p>
-                    初始每页数量，<b>pageSize,defaultPageSize 必填一项</b>
+                    初始每页数量，
+                    <b>pageSize,defaultPageSize 必填一项</b>
                   </p>
                 ),
                 type: "number",
@@ -190,11 +193,7 @@ class Demo1 extends Component {
               },
               {
                 name: "defaultPageSize",
-                description: (
-                  <p>
-                    初始每页数量
-                  </p>
-                ),
+                description: <p>初始每页数量</p>,
                 type: "number",
                 default: ""
               },
@@ -202,7 +201,8 @@ class Demo1 extends Component {
                 name: "onPageSizeChange",
                 description: (
                   <p>
-                    pageSize 改变事件<br />
+                    pageSize 改变事件
+                    <br />
                     {"(pageSize) =>{}"}
                   </p>
                 ),
@@ -213,7 +213,8 @@ class Demo1 extends Component {
                 name: "pageSizeList",
                 description: (
                   <p>
-                    每页数量可视列表，<b>必填项</b>
+                    每页数量可视列表，
+                    <b>必填项</b>
                   </p>
                 ),
                 type: "arr",
@@ -241,7 +242,8 @@ class Demo1 extends Component {
                 name: "onChange",
                 description: (
                   <p>
-                    当前页改变事件，pageSize 改变事件也会触发<br />
+                    当前页改变事件，pageSize 改变事件也会触发
+                    <br />
                     {"(currentPage,pageSize, total) =>{}"}
                   </p>
                 ),
@@ -256,15 +258,13 @@ class Demo1 extends Component {
           <ApiTable
             columns={[
               {
-                render: (dataItem, index, colKey) => (
-                  dataItem.name
-                ),
+                title: "className",
+                render: (dataItem, index, colKey) => dataItem.name,
                 id: 0
               },
               {
-                render: (dataItem, index, colKey) => (
-                  dataItem.description
-                ),
+                title: "描述",
+                render: (dataItem, index, colKey) => dataItem.description,
                 id: 1
               }
             ]}

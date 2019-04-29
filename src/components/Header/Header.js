@@ -234,7 +234,8 @@ class Header extends PureComponent {
     const { mdid, userId, iaid } = this.props.user || {};
     const { mdid: nextMdid, userId: nextUserId, iaid: nextIaid } =
       nextProps.user || {};
-    const idsInited = nextUserId && (nextUserId !== userId) && nextIaid && (nextIaid !== iaid)
+    const idsInited =
+      nextUserId && nextUserId !== userId && nextIaid && nextIaid !== iaid;
     idsInited &&
       this.get_hospitalInfo({ mdid })
         .then(logo => {
@@ -347,10 +348,13 @@ class Header extends PureComponent {
       onCompanyChange,
       onChangePassword,
       onUserNameClick,
-      changePasswordUrl
+      changePasswordUrl,
+      appListTEXT,
+      newsListTEXT,
+      userInfoTEXT
     } = this.props;
     const { appList, moreSystem, newsList, logo } = this.state;
-    const userLastName = user ? (user.name||'').substr(-1) : "";
+    const userLastName = user ? (user.name || "").substr(-1) : "";
 
     const UserInfoProps = {
       onCompanyChange,
@@ -386,6 +390,7 @@ class Header extends PureComponent {
             {
               <ControlWrap>
                 <AppList
+                  TEXT={appListTEXT}
                   list={appList}
                   moreLink={moreSystem + "/page/MyApps"}
                 />
@@ -400,6 +405,7 @@ class Header extends PureComponent {
             {
               <ControlWrap>
                 <NewsList
+                  TEXT={newsListTEXT}
                   list={newsList}
                   currentDate={new Date()}
                   moreLink={moreSystem + "/page/messageCenter"}
@@ -412,7 +418,7 @@ class Header extends PureComponent {
               {userLastName}
             </User>
             <ControlWrap className={"wj-user-control__wrap"}>
-              <UserInfo {...UserInfoProps} />
+              <UserInfo {...UserInfoProps} TEXT={userInfoTEXT} />
             </ControlWrap>
           </li>
         </Right>
@@ -443,7 +449,10 @@ Header.propTypes = {
   onCompanyChange: PropTypes.func,
   onUserNameClick: PropTypes.func,
   onChangePassword: PropTypes.func,
-  changePasswordUrl: PropTypes.string
+  changePasswordUrl: PropTypes.string,
+  appListTEXT: PropTypes.object,
+  newsListTEXT: PropTypes.object,
+  userInfoTEXT: PropTypes.object
 };
 export default ControllSwitchHoc({
   onChange: "onCompanyChange",

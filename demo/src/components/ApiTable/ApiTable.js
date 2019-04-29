@@ -6,23 +6,32 @@ class ApiTable extends Component {
     return (
       <Table
         defaultStyles={`
+          tr>th{border: 1px solid #aaa;};
           tr>td{border: 1px solid #aaa;}
-          color: #666
+          color: #666;
+          .description{
+            white-space: nowrap
+          }
         `}
         columns={[
           {
+            title: "属性",
             render: (dataItem, index, colKey) => dataItem.name,
             id: 0
           },
           {
+            title: "描述",
             render: (dataItem, index, colKey) => dataItem.description,
-            id: 1
+            id: 1,
+            className: "description"
           },
           {
+            title: "类型",
             render: (dataItem, index, colKey) => dataItem.type,
             id: 2
           },
           {
+            title: "默认值",
             render: (dataItem, index, colKey) => dataItem.default,
             id: 3
           }

@@ -207,6 +207,67 @@ class Demo1 extends Component {
             ]}
           />
         </Apis>
+        <Apis>
+          <h2>Text Api</h2>
+          <ApiTable
+            columns={[
+              {
+                title: "属性",
+                render: (dataItem, index, colKey) => dataItem.name,
+                id: 0
+              },
+              {
+                title: "描述",
+                render: (dataItem, index, colKey) => dataItem.description,
+                id: 1,
+                className: "description"
+              },
+              {
+                title: "默认值",
+                render: (dataItem, index, colKey) => dataItem.default,
+                id: 2
+              }
+            ]}
+            data={[
+              {
+                name: "appListTEXT",
+                description: "应用列表文本",
+                default: `{viewMore: "查看更多系统 ",none: "暂无应用"}`
+              },
+              {
+                name: "newsListTEXT",
+                description: "新闻列表文本",
+                default: `{title: "消息通知",justNow: "刚刚",minutesAgo: "分钟前",hoursAgo: "小时前",gotoMsgCenter: "进入消息中心 ",none: "暂无消息"}`
+              },
+              {
+                name: "userInfoTEXT",
+                description: "用户信息文本",
+                default: `{
+                  from: "所属医院：",
+                  changeCompany: "切换公司",
+                  changePassword: "修改密码",
+                  logout: "退出登录",
+                  oldPassword: "旧密码",
+                  pleaseEnterOldPassword: "请输入旧密码",
+                  newPassword: "新密码",
+                  pleaseEnterNewPassword: "请输入新密码",
+                  pleaseEnterRightNewPassword: "请输入格式正确的新密码",
+                  repeatePassword: "确认新密码",
+                  pleaseEnterRepeatePassword: "请再次输入新密码",
+                  inconsistentWithTwoPassword: "两次密码不一致",
+                  newPasswordLimit: "3-16个字符",
+                  ok: "确认",
+                  cancel: "取消",
+                  unEnter: {
+                    oldPassword: "您还未输入旧密码",
+                    newPassword: "您还未输入新密码",
+                    repeatePassword: "您还未确认新密码"
+                  }
+                }`
+              }
+            ]}
+          />
+        </Apis>
       </DetailTemp>
     );
   }
