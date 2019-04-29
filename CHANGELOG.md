@@ -1,3 +1,10 @@
+## 0.11.41 (2019/4/29)
+
+### feature
+
+- Header 组件增加 TEXT api
+- Pagination 组件样式修改
+
 ## 0.11.40 (2019/4/15)
 
 ### bugfix
