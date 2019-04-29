@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Pagination, Pagination1 } from "@es";
+import { Pagination, Pagination1 } from "@src";
 
 class Demo1 extends Component {
   changeHandle = (currentPage, pageSize, total) => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Pagination } from "@es";
+import { Pagination } from "@src";
 
 class Demo2 extends Component {
   render() {
