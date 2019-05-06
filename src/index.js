@@ -8,6 +8,7 @@ import Table from "./components/Table";
 import Toast from "./components/Toast";
 import Input from "./components/Input";
 import { CheckBox } from "./components/Form";
+import Steps from "./components/Steps";
 const Components = {
   Header,
   Nav,
@@ -25,7 +26,8 @@ const Components = {
   Table,
   CheckBox,
   Toast,
-  Input
+  Input,
+  Steps
 };
 export {
   Header,
@@ -44,6 +46,7 @@ export {
   Table,
   CheckBox,
   Toast,
-  Input
+  Input,
+  Steps
 };
 export default Components;

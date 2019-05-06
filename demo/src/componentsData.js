@@ -1,34 +1,38 @@
 export default [
   {
     name: "Svg",
-    description: "svg 图标库",
+    description: "svg 图标库"
   },
   {
     name: "Btn",
-    description: "按钮",
+    description: "按钮"
   },
   {
     name: "Layout",
-    description: "布局",
+    description: "布局"
   },
   {
     name: "Header",
-    description: "公共头部",
+    description: "公共头部"
   },
   {
     name: "Nav",
-    description: "侧边导航栏",
+    description: "侧边导航栏"
   },
   {
     name: "Input",
-    description: "输入框",
+    description: "输入框"
   },
   {
     name: "Dialog",
-    description: "弹出框",
+    description: "弹出框"
   },
   {
     name: "Pagination",
-    description: "分页器",
+    description: "分页器"
+  },
+  {
+    name: "Steps",
+    description: "步骤条"
   }
 ];
