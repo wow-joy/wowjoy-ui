@@ -30,5 +30,9 @@ export default [
   {
     name: "Pagination",
     description: "分页器",
+  },
+  {
+    name: "Switch",
+    description: "开关",
   }
 ];
