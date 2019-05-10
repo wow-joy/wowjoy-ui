@@ -34,5 +34,9 @@ export default [
   {
     name: "Switch",
     description: "开关",
+  },
+  {
+    name: "Rate",
+    description: "评分",
   }
 ];

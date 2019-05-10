@@ -1,6 +1,6 @@
-# Switch
+# Rate
 
-Switch 组件
+Rate 组件
 
 ## 使用
 
@@ -8,9 +8,9 @@ Switch 组件
 
 ```
 import React from 'react'
-import Switch from 'wowjoy-ui'
+import Rate from 'wowjoy-ui'
 
-const Foo = () => <Switch></Switch>
+const Foo = () => <Rate></Rate>
 ```
 
 ## APIs
