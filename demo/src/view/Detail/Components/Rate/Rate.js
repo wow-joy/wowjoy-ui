@@ -30,10 +30,22 @@ class Rate extends PureComponent {
               import React, { Component } from "react";
               import { Rate } from "@src";
               
-              class Demo1 extends PureComponent{
+              class Demo1 extends Component{
+              
+                  handleSelectRate =(value)=>{
+                      alert(value)
+                  }
+                  
                   render(){
                       return(
-                          <Rate>Rare组件</Rate>
+                          <Rate 
+                          canClick={true}
+                          rateNum={5}
+                          handleSelectRate={this.handleSelectRate}
+                          rateValue={0}
+                          size='30px'
+                          color='#06aea6'
+                          />
                       )
                   }
               }
@@ -96,6 +108,42 @@ class Rate extends PureComponent {
                 name: "children",
                 description: "内容",
                 type: "node",
+                default: ""
+              },
+              {
+                name: "canClick",
+                description: "能否点击",
+                type: "bool",
+                default: ""
+              },
+              {
+                name: "rateNum",
+                description: "总共星数",
+                type: "number",
+                default: ""
+              },
+              {
+                name: "handleSelectRate",
+                description: "点击事件",
+                type: "function",
+                default: ""
+              },
+              {
+                name: "rateValue",
+                description: "初始星数",
+                type: "number",
+                default: ""
+              },
+              {
+                name: "size",
+                description: "尺寸大小",
+                type: "string",
+                default: ""
+              },
+              {
+                name: "color",
+                description: "颜色",
+                type: "string",
                 default: ""
               }
             ]}
