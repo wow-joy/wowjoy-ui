@@ -19,6 +19,7 @@ const SwitchBase = styled.input`
     -webkit-appearance: none;
     user-select: none;
     outline: none;
+    cursor: pointer;
     :before {
         content: '';
         width: 29px;

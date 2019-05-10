@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Rate } from "@src";
+import { Rate } from "@es";
 
 class Demo1 extends Component{
 
     handleSelectRate =(value)=>{
         alert(value)
     }
-    
+
     render(){
         return(
             <Rate 
