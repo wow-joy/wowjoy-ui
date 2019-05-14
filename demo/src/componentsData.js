@@ -38,5 +38,9 @@ export default [
   {
     name: "Rate",
     description: "评分",
+  },
+  {
+    name: "Divider",
+    description: "分割线",
   }
 ];

@@ -10,6 +10,7 @@ import Input from "./components/Input";
 import { CheckBox } from "./components/Form";
 import Switch from "./components/Switch";
 import Rate from "./components/Rate";
+import Divider from "./components/Divider";
 const Components = {
   Header,
   Nav,
@@ -29,7 +30,8 @@ const Components = {
   Toast,
   Input,
   Switch,
-  Rate
+  Rate,
+  Divider
 };
 export {
   Header,
@@ -50,6 +52,7 @@ export {
   Toast,
   Input,
   Switch,
-  Rate
+  Rate,
+  Divider
 };
 export default Components;
