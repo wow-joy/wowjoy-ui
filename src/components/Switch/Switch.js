@@ -46,12 +46,32 @@ const SwitchBase = styled.input`
 `;
 
 class Switch extends PureComponent {
+    static defaultProps = {
+        checked:false
+    }
+    constructor(props){
+        super(props);
+        this.state = {
+          checked:props.checked
+        }
+      }
     onChange = () => {
-        const { onChange,checked } = this.props;
-        return onChange && onChange();
+        const { onChange} = this.props;
+        const {checked} = this.state
+        if(checked === false){
+            this.setState({
+                checked:true
+            })
+        }else{
+            this.setState({
+                checked:false
+            })
+        }
+        return onChange && onChange(!checked);
     }
     render(){
-        const {className,defaultStyles,children,checked} = this.props;
+        const {className,defaultStyles,children} = this.props;
+        const {checked} = this.state
         return(
             <SwitchBase
               type='checkbox'
