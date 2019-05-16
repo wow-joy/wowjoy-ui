@@ -41,7 +41,7 @@ class Table extends PureComponent {
   onSelectedChange = (rowEle, rowIndex) => e => {
     const { onChange, selected = [] } = this.props;
     if (rowEle instanceof Array) {
-      onChange(rowEle.map(ele => ele.id), "all", -1, e);
+      onChange && onChange(rowEle.map(ele => ele.id), "all", -1, e);
       return;
     }
     const toggleArr = (arr, item) => {
@@ -50,7 +50,7 @@ class Table extends PureComponent {
       }
       return [...arr, item];
     };
-    onChange(toggleArr(selected, rowEle.id), rowEle, rowIndex, e);
+    onChange && onChange(toggleArr(selected, rowEle.id), rowEle, rowIndex, e);
   };
 
   addColumns = columns => {
@@ -108,7 +108,7 @@ class Table extends PureComponent {
         className={className}
         data={data}
         columns={selection ? this.addColumns(columns) : columns}
-        onRowClick
+        onRowClick={onRowClick}
       >
         {children}
       </Wrap>
