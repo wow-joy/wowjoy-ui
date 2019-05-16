@@ -77,7 +77,7 @@ export default Demo1;
     ];
 
     return (
-      <DetailTemp title={"Btn"}>
+      <DetailTemp title={"Input"}>
         <Description>
           <h2>描述</h2>
           <p>

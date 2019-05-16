@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
-import { Layout, Header, Nav } from "@es";
+import { Layout as LayoutBase, Header, Nav } from "@es";
 import List from "./view/List";
 import Detail from "./view/Detail";
 import { ReactComponent as LogoSvg } from "./media/logo.svg";
 import "wowjoy-component/lib/media/common.css";
 import ScrollSelect from "./view/ScrollSelect";
 import componentsData from "./componentsData";
-import styled, { keyframes,ThemeProvider } from "styled-components";
+import styled, { keyframes, ThemeProvider } from "styled-components";
 
+const Layout = styled(LayoutBase)`
+  main {
+    padding: 0 20px 0 46px;
+  }
+`;
 const appLogoSpin = keyframes`
   from {
     transform: rotate(0deg);
@@ -62,30 +67,28 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-
-      <Layout
-        header={
-          <Header onChange={this.toggleLeft}>
-            <Logo className={"logo"} />
-            wowjoy-ui
-          </Header>
-        }
-        asideLeft={
-          <Nav
-            navList={componentsData.map((ele, index) => ({
-              content: ele.name,
-              id: ele.name,
-              to: `/detail/${ele.name}`
-            }))}
-            activeId={this.props.location.pathname.replace(/\/detail\//, "")}
-          />
-        }
-        showLeft={this.state.showLeft}
-      >
-        <Routers />
-      </Layout>
+        <Layout
+          header={
+            <Header onChange={this.toggleLeft}>
+              <Logo className={"logo"} />
+              wowjoy-ui
+            </Header>
+          }
+          asideLeft={
+            <Nav
+              navList={componentsData.map((ele, index) => ({
+                content: ele.name,
+                id: ele.name,
+                to: `/detail/${ele.name}`
+              }))}
+              activeId={this.props.location.pathname.replace(/\/detail\//, "")}
+            />
+          }
+          showLeft={this.state.showLeft}
+        >
+          <Routers />
+        </Layout>
       </ThemeProvider>
-
     );
   }
 }
