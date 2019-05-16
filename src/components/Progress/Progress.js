@@ -5,8 +5,8 @@ import styled from "styled-components";
 const ProgressBase = styled.div`
     display:inline-block;
     width:100%;
-    margin-right: calc(-2em - 8px);
-    padding-right: calc(2em + 8px);
+    margin-right: ${p=>p.showInfo?'calc(-2em - 8px)':'0px'};
+    padding-right: ${p=>p.showInfo?'calc(2em + 8px)':'0px'};
     .inner{
         position: relative;
         display:inline-block;
@@ -52,6 +52,7 @@ class Progress extends PureComponent{
                 className={className}
                 percent={percent}
                 strokeColor={strokeColor}
+                showInfo={showInfo}
                 >
                     <div className='inner'>
                         <div className='bg'></div>
