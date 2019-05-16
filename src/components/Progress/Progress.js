@@ -25,7 +25,7 @@ const ProgressBase = styled.div`
     }
 `;
 const Span = styled.span`
-    display:inline-block;
+    display:${p=>p.showInfo?'inline-block':'none'};
     width:2em;
     margin-left:8px;
     color:rgba(0,0,0,0.45);
@@ -40,10 +40,11 @@ const Span = styled.span`
 class Progress extends PureComponent{
     static defaultProps = {
         percent:0,
-        strokeColor:'#06aea6'
+        strokeColor:'#06aea6',
+        showInfo:true
     }
     render(){
-        const {className,defaultStyles,children,percent,strokeColor} = this.props;
+        const {className,defaultStyles,children,percent,strokeColor,showInfo} = this.props;
         return(
             <div>
                 <ProgressBase
@@ -53,10 +54,10 @@ class Progress extends PureComponent{
                 strokeColor={strokeColor}
                 >
                     <div className='inner'>
-                    <div className='bg'></div>
+                        <div className='bg'></div>
                     </div>
                 </ProgressBase>
-                <Span>{percent}%</Span>
+                <Span showInfo={showInfo}>{percent}%</Span>
             </div>
         )
     }
@@ -67,7 +68,8 @@ Progress.propTypes = {
     defaultStyles: PropTypes.string,
     children: PropTypes.node,
     percent:PropTypes.number,
-    strokeColor:PropTypes.string
+    strokeColor:PropTypes.string,
+    showInfo:PropTypes.bool
 };
 
 export default Progress;

@@ -37,6 +37,7 @@ class Progress extends PureComponent {
                       <Progress 
                         percent={15}
                         strokeColor='#06aea6'
+                        showInfo={true}
                       />
                     );
                   }
@@ -113,6 +114,12 @@ class Progress extends PureComponent {
                 description: "进度条的颜色",
                 type: "string",
                 default: "#06aea6"
+              },
+              {
+                name: "showInfo",
+                description: "是否显示数值",
+                type: "bool",
+                default: "true"
               }
             ]}
           />

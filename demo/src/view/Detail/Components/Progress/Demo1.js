@@ -8,6 +8,7 @@ class Demo1 extends Component {
         <Progress 
           percent={15}
           strokeColor='#06aea6'
+          showInfo={true}
         />
       );
     }
