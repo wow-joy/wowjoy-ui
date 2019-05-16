@@ -11,6 +11,7 @@ import { CheckBox } from "./components/Form";
 import Switch from "./components/Switch";
 import Rate from "./components/Rate";
 import Divider from "./components/Divider";
+import Progress from "./components/Progress";
 const Components = {
   Header,
   Nav,
@@ -31,7 +32,8 @@ const Components = {
   Input,
   Switch,
   Rate,
-  Divider
+  Divider,
+  Progress
 };
 export {
   Header,
@@ -53,6 +55,7 @@ export {
   Input,
   Switch,
   Rate,
-  Divider
+  Divider,
+  Progress
 };
 export default Components;

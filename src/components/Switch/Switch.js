@@ -33,7 +33,7 @@ const SwitchBase = styled.input`
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
         background-color: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);  
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
     :checked {
         border-color: #06aea6;
@@ -54,7 +54,7 @@ class Switch extends PureComponent {
         this.state = {
           checked:props.checked
         }
-      }
+    }
     onChange = () => {
         const { onChange} = this.props;
         const {checked} = this.state

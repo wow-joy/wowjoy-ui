@@ -42,5 +42,9 @@ export default [
   {
     name: "Divider",
     description: "分割线",
+  },
+  {
+    name: "Progress",
+    description: "进度条",
   }
 ];
