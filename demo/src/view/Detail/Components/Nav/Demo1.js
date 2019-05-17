@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav } from "@es";
+import { Nav } from "@src";
 import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
 
 class Demo1 extends Component {

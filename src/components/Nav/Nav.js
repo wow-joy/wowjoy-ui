@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { SlideDown, PopOut, ScrollBox } from "wowjoy-component";
+import { SlideDown, ScrollBox } from "@test";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
+import { ReactComponent as SpreadBase } from "../../static/medias/svg/spread.svg";
+import { ReactComponent as DropDownBase } from "../../static/medias/svg/drop_down.svg";
 const isChrome = /(Chrome|Safari)/i.test(window.navigator.userAgent);
 
 const Wrap = styled.nav`
@@ -16,7 +18,7 @@ const Wrap = styled.nav`
   box-shadow: 0 1px 4px 0 rgba(202, 202, 202, 0.5);
   font-size: 14px;
   color: #333;
-  svg {
+  svg.icon {
     margin-right: 28px;
     width: 19px;
     height: 19px;
@@ -42,7 +44,6 @@ const Wrap = styled.nav`
   }
 
   .wjc-slieDown-subContent > .active {
-    & > .wjc-popOut-content,
     & > .wjc-slideDown-content {
       color: ${p => p.theme.mainColor};
       position: relative;
@@ -60,7 +61,6 @@ const Wrap = styled.nav`
       }
     }
   }
-  .childActive:not(.open):not(.active) > .wjc-popOut-content,
   .childActive:not(.open):not(.active) > .wjc-slideDown-content {
     color: ${p => p.theme.mainColor};
     &::before {
@@ -76,8 +76,11 @@ const Wrap = styled.nav`
 `;
 
 const SubMenuSlideDown = styled(SlideDown)`
+  .wjc-slideDown-content {
+    color: #333;
+  }
   .wjc-slideDown-content:hover {
-    background: ${p=>p.theme.lightColor};
+    background: ${p => p.theme.lightColor};
   }
   .wjc-slieDown-subContent {
     background: #f5f7f8;
@@ -119,51 +122,6 @@ const SubMenuSlideDown = styled(SlideDown)`
     }
   }
 `;
-const SubMenuPopOut = styled(PopOut)`
-  & > div {
-    background: #f8f8f8;
-    color: #333;
-    cursor: pointer;
-    &:hover {
-      background: ${p=> p.theme.lightColor};
-    }
-  }
-  &.open > .wjc-popOut-content {
-    color: ${p => p.theme.mainColor};
-  }
-
-  .wjc-popOut-subContent > div {
-    background: #fff;
-    box-shadow: 0 1px 6px 0 rgba(153, 153, 153, 0.5);
-    width: 200px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: #333;
-  }
-  &.childActive > .wjc-popOut-content {
-    color: ${p => p.theme.mainColor};
-    &::before {
-      display: none;
-    }
-  }
-  .wj-nav-item__3 {
-    color: #333;
-  }
-  .wj-nav-item__3.active > div:first-child {
-    color: ${p => p.theme.mainColor};
-    &::before {
-      display: none;
-    }
-  }
-  .wj-nav-item__3 > div > .wj-nav-item-content {
-    padding-left: 31px;
-    height: 30px;
-    &::before {
-      display: none;
-    }
-  }
-`;
 
 const Content = styled(NavContent)`
   ${p => {
@@ -188,9 +146,6 @@ const Content = styled(NavContent)`
   }};
 `;
 const SubMenu = props => {
-  if (props.type === "pop") {
-    return <SubMenuPopOut {...props} />;
-  }
   return (
     <SubMenuSlideDown
       onBlur={e =>
@@ -202,8 +157,32 @@ const SubMenu = props => {
     />
   );
 };
+const Spread = styled(SpreadBase)`
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) rotate(${p => (p.isActive ? 180 : 0)}deg);
+  transition: 0.3s;
+  path {
+    fill: #797979;
+  }
+`;
+
+const DropDown = styled(DropDownBase)`
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  transform: rotate(${p => (p.isActive ? 180 : 0)}deg);
+  transition: 0.3s;
+  path {
+    fill: currentColor;
+  }
+`;
 
 const GetSubMenu = ({
+  controlIconType,
   navList = [],
   num,
   clickHandle,
@@ -213,19 +192,18 @@ const GetSubMenu = ({
   size
 }) => {
   const activeId = activePath[0];
-  const loop = (list, number) => {
+  const loop = (list, number, isFirst) => {
     return list.map(item => (
       <SubMenu
         size={size}
         key={item.id}
-        type={item.subViewType}
         className={`wj-nav-item__${number} ${
           activeId && activeId === item.id ? "active" : ""
         } ${activeId && activePath.includes(item.id) ? "childActive" : ""}`}
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
         onTransitionEnd={onTransitionEnd}
-        onChange={onChange(item.subViewType)}
+        onChange={onChange}
         content={
           <Content
             key={item.id}
@@ -243,12 +221,19 @@ const GetSubMenu = ({
             {item.content}
           </Content>
         }
+        ControlComponent={
+          controlIconType === "arrow"
+            ? Spread
+            : !isFirst
+              ? DropDown
+              : () => null
+        }
       >
-        {item.subList ? loop(item.subList, number + 1) : null}
+        {item.subList ? loop(item.subList, number + 1, false) : null}
       </SubMenu>
     ));
   };
-  return loop(navList, num);
+  return loop(navList, num, true);
 };
 
 const getValuePath = (navList = [], activeId) => {
@@ -278,11 +263,10 @@ class Nav extends PureComponent {
     const {
       className,
       defaultStyles,
-      children,
       size,
       navList,
       activeId,
-      theme
+      controlIconType
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);
@@ -300,6 +284,7 @@ class Nav extends PureComponent {
           hoverControl
         >
           <GetSubMenu
+            controlIconType={controlIconType}
             navList={navList}
             num={1}
             clickHandle={this.clickHandle}
@@ -316,16 +301,10 @@ class Nav extends PureComponent {
     const { onChange } = this.props;
     return onChange && onChange(itemData.id || "", itemData);
   };
-  toggleSubMenu = type => activeId => {
-    if (type === "pop" && activeId) {
-      this.setState({
-        overflow: "visible"
-      });
-    } else {
-      this.setState({
-        overflow: "auto"
-      });
-    }
+  toggleSubMenu = () => {
+    this.setState({
+      overflow: "auto"
+    });
   };
   onTransitionEnd = (...args) => {
     if (this.props.noScroll) {
@@ -345,7 +324,8 @@ Nav.propTypes = {
   navList: PropTypes.array,
   activeId: PropTypes.string,
   defaultActiveId: PropTypes.string,
-  noScroll: PropTypes.bool
+  noScroll: PropTypes.bool,
+  controlIconType: PropTypes.oneOf(["arrow", "delta"])
 };
 export default withRouter(
   ControllSwitchHoc({

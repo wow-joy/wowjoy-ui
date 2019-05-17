@@ -20,6 +20,10 @@ export default [
     description: "侧边导航栏"
   },
   {
+    name: "FormLayout",
+    description: "表单布局"
+  },
+  {
     name: "Input",
     description: "输入框"
   },

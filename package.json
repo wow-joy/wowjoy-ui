@@ -46,6 +46,6 @@
     "react-component"
   ],
   "dependencies": {
-    "wowjoy-component": "^3.2.1"
+    "wowjoy-component": "3.3.1"
   }
 }

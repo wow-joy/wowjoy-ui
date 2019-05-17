@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import { Layout as LayoutBase, Header, Nav } from "@es";
+import { ScrollBox } from "wowjoy-component";
 import List from "./view/List";
 import Detail from "./view/Detail";
 import { ReactComponent as LogoSvg } from "./media/logo.svg";
@@ -10,8 +11,9 @@ import componentsData from "./componentsData";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 
 const Layout = styled(LayoutBase)`
-  main {
-    padding: 0 20px 0 46px;
+  .wjc-layout-center {
+    overflow: auto;
+    height: calc(100vh - 64px);
   }
 `;
 const appLogoSpin = keyframes`
@@ -86,7 +88,9 @@ class App extends Component {
           }
           showLeft={this.state.showLeft}
         >
-          <Routers />
+          <ScrollBox defaultStyles={`height: calc(100vh - 64px)`} maxHeight={"100%"}>
+            <Routers />
+          </ScrollBox>
         </Layout>
       </ThemeProvider>
     );
