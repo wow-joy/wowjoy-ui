@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { SlideDown, ScrollBox } from "@test";
+import { SlideDown, ScrollBox } from "wowjoy-component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
@@ -174,7 +174,7 @@ const DropDown = styled(DropDownBase)`
   width: 8px;
   height: 8px;
   margin-left: 8px;
-  transform: rotate(${p => (p.isActive ? 180 : 0)}deg);
+  transform: rotate(${p => (p.isActive ? 0 : -90)}deg);
   transition: 0.3s;
   path {
     fill: currentColor;
@@ -266,7 +266,7 @@ class Nav extends PureComponent {
       size,
       navList,
       activeId,
-      controlIconType
+      controlIconType = 'arrow'
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);

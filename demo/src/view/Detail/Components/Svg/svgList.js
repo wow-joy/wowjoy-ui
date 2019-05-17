@@ -7,9 +7,9 @@ export default [
   "open",
   "go",
   "crumbs",
-
   "msg",
   "none",
+  "no_picture",
   "picture",
   "time",
   "loading",
