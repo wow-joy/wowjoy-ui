@@ -24,10 +24,8 @@ const Display = styled.dl`
 
 const Column = styled.div``;
 
-
 const SvgItem = ({ name }) => {
-  const Svg = require(`@es/static/medias/svg/${name}.svg`)
-    .ReactComponent;
+  const Svg = require(`@es/static/medias/svg/${name}.svg`).ReactComponent;
   return (
     <Display>
       <dt>
@@ -176,7 +174,7 @@ const Icon = styled(Male)\`
   }
 \`
 
-const Render = () =>  <img src={male} style={{width: '40px', height: '40px'}} />`
+const Render = () =>  <Male src={male} style={{width: '40px', height: '40px'}} />`
       }
     ];
     return (
@@ -195,16 +193,18 @@ const Render = () =>  <img src={male} style={{width: '40px', height: '40px'}} />
         <Description>
           <h2>描述</h2>
           <p>
-            1. svg的使用需要预装 <b>@svgr/webpack</b> 依赖并配置<br />
-            2. 本svg库提供公用的图标，个别项目的私有图标请自行引用<br />
-            3. svg的引入允许 <code>{`<svg/>`}</code>， <code>{`<img/>`}</code>{" "}
-            两种形式引入（详见
-            <HashLink href="#demo1">demo-引入方式</HashLink>）<br />
-            4. <code>{`<svg/>`}</code>的方式的引入允许修改图片样式（详见
-            <HashLink href="#demo2">demo-样式修改</HashLink>）
+            1. svg的使用需要预装 <b>@svgr/webpack</b> 依赖并配置
+            <br />
+            2. 本svg库提供公用的图标，个别项目的私有图标请自行引用
+            <br />
+            3. svg的引入允许 <code>{`<Svg/>`}</code>，{" "}
+            <code>{`<img src={svg}/>`}</code> 两种形式引入
+            <br />
+            4. <code>{`<Svg/>`}</code>
+            的方式的引入允许修改图片样式
           </p>
         </Description>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 0)
             .map((ele, index) => (
@@ -217,7 +217,7 @@ const Render = () =>  <img src={male} style={{width: '40px', height: '40px'}} />
               </CodeDemo>
             ))}
         </Column>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 1)
             .map((ele, index) => (

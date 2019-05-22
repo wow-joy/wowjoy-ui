@@ -18,15 +18,6 @@ const Wrap = styled.nav`
   box-shadow: 0 1px 4px 0 rgba(202, 202, 202, 0.5);
   font-size: 14px;
   color: #333;
-  svg.icon {
-    margin-right: 28px;
-    width: 19px;
-    height: 19px;
-    path {
-      fill: #666;
-    }
-  }
-
   ${p =>
     p.size === "small" &&
     `width: 180px;
@@ -36,7 +27,6 @@ const Wrap = styled.nav`
       height: 16px;
     }`} .wj-nav-item-content__active {
     & > svg {
-      color: #000;
       path {
         fill: ${p => p.theme.mainColor};
       }
@@ -197,7 +187,7 @@ const GetSubMenu = ({
       <SubMenu
         size={size}
         key={item.id}
-        className={`wj-nav-item__${number} ${
+        className={`wj-nav-item wj-nav-item__${number} ${
           activeId && activeId === item.id ? "active" : ""
         } ${activeId && activePath.includes(item.id) ? "childActive" : ""}`}
         isActive={item.isOpen}
@@ -273,7 +263,7 @@ class Nav extends PureComponent {
     const activePath = getValuePath(navList, activeId);
 
     return (
-      <Wrap defaultStyles={defaultStyles} className={className} size={size}>
+      <Wrap defaultStyles={defaultStyles} className={`wj-nav-wrap ${className || ''}`} size={size}>
         <ScrollBox
           defaultStyles={`&>div{ height: calc(100vh - 64px)} `}
           dynamic={!noScroll}

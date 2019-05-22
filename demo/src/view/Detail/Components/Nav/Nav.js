@@ -30,12 +30,47 @@ class Nav extends Component {
 import { Nav, Btn1 } from "@es";
 import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
 
+const navList = [
+  {
+    content: [<Home key={'home'} />, "首页"],
+    id: "home1"
+  },
+  {
+    content: [<Home key={'1'} />,"1级常规下拉"],
+    id: "home2",
+    subList: [
+      {
+        content: <div>常规下拉子项</div>,
+        id: "home21"
+      },
+      {
+        content: <div>2级下拉1</div>,
+        id: "home22",
+        subList: [
+          { content: <div>111</div>, id: "x1" },
+          { content: <div>222</div>, id: "x2" },
+          { content: <div>333</div>, id: "x3" }
+        ]
+      },
+      {
+        content: <div>2级下拉2</div>,
+        id: "home23",
+        subList: [
+          { content: <div>111</div>, id: "y1" },
+          { content: <div>222</div>, id: "y2" },
+          { content: <div>333</div>, id: "y3" }
+        ]
+      }
+    ]
+  }
+]
 class Demo1 extends Component {
   state = {
     arrow: true
   };
   changeHandle = (id, data) => {
     alert('切换到了id:'+id )
+    return false;
   };
   iconChange = e => {
     this.setState({
@@ -55,41 +90,7 @@ class Demo1 extends Component {
           controlIconType={this.state.arrow ? "arrow" : "delta"}
           defaultActiveId="home1"
           onChange={this.changeHandle}
-          navList={[
-            {
-              content: [<Home key={'home'} />, "首页"],
-              id: "home1"
-            },
-            {
-              content: [<Home key={'1'} />,"1级常规下拉"],
-              id: "home2",
-              subList: [
-                {
-                  content: <div>常规下拉子项</div>,
-                  id: "home21"
-                },
-                {
-                  content: <div>2级常规下拉</div>,
-                  id: "home22",
-                  subList: [
-                    { content: <div>111</div>, id: "x1" },
-                    { content: <div>222</div>, id: "x2" },
-                    { content: <div>333</div>, id: "x3" }
-                  ]
-                },
-                {
-                  content: <div>2级弹出下拉</div>,
-                  subViewType: "pop",
-                  id: "home23",
-                  subList: [
-                    { content: <div>111</div>, id: "y1" },
-                    { content: <div>222</div>, id: "y2" },
-                    { content: <div>333</div>, id: "y3" }
-                  ]
-                }
-              ]
-            }
-          ]}
+          navList={navList}
         />
       </div>
     );
@@ -203,9 +204,7 @@ class Demo1 extends Component {
             data={[
               {
                 name: "content",
-                description: "内容",
-                type: "node",
-                default: ""
+                description: "内容"
               },
               {
                 name: "id",
@@ -243,6 +242,40 @@ class Demo1 extends Component {
                 description: "点击跳转的路由",
                 type: "string",
                 default: ""
+              }
+            ]}
+          />
+        </Apis>
+        <Apis>
+          <h2>Class Api</h2>
+          <ApiTable
+            columns={[
+              {
+                title: "className",
+                render: (dataItem, index, colKey) => dataItem.name,
+                id: 0
+              },
+              {
+                title: "描述",
+                render: (dataItem, index, colKey) => dataItem.description,
+                id: 1
+              }
+            ]}
+            data={[
+              {
+                name: "wj-nav-wrap",
+                description: "最外层"
+              },
+              {
+                name:
+                  "wj-nav-item[(.wj-nav-item__{number}),(.active), (.childActive)]",
+                description:
+                  "导航项[(第{number}级导航项),(当前选中项),(当前选中项在子项内)]"
+              },
+              {
+                name:
+                  "wj-nav-item-content[(.wj-nav-item-content__active),(.hasSubList)]",
+                description: "导航项内容[(当前选中项), (拥有子项)]"
               }
             ]}
           />

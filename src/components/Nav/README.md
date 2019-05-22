@@ -35,7 +35,6 @@ const PROPS = {
       subList: [
         {
           content: <div>参数设置</div>,
-          subViewType: "pop",
           id: "home31",
           subList: [
             { content: <div>职级序列与职级1</div>, id: "xx1" },
@@ -44,7 +43,6 @@ const PROPS = {
           ]
         },
         {
-          subViewType: "pop",
           content: <div>考勤假期设置</div>,
           id: "home32",
         }
@@ -84,7 +82,6 @@ const Foo = () => <Nav></Nav>
 | content       | 内容                                                      |  node  |        |
 | id            | 唯一标识                                                  | string |        |
 | subList       | 下拉列表内容 配置同`navList`                              | array  |        |
-| subViewType   | 下拉弹出类型 可选项: `'pop'`（弹出式下拉） 默认为直接下拉 | string |        |
 | isOpen        | 是否打开此弹出菜单                                        |  bool  |        |
 | defaultIsOpen | 是否默认打开此弹出菜单                                    |  bool  |        |
 | to            | 点击跳转的路由                                            | string |        |
