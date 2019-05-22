@@ -12,9 +12,9 @@ const Wrap = styled.div`
   line-height: 1;
   svg {
     vertical-align: middle;
-    margin-right: 28px;
-    width: 16px;
-    height: 16px;
+    margin-right: 26px;
+    width: 20px;
+    height: 20px;
     path {
       fill: #666;
     }

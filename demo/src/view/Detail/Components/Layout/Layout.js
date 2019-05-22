@@ -5,7 +5,10 @@ import DetailTemp from "@demoComponents/DetailTemp";
 import { Link } from "react-router-dom";
 import CodeDemo from "@demoComponents/CodeDemo";
 import ApiTable from "@demoComponents/ApiTable";
-
+import Demo1, { code as code1 } from "./Demo1";
+import Demo2, { code as code2 } from "./Demo2";
+import Demo3, { code as code3 } from "./Demo3";
+import Demo4, { code as code4 } from "./Demo4";
 const Relate = styled.section``;
 const Description = styled.section``;
 const RouterLink = styled(Link)``;
@@ -16,7 +19,7 @@ const Apis = styled.section`
   padding-top: 20px;
   width: 100%;
   clear: both;
-  table{
+  table {
     width: 100%;
   }
   td {
@@ -27,133 +30,29 @@ class Layout extends Component {
   render() {
     const demoList = [
       {
-        display: (
-          <LayoutBase
-            defaultStyles={`
-          min-height: 0;
-          &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-          &&>.wj-aside__left{
-            height: 100px;
-            background: rgba(155,243,225,0.6)
-          }
-        `}
-            header={"header -- height: 64px"}
-            asideLeft={"left -- width: 230px"}
-            showLeft={true}
-          >
-            children
-          </LayoutBase>
-        ),
+        display: <Demo1 />,
         description: <p>常规布局</p>,
-        code: `<LayoutBase
-  defaultStyles={\`
-  min-height: 0;
-  &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-  &&>.wj-aside__left{
-    height: 100px;
-    background: rgba(155,243,225,0.6)
-  }
-\`}
-    header={"header -- height: 64px"}
-    asideLeft={"left -- width: 230px"}
-    showLeft={true}
-  >
-    children
-</LayoutBase>`
+        code: code1
       },
       {
-        display: (
-          <LayoutBase
-            defaultStyles={`
-              min-height: 0;
-              &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-              &&>.wj-aside__left{
-                height: 100px;
-                background: rgba(155,243,225,0.6);
-              }
-              &&>.wj-aside__right
-              {
-                background: rgba(155,243,225,0.6);
-              }
-              &&>footer{
-                background: rgba(186,241,230,0.3);
-              }
-            `}
-            header={"header"}
-            asideLeft={"left"}
-            asideRight={"right"}
-            footer={"footer"}
-            showLeft={true}
-          >
-            children
-          </LayoutBase>
-        ),
+        display: <Demo2 />,
         description: <p>完整布局方案</p>,
-        code: `<Layout
-    defaultStyles={\`
-      min-height: 0;
-      &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-      &&>.wj-aside__left{
-        height: 100px;
-        background: rgba(155,243,225,0.6);
-      }
-      &&>.wj-aside__right
-      {
-        background: rgba(155,243,225,0.6);
-      }
-      &&>footer{
-        background: rgba(186,241,230,0.3);
-      }
-    \`}
-    header={"header"}
-    asideLeft={"left"}
-    asideRight={"right"}
-    footer={"footer"}
-    showLeft={true}
-  >
-    children
-  </Layout>`
+        code: code2
       },
       {
-        display: (
-          <LayoutBase
-            defaultStyles={`
-          min-height: 0;
-          &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-          &&>.wj-aside__left{
-            height: 100px;
-            background: rgba(155,243,225,0.6)
-          }
-        `}
-            header={"header -- height: 64px"}
-            asideLeft={"left -- width: 180px"}
-            showLeft={true}
-            leftSize="small"
-          >
-            children
-          </LayoutBase>
-        ),
+        display: <Demo3 />,
         description: (
           <p>
             小型左侧导航布局 leftSize="small"，
             如果和nav组件一起使用，nav组件也应加上 size="small"
           </p>
         ),
-        code: `<LayoutBase
-  defaultStyles={\`
-  min-height: 0;
-  &&>header{position: absolute; background: rgba(186,241,230,0.3)};
-  &&>.wj-aside__left{
-    height: 100px;
-    background: rgba(155,243,225,0.6)
-  }
-\`}
-    header={"header -- height: 64px"}
-    asideLeft={"left -- width: 230px"}
-    showLeft={true}
-  >
-    children
-</LayoutBase>`
+        code: code3
+      },
+      {
+        display: <Demo4 />,
+        description: <p>通用完整布局方案</p>,
+        code: code4
       }
     ];
     return (
@@ -166,12 +65,14 @@ class Layout extends Component {
         <Description>
           <h2>描述</h2>
           <p>
-            1. 顶层结构布局组件<br />
-            2. <b>Layout</b>,<b>Nav</b>,<b>Header</b>组件通常一起使用，但不是强关联，都可以单独使用
-            3. 详细内容查阅<HashLink href="#api">api</HashLink>
+            1. 顶层结构布局组件
+            <br />
+            2. <b>Layout</b>,<b>Nav</b>,<b>Header</b>
+            组件通常一起使用，但不是强关联，都可以单独使用
+            <br />
           </p>
         </Description>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 0)
             .map((ele, index) => (
@@ -184,7 +85,7 @@ class Layout extends Component {
               </CodeDemo>
             ))}
         </Column>
-        <Column className={'demo-column'}>
+        <Column className={"demo-column"}>
           {demoList
             .filter((ele, index) => index % 2 === 1)
             .map((ele, index) => (

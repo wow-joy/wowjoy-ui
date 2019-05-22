@@ -109,7 +109,7 @@ export default [
   "singleelection_chec_",
   "singleelection_norm",
   "singleelection_norm_",
-  "sort1",
+  "sort",
   "spread",
   "time",
   "title",

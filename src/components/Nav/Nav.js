@@ -21,11 +21,12 @@ const Wrap = styled.nav`
   ${p =>
     p.size === "small" &&
     `width: 180px;
-    svg{
-      margin-right: 16px;
-      width: 16px;
-      height: 16px;
-    }`} .wj-nav-item-content__active {
+      .wj-nav-item-content>svg{
+        margin-right: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    `} .wj-nav-item-content__active {
     & > svg {
       path {
         fill: ${p => p.theme.mainColor};
@@ -263,7 +264,11 @@ class Nav extends PureComponent {
     const activePath = getValuePath(navList, activeId);
 
     return (
-      <Wrap defaultStyles={defaultStyles} className={`wj-nav-wrap ${className || ''}`} size={size}>
+      <Wrap
+        defaultStyles={defaultStyles}
+        className={`wj-nav-wrap ${className || ""}`}
+        size={size}
+      >
         <ScrollBox
           defaultStyles={`&>div{ height: calc(100vh - 64px)} `}
           dynamic={!noScroll}
