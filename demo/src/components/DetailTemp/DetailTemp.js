@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Wrap = styled.main`
-  &>h1 {
+  padding-bottom: 20px;
+  & > h1 {
     font-size: 22px;
     text-align: center;
     margin: 12px auto;

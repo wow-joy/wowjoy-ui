@@ -266,6 +266,7 @@ class Nav extends PureComponent {
       size,
       navList,
       activeId,
+      noScroll,
       controlIconType = "arrow"
     } = this.props;
 
@@ -274,8 +275,8 @@ class Nav extends PureComponent {
     return (
       <Wrap defaultStyles={defaultStyles} className={className} size={size}>
         <ScrollBox
-          defaultStyles={`&>div{ height: calc(100vh - 64px); &>div{width: 100%; }} `}
-          dynamic
+          defaultStyles={`&>div{ height: calc(100vh - 64px)} `}
+          dynamic={!noScroll}
         >
           <GetSubMenu
             controlIconType={controlIconType}
@@ -304,9 +305,7 @@ class Nav extends PureComponent {
     if (this.props.noScroll) {
       return;
     }
-    if (!isChrome) {
-      this.forceUpdate();
-    }
+    this.forceUpdate();
   };
 }
 

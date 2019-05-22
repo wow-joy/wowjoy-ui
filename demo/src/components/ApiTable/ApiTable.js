@@ -1,18 +1,31 @@
-import { Table } from "wowjoy-component";
+import { Table as TableBase } from "@es";
 import React, { Component } from "react";
-
+import styled from "styled-components";
+const Table = styled(TableBase)`
+  margin: 20px auto;
+  width: 90%;
+  tr > th {
+    border: 1px solid #aaa;
+  }
+  tr > td {
+    border: 1px solid #aaa;
+  }
+  & > thead {
+    font-size: 16px;
+  }
+  & > tbody {
+    font-size: 14px;
+  }
+  color: #666;
+  .description {
+    white-space: nowrap;
+  }
+`;
 class ApiTable extends Component {
   render() {
     return (
       <Table
-        defaultStyles={`
-          tr>th{border: 1px solid #aaa;};
-          tr>td{border: 1px solid #aaa;}
-          color: #666;
-          .description{
-            white-space: nowrap
-          }
-        `}
+        selection={false}
         columns={[
           {
             title: "属性",
