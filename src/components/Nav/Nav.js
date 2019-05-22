@@ -266,7 +266,7 @@ class Nav extends PureComponent {
       size,
       navList,
       activeId,
-      controlIconType = 'arrow'
+      controlIconType = "arrow"
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);
@@ -274,14 +274,8 @@ class Nav extends PureComponent {
     return (
       <Wrap defaultStyles={defaultStyles} className={className} size={size}>
         <ScrollBox
-          defaultStyles={`&>div{ height: calc(100vh - 64px)} ${
-            this.state.overflow === "visible"
-              ? `overflow:visible; &>div{overflow: visible; &>.wjc-scroll-bar{display: none}}`
-              : ""
-          }`}
-          maxHeight={"100%"}
-          visible
-          hoverControl
+          defaultStyles={`&>div{ height: calc(100vh - 64px); &>div{width: 100%; }} `}
+          dynamic
         >
           <GetSubMenu
             controlIconType={controlIconType}

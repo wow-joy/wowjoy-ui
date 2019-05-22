@@ -88,7 +88,7 @@ class App extends Component {
           }
           showLeft={this.state.showLeft}
         >
-          <ScrollBox defaultStyles={`height: calc(100vh - 64px)`} maxHeight={"100%"}>
+          <ScrollBox style={{height: `calc(100vh - 64px)`}} dynamic>
             <Routers />
           </ScrollBox>
         </Layout>

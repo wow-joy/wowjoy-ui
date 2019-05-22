@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import { pop } from "wowjoy-component/lib/tools";
-import { ReactComponent as LoadingBase } from "../../static/medias/svg/loading.svg";
+import { ReactComponent as LoadingBase } from "../../static/medias/svg/loading_shulan.svg";
 import { ReactComponent as Success } from "../../static/medias/svg/done_line.svg";
 import { ReactComponent as Error } from "../../static/medias/svg/wrong_line.svg";
 import { ReactComponent as Warning } from "../../static/medias/svg/waring_line.svg";

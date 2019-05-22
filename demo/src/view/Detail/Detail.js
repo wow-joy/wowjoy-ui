@@ -12,11 +12,9 @@ class Detail extends Component {
     const ComponentItem = require(`./Components/${name}`).default;
 
     return (
-      <ScrollBox maxHeight={"calc(100vh - 64px)"} visible={true}>
         <Wrap>
           <ComponentItem />
         </Wrap>
-      </ScrollBox>
     );
   }
 }
