@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 const Wrap = styled.ul`
+  width: calc(100% + 40px);
+  margin-right: -40px;
   display: flex;
   flex-wrap: wrap;
   ${props => props.defaultStyles};
@@ -25,9 +27,17 @@ class FormLayout extends PureComponent {
       return;
     }
     const { wrapNode } = this;
-    const { fontSize = 16, labelClassName, getColumnsCount } = this.props;
+    const {
+      fontSize = 14,
+      labelClassName,
+      getColumnsCount,
+      maxItemWidth
+    } = this.props;
     const wrapWidth = wrapNode.scrollWidth;
-    const columnCount = (getColumnsCount || defaultGetColumnsCount)(wrapWidth);
+    const columnCount = (getColumnsCount || defaultGetColumnsCount)(
+      wrapWidth,
+      maxItemWidth || fontSize * 6 + 310
+    );
     this.setState({
       columnCount: columnCount
     });
@@ -62,7 +72,8 @@ class FormLayout extends PureComponent {
   render() {
     const { className, defaultStyles, children } = this.props;
     const Container = this.Container;
-    const width = (100 / this.state.columnCount).toFixed(2) + "%";
+    const width =
+      (100 / this.state.columnCount).toFixed(3).replace(/.$/, "") + "%";
     return (
       <Wrap
         defaultStyles={defaultStyles}
@@ -71,7 +82,11 @@ class FormLayout extends PureComponent {
       >
         {React.Children.toArray(children).map((ele, index) => {
           return (
-            <li key={index} style={{ width }}>
+            <li
+              className={"wjc-form-layout-item"}
+              key={index}
+              style={{ width }}
+            >
               {ele}
             </li>
           );
@@ -81,24 +96,16 @@ class FormLayout extends PureComponent {
   }
 }
 
-function defaultGetColumnsCount(width) {
-  if (width > 1634) {
-    return 4;
-  }
-  if (width > 1134) {
-    return 3;
-  }
-  if (width > 634) {
-    return 2;
-  }
-  return 1;
+function defaultGetColumnsCount(width, maxItemWidth) {
+  return Math.floor(width / maxItemWidth);
 }
 
 FormLayout.propTypes = {
   className: PropTypes.string,
   defaultStyles: PropTypes.string,
   fontSize: PropTypes.number,
+  maxItemWidth: PropTypes.number,
   labelClassName: PropTypes.string,
-  defaultGetColumnsCount: PropTypes.func
+  getColumnsCount: PropTypes.func
 };
 export default FormLayout;

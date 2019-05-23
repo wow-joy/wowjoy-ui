@@ -47,7 +47,10 @@ class Demo extends Component {
           }
         `}
         header={
-          <Header onChange={this.toggleLeft} value={this.state.showLeft} />
+          <Header
+            onChange={this.toggleLeft}
+            defaultValue={this.state.showLeft}
+          />
         }
         asideLeft={<Nav size="small" navList={navList} />}
         showLeft={this.state.showLeft}
@@ -101,7 +104,7 @@ class Demo extends Component {
     return (
       <Layout
         header={
-          <Header onChange={this.toggleLeft} value={this.state.showLeft} />
+          <Header onChange={this.toggleLeft} defaultValue={this.state.showLeft} />
         }
         asideLeft={<Nav size="small" navList={navList} />}
         showLeft={this.state.showLeft}
