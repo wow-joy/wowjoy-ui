@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import InputBase from "./Input";
-import Hoc from "wowjoy-component/lib/tools/Hoc";
+import Hoc from "wowjoy-component/es/tools/Hoc";
 import Captcha from "./types/Captcha";
 import Password from "./types/Password";
 

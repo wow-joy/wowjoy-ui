@@ -1,5 +1,5 @@
 import Pagination from "./Pagination";
-import Hoc from "wowjoy-component/lib/tools/Hoc";
+import Hoc from "wowjoy-component/es/tools/Hoc";
 import { Pagination as PainationBase } from "wowjoy-component";
 import Pagination1 from "./types/type1";
 
