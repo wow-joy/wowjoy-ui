@@ -1,3 +1,11 @@
+## 0.12.2 (2019/5/24)
+
+### feature
+
+- 增加 FormLayout demo
+- 更换 Svg
+- 升级 component 组件库
+
 ## 0.12.1 (2019/5/17)
 
 ### feature
