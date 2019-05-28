@@ -1,3 +1,11 @@
+## 0.13.0 (2019/5/29)
+
+### feature
+
+- 新增 ScrollBox 组件
+- 增加 ScrollBox demo
+- 升级 component 组件库
+
 ## 0.12.2 (2019/5/24)
 
 ### feature
