@@ -12,7 +12,7 @@ import styled, { keyframes, ThemeProvider } from "styled-components";
 
 const Layout = styled(LayoutBase)`
   .wjc-layout-center {
-    overflow: auto;
+    overflow: hidden;
     height: calc(100vh - 64px);
   }
 `;

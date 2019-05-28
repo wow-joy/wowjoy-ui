@@ -14,7 +14,7 @@ class Demo1 extends Component {
           "班级班级班级",
           "学号学号"
         ].map((ele, index) => (
-          <label style={{ display: "flex", margin: "10px 0" }}>
+          <label style={{ display: "flex", margin: "10px 0" }} key={index}>
             <span className={"label"} style={{ flexShrink: "0" }}>
               {ele}
             </span>

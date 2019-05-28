@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Btn1 } from "@src";
+import { Nav, Btn1 } from "@es";
 import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
 const navList = [
   {
