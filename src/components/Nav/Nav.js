@@ -148,19 +148,28 @@ const SubMenu = props => {
     />
   );
 };
-const Spread = styled(SpreadBase)`
+const Spread0 = styled(SpreadBase)`
   width: 8px;
   height: 8px;
   position: absolute;
   right: 16px;
   top: 50%;
-  transform: translateY(-50%) rotate(${p => (p.isActive ? 180 : 0)}deg);
+  transform: translateY(-50%) rotate(0deg);
+  &.active {
+    transform: translateY(-50%) rotate(180deg);
+  }
   transition: 0.3s;
   path {
     fill: #797979;
   }
 `;
-
+const Spread = React.forwardRef(({ isActive, className, ...props }, ref) => (
+  <Spread0
+    className={className + (isActive ? " active" : "")}
+    ref={ref}
+    {...props}
+  />
+));
 const DropDown = styled(DropDownBase)`
   width: 8px;
   height: 8px;
@@ -171,6 +180,12 @@ const DropDown = styled(DropDownBase)`
     fill: currentColor;
   }
 `;
+
+class Empty extends React.PureComponent {
+  render() {
+    return void 0;
+  }
+}
 
 const GetSubMenu = ({
   controlIconType,
@@ -213,11 +228,7 @@ const GetSubMenu = ({
           </Content>
         }
         ControlComponent={
-          controlIconType === "arrow"
-            ? Spread
-            : !isFirst
-              ? DropDown
-              : () => null
+          controlIconType === "arrow" ? Spread : !isFirst ? DropDown : Empty
         }
       >
         {item.subList ? loop(item.subList, number + 1, false) : null}

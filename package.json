@@ -22,14 +22,14 @@
     "copy": "rm -rf ./test_component/* && cp -rf ../wowjoy-component/es/* ./test_component/"
   },
   "peerDependencies": {
-    "@svgr/webpack": "^2.x",
+    "@svgr/webpack": "^4.x",
     "react": "^16.x",
     "react-dom": "^16.x",
     "react-router-dom": "^4.x",
     "styled-components": "^4.x"
   },
   "devDependencies": {
-    "@svgr/webpack": "^2.1.1",
+    "@svgr/webpack": "^4.2.0",
     "babel-plugin-prismjs": "^1.0.2",
     "nwb": "0.23.x",
     "prismjs": "^1.16.0",
@@ -46,6 +46,6 @@
     "react-component"
   ],
   "dependencies": {
-    "wowjoy-component": "3.5.7"
+    "wowjoy-component": "3.5.9"
   }
 }

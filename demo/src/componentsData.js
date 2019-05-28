@@ -32,6 +32,10 @@ export default [
     description: "弹出框"
   },
   {
+    name: "ScrollBox",
+    description: "滚动条"
+  },
+  {
     name: "Pagination",
     description: "分页器"
   },

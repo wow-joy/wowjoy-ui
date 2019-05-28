@@ -6,20 +6,20 @@ module.exports = {
     esModules: true,
     umd: false
   },
-  babel:{
-    plugins:[
+  babel: {
+    plugins: [
       [
-        "prismjs", {
-          "languages": ["javascript", "css", "jsx"],
-          "plugins": ["line-numbers"],
-          "theme": "default",
-          "css": true
+        "prismjs",
+        {
+          languages: ["javascript", "css", "jsx"],
+          plugins: ["line-numbers"],
+          theme: "default",
+          css: true
         }
       ]
-    ],
+    ]
   },
   webpack: {
-    
     aliases: {
       "@test": path.resolve("test_component"),
       "@src": path.resolve("src"),
@@ -28,13 +28,13 @@ module.exports = {
       "@esMedia": path.resolve("es/static/medias"),
       "@demoComponents": path.resolve("demo/src/components"),
       "@static": path.resolve("src/static"),
-      "@svg": path.resolve("src/static/medias/svg"),
+      "@svg": path.resolve("src/static/medias/svg")
     },
     rules: {
       svg: {
         // use: ["@svgr/webpack"],
-        use: ["@svgr/webpack", "url-loader"]
+        use: [{ loader: "@svgr/webpack", options: { ref: true } }, "url-loader"]
       }
-    },
+    }
   }
 };
