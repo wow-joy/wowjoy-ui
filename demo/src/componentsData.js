@@ -46,5 +46,9 @@ export default [
   {
     name: "Progress",
     description: "进度条",
+  },
+  {
+    name: "Upload",
+    description: "文件上传",
   }
 ];

@@ -12,6 +12,9 @@ import Switch from "./components/Switch";
 import Rate from "./components/Rate";
 import Divider from "./components/Divider";
 import Progress from "./components/Progress";
+import Breadcrumb from "./components/Breadcrumb";
+import Upload from "./components/Upload";
+
 const Components = {
   Header,
   Nav,
@@ -33,7 +36,9 @@ const Components = {
   Switch,
   Rate,
   Divider,
-  Progress
+  Progress,
+  Breadcrumb,
+  Upload
 };
 export {
   Header,
@@ -56,6 +61,8 @@ export {
   Switch,
   Rate,
   Divider,
-  Progress
+  Progress,
+  Breadcrumb,
+  Upload
 };
 export default Components;
