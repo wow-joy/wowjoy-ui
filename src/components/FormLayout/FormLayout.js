@@ -15,11 +15,15 @@ class FormLayout extends PureComponent {
   needReload = true;
   componentDidMount() {
     this.layout();
-    window.onresize = this.layout;
+    window.addEventListener('resize', this.layout)
   }
   componentDidUpdate(prevProps, prevState) {
     this.layout();
   }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.layout)
+  }
+  
   wrapNode = void 0;
   layout = () => {
     if (!this.needReload) {
