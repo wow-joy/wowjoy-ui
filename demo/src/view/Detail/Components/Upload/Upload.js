@@ -100,6 +100,24 @@ class Upload extends PureComponent {
                 description: "内容",
                 type: "node",
                 default: ""
+              },
+              {
+                name: "name",
+                description: "input的name属性",
+                type: "string",
+                default: "file"
+              },
+              {
+                name: "accept",
+                description: "规定上传的文件格式，默认为空",
+                type: "string",
+                default: ""
+              },
+              {
+                name: "action",
+                description: "上传地址",
+                type: "string",
+                default: ""
               }
             ]}
           />

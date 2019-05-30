@@ -137,6 +137,9 @@ Upload.propTypes = {
     className: PropTypes.string,
     defaultStyles: PropTypes.string,
     children: PropTypes.node,
+    accept:PropTypes.string,
+    name:PropTypes.string,
+    action:PropTypes.string,
 };
 
 export default Upload;
