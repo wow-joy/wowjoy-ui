@@ -50,5 +50,9 @@ export default [
   {
     name: "Upload",
     description: "文件上传",
+  },
+  {
+    name: "Tooltip",
+    description: "提示框",
   }
 ];

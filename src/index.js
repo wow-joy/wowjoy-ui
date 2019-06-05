@@ -14,6 +14,7 @@ import Divider from "./components/Divider";
 import Progress from "./components/Progress";
 import Breadcrumb from "./components/Breadcrumb";
 import Upload from "./components/Upload";
+import Tooltip from "./components/Tooltip";
 
 const Components = {
   Header,
@@ -38,7 +39,8 @@ const Components = {
   Divider,
   Progress,
   Breadcrumb,
-  Upload
+  Upload,
+  Tooltip
 };
 export {
   Header,
@@ -63,6 +65,7 @@ export {
   Divider,
   Progress,
   Breadcrumb,
-  Upload
+  Upload,
+  Tooltip
 };
 export default Components;
