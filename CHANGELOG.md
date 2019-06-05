@@ -1,4 +1,17 @@
-## 0.13.0 (2019/5/29)
+## 0.13.2 (2019/6/5)
+
+### bugfix
+
+- 修复 FormLayout 重复渲染bug
+
+## 0.13.1 (2019/5/29)
+
+### bugfix
+
+- 修复 Pagination 行高
+- 修复 FormLayout resize 事件未注销
+
+## 0.13.0 (2019/5/28)
 
 ### feature
 

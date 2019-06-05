@@ -18,7 +18,12 @@ class FormLayout extends PureComponent {
     window.addEventListener('resize', this.layout)
   }
   componentDidUpdate(prevProps, prevState) {
-    this.layout();
+    if (this.needReload) {
+      this.layout();
+      this.needReload = false;
+    }else{
+      this.needReload = true;
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.layout)
@@ -26,10 +31,6 @@ class FormLayout extends PureComponent {
   
   wrapNode = void 0;
   layout = () => {
-    if (!this.needReload) {
-      this.needReload = true;
-      return;
-    }
     const { wrapNode } = this;
     const {
       fontSize = 14,
