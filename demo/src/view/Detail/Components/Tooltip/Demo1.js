@@ -7,6 +7,8 @@ const  Tool = styled(Tooltip)`
     margin:0 50px;
     position: relative;
     display: inline-block;
+    border:1px solid #06aea6;
+    border-radius:3px;
 `;
 
 class Demo1 extends Component {
