@@ -1,8 +1,14 @@
+## 0.13.3 (2019/6/25)
+
+### feature
+
+- 升级 wowjoy-component (view CHANGELOG there)
+
 ## 0.13.2 (2019/6/5)
 
 ### bugfix
 
-- 修复 FormLayout 重复渲染bug
+- 修复 FormLayout 重复渲染 bug
 
 ## 0.13.1 (2019/5/29)
 
