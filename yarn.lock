@@ -8837,10 +8837,10 @@ worker-farm@^1.5.2:
   dependencies:
     errno "~0.1.7"
 
-wowjoy-component@3.5.13:
-  version "3.5.13"
-  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-3.5.13.tgz#31961e1e7d67d4b2b60792fb30e7589348bb4bee"
-  integrity sha512-e3RJOcmlE2tmqej/YwpSDj/TQsWfpx94ytEPVV0CqX22X7erpk2kPkgj/GahmVP1nL01ej+yAu5cGjv8rfXoTQ==
+wowjoy-component@^3.5.17:
+  version "3.5.17"
+  resolved "https://registry.yarnpkg.com/wowjoy-component/-/wowjoy-component-3.5.17.tgz#7dd1e6288fc454fd9f2cbdcf5611a0ad62425df3"
+  integrity sha512-5iBD8wnb8Iq9l56Gow4NxVJ9+aLW81IDTGphk8Ep495EOY1R4fxRRCJjuZPYuAac2jeGXTbZPyaII3A5zZuJtw==
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

@@ -15,20 +15,20 @@ class FormLayout extends PureComponent {
   needReload = true;
   componentDidMount() {
     this.layout();
-    window.addEventListener('resize', this.layout)
+    window.addEventListener("resize", this.layout);
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.needReload) {
       this.layout();
       this.needReload = false;
-    }else{
+    } else {
       this.needReload = true;
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.layout)
+    window.removeEventListener("resize", this.layout);
   }
-  
+
   wrapNode = void 0;
   layout = () => {
     const { wrapNode } = this;
@@ -36,7 +36,7 @@ class FormLayout extends PureComponent {
       fontSize = 14,
       labelClassName,
       getColumnsCount,
-      maxItemWidth
+      maxItemWidth,
     } = this.props;
     const wrapWidth = wrapNode.scrollWidth;
     const columnCount = (getColumnsCount || defaultGetColumnsCount)(
