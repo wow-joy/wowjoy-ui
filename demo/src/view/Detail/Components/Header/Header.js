@@ -256,7 +256,7 @@ class Demo1 extends Component {
                   pleaseEnterRepeatePassword: "请再次输入新密码",
                   inconsistentWithTwoPassword: "两次密码不一致",
                   newPasswordLimit: "3-16个字符",
-                  ok: "确认",
+                  ok: "确定",
                   cancel: "取消",
                   unEnter: {
                     oldPassword: "您还未输入旧密码",
