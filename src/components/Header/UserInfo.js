@@ -214,7 +214,7 @@ const TEXT = {
   repeatePassword: "确认新密码",
   pleaseEnterRepeatePassword: "请再次输入新密码",
   inconsistentWithTwoPassword: "两次密码不一致",
-  newPasswordLimit: "3-16个字符",
+  newPasswordLimit: "8-32个字符",
   ok: "确认",
   cancel: "取消",
   unEnter: {
@@ -359,7 +359,7 @@ class UserInfo extends PureComponent {
         if (value === "") {
           return TEXT.pleaseEnterNewPassword;
         }
-        if (!(value.length <= 16 && value.length >= 3)) {
+        if (!(value.length <= 32 && value.length >= 8)) {
           return TEXT.pleaseEnterRightNewPassword;
         }
       case "repeatePassword":
@@ -527,7 +527,7 @@ class UserInfo extends PureComponent {
                 type={"password"}
                 autoComplete="new-password"
                 placeholder={TEXT.newPasswordLimit}
-                max={16}
+                max={32}
                 {...getInputProps("newPassword")}
               />
             </Label>
