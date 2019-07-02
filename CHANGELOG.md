@@ -1,3 +1,14 @@
+## 0.13.4 (2019/7/2)
+
+### feature
+
+- 增加 Toast 组件 demo
+- 修改 Header 组件忘记密码的长度限制
+
+### bugfix
+
+- 修复 Toast 组件 className
+
 ## 0.13.3 (2019/6/25)
 
 ### feature
