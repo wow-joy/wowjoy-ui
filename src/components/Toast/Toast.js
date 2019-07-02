@@ -59,31 +59,29 @@ const MsgContent = styled.div`
     }
   }
 `;
-export function createToast(name, content, options) {
-  const symbol = Symbol(name);
-  Toast[symbol] = pop(content)({
-    options
-  });
+export function createToast(content, options = {}) {
+  const symbol = Symbol("toast");
+  Toast[symbol] = pop(content)(options);
   return Toast[symbol];
 }
 
 class Toast extends PureComponent {
-  static open = (name, content, options) =>
-    createToast(name, <Toast>{content}</Toast>, {
+  static open = (content, options) => {
+    const instance = createToast(<Toast>{content}</Toast>, {
       layer: false,
-      autoClose: 500,
-      onClose: () => {
-        Toast[symbol] && Toast[symbol].destroy();
+      autoClose: 1000,
+      onClose: self => {
+        self.destroy();
       },
       ...options
     });
-
-  static loading = (options = {}) =>
+    return instance;
+  };
+  static loading = (content, options = {}) =>
     createToast(
-      "loading",
       [
         <LoadingContent key={0} haveLayer={options.layer !== false}>
-          {options.content}
+          {content}
         </LoadingContent>,
         <Loading key={1} />
       ],
@@ -95,7 +93,6 @@ class Toast extends PureComponent {
 
   static success = (content, options = {}) =>
     createToast(
-      "success",
       <MsgContent color={"#3ac9a8"}>
         <Success />
         {content}
@@ -108,7 +105,6 @@ class Toast extends PureComponent {
     );
   static error = (content, options = {}) =>
     createToast(
-      "error",
       <MsgContent color={"#f36969"}>
         <Error />
         {content}
@@ -121,7 +117,6 @@ class Toast extends PureComponent {
     );
   static warning = (content, options = {}) =>
     createToast(
-      "warning",
       <MsgContent color={"#ff9b54"}>
         <Warning />
         {content}
@@ -134,7 +129,6 @@ class Toast extends PureComponent {
     );
   static info = (content, options = {}) =>
     createToast(
-      "info",
       <MsgContent color={"#45a8e6"}>
         <Info />
         {content}
@@ -148,7 +142,10 @@ class Toast extends PureComponent {
   render() {
     const { className, defaultStyles, children } = this.props;
     return (
-      <Wrap className={"wj-toast " + className} defaultStyles={defaultStyles}>
+      <Wrap
+        className={"wj-toast " + className || ""}
+        defaultStyles={defaultStyles}
+      >
         {children}
       </Wrap>
     );

@@ -42,5 +42,9 @@ export default [
   {
     name: "Steps",
     description: "步骤条"
+  },
+  {
+    name: "Toast",
+    description: "轻提示"
   }
 ];
