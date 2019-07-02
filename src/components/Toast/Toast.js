@@ -59,11 +59,17 @@ const MsgContent = styled.div`
     }
   }
 `;
+export function createToast(name, content, options) {
+  const symbol = Symbol(name);
+  Toast[symbol] = pop(content)({
+    options
+  });
+  return Toast[symbol];
+}
 
 class Toast extends PureComponent {
-  static open = (name, content, options) => {
-    const symbol = Symbol.for(name);
-    Toast[symbol] = pop(<Toast>{content}</Toast>)({
+  static open = (name, content, options) =>
+    createToast(name, <Toast>{content}</Toast>, {
       layer: false,
       autoClose: 500,
       onClose: () => {
@@ -71,67 +77,78 @@ class Toast extends PureComponent {
       },
       ...options
     });
-    return Toast[symbol];
-  };
+
   static loading = (options = {}) =>
-    pop([
-      <LoadingContent key={0} haveLayer={options.layer !== false}>
-        {options.content}
-      </LoadingContent>,
-      <Loading key={1} />
-    ])({
-      layer: true,
-      ...options
-    });
+    createToast(
+      "loading",
+      [
+        <LoadingContent key={0} haveLayer={options.layer !== false}>
+          {options.content}
+        </LoadingContent>,
+        <Loading key={1} />
+      ],
+      {
+        layer: true,
+        ...options
+      }
+    );
 
   static success = (content, options = {}) =>
-    pop(
+    createToast(
+      "success",
       <MsgContent color={"#3ac9a8"}>
         <Success />
         {content}
-      </MsgContent>
-    )({
-      layer: false,
-      autoClose: 3000,
-      ...options
-    });
+      </MsgContent>,
+      {
+        layer: false,
+        autoClose: 3000,
+        ...options
+      }
+    );
   static error = (content, options = {}) =>
-    pop(
+    createToast(
+      "error",
       <MsgContent color={"#f36969"}>
         <Error />
         {content}
-      </MsgContent>
-    )({
-      layer: false,
-      autoClose: 3000,
-      ...options
-    });
+      </MsgContent>,
+      {
+        layer: false,
+        autoClose: 3000,
+        ...options
+      }
+    );
   static warning = (content, options = {}) =>
-    pop(
+    createToast(
+      "warning",
       <MsgContent color={"#ff9b54"}>
         <Warning />
         {content}
-      </MsgContent>
-    )({
-      layer: false,
-      autoClose: 3000,
-      ...options
-    });
+      </MsgContent>,
+      {
+        layer: false,
+        autoClose: 3000,
+        ...options
+      }
+    );
   static info = (content, options = {}) =>
-    pop(
+    createToast(
+      "info",
       <MsgContent color={"#45a8e6"}>
         <Info />
         {content}
-      </MsgContent>
-    )({
-      layer: false,
-      autoClose: 3000,
-      ...options
-    });
+      </MsgContent>,
+      {
+        layer: false,
+        autoClose: 3000,
+        ...options
+      }
+    );
   render() {
     const { className, defaultStyles, children } = this.props;
     return (
-      <Wrap className={className} defaultStyles={defaultStyles}>
+      <Wrap className={"wj-toast " + className} defaultStyles={defaultStyles}>
         {children}
       </Wrap>
     );

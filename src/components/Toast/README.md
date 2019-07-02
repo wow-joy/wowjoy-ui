@@ -59,10 +59,14 @@ loadingToast.destroy()
 
 - method
 
-  | 方法    | 描述             | arguments                                                                                         | 默认 options                   |
-  | ------- | :--------------- | :------------------------------------------------------------------------------------------------ | :----------------------------- |
-  | open    | 弹出一个 toast   | `name` : 弹框名（区分多个弹框的自动关闭事件用）,<br/>`content` : 弹出的内容,<br/>`options` : 配置 | `layer: false, autoClose: 500` |
-  | loading | 弹出一个 loading | `options` : 配置                                                                                  | `layer: true`                  |
+  | 方法    | 描述                    | arguments                                                                                         | 默认 options                    |
+  | ------- | :---------------------- | :------------------------------------------------------------------------------------------------ | :------------------------------ |
+  | open    | 弹出一个 toast          | `name` : 弹框名（区分多个弹框的自动关闭事件用）,<br/>`content` : 弹出的内容,<br/>`options` : 配置 | `layer: false, autoClose: 500`  |
+  | loading | 弹出一个 loading        | `options` : 配置                                                                                  | `layer: true`                   |
+  | success | 弹出一个 success 的提示 | `options` : 配置                                                                                  | `layer: false, autoClose: 3000` |
+  | error   | 弹出一个 error 的提示   | `options` : 配置                                                                                  | `layer: false, autoClose: 3000` |
+  | warning | 弹出一个 warning 的提示 | `options` : 配置                                                                                  | `layer: false, autoClose: 3000` |
+  | info    | 弹出一个 info 的提示    | `options` : 配置                                                                                  | `layer: false, autoClose: 3000` |
 
 - options
   | 参数 | 描述 | 类型 | 默认值 |
