@@ -46,5 +46,13 @@ export default [
   {
     name: "Toast",
     description: "轻提示"
+  },
+  {
+    name: "Tooltip",
+    description: "文字提示"
+  },
+  {
+    name: "Slider",
+    description: "滑动输入条"
   }
 ];
