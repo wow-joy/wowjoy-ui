@@ -11,6 +11,9 @@ import { CheckBox } from "./components/Form";
 import Steps from "./components/Steps";
 import FormLayout from "./components/FormLayout";
 import ScrollBox from "./components/ScrollBox";
+import Tooltip from "./components/Tooltip";
+import { SimpleTooltip } from "./components/Tooltip";
+import Slider from "./components/Slider";
 const Components = {
   Header,
   Nav,
@@ -31,7 +34,9 @@ const Components = {
   Input,
   Steps,
   FormLayout,
-  ScrollBox
+  ScrollBox,
+  Tooltip,
+  Slider
 };
 export {
   Header,
@@ -53,6 +58,9 @@ export {
   Input,
   Steps,
   FormLayout,
-  ScrollBox
+  ScrollBox,
+  Tooltip,
+  SimpleTooltip,
+  Slider
 };
 export default Components;
