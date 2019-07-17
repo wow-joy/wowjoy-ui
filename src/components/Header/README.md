@@ -54,6 +54,7 @@ const Foo = () => <Header
 | companyList     | 公司列表 `[{id, content}]`                                                | array  |        |
 | onCompanyChange | 公司改变事件 params: `(id, content)`                                      |  func  |        |
 | onUserNameClick | 弹出框的用户名点击事件                                                    |  func  |        |
+| onLogOut        | 登出事件钩子， `return false` 可以阻止登出                                |  func  |        |
 
 ## textApi
 

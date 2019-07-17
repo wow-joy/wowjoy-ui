@@ -290,6 +290,10 @@ class UserInfo extends PureComponent {
   }
   logOutForm;
   logOut = () => {
+    const { onLogOut } = this.props;
+    if (onLogOut && onLogOut() === false) {
+      return;
+    }
     this.logOutForm.submit();
   };
 
@@ -549,6 +553,7 @@ class UserInfo extends PureComponent {
 
 UserInfo.propTypes = {
   onUserNameClick: PropTypes.func,
+  onLogOut: PropTypes.func,
   user: PropTypes.object,
   companyList: PropTypes.array,
   company: PropTypes.string,

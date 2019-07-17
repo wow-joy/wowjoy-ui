@@ -305,13 +305,15 @@ class Header extends PureComponent {
         if (res.responseCode === "0") {
           const { applicationList: appList, moreSystem } = res.responseData;
           return {
-            appList: appList.filter(ele => ele.isAuth === "1").map(ele => ({
-              title: ele.name,
-              icon: ele.logo,
-              content: ele.descLong,
-              id: ele.id,
-              to: ele.address
-            })),
+            appList: appList
+              .filter(ele => ele.isAuth === "1")
+              .map(ele => ({
+                title: ele.name,
+                icon: ele.logo,
+                content: ele.descLong,
+                id: ele.id,
+                to: ele.address
+              })),
             moreSystem: moreSystem
           };
         }
@@ -351,7 +353,8 @@ class Header extends PureComponent {
       changePasswordUrl,
       appListTEXT,
       newsListTEXT,
-      userInfoTEXT
+      userInfoTEXT,
+      onLogOut
     } = this.props;
     const { appList, moreSystem, newsList, logo } = this.state;
     const userLastName = user ? (user.name || "").substr(-1) : "";
@@ -364,7 +367,8 @@ class Header extends PureComponent {
       companyList,
       company,
       userLastName,
-      changePasswordUrl
+      changePasswordUrl,
+      onLogOut
     };
     const { newsCount } = this;
 
@@ -452,7 +456,8 @@ Header.propTypes = {
   changePasswordUrl: PropTypes.string,
   appListTEXT: PropTypes.object,
   newsListTEXT: PropTypes.object,
-  userInfoTEXT: PropTypes.object
+  userInfoTEXT: PropTypes.object,
+  onLogOut: PropTypes.func
 };
 export default ControllSwitchHoc({
   onChange: "onCompanyChange",

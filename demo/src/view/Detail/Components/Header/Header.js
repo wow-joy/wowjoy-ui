@@ -80,7 +80,8 @@ class Demo1 extends Component {
         <Description>
           <h2>描述</h2>
           <p>
-            1. 头部组件组件<br />
+            1. 头部组件组件
+            <br />
             2. 通常配合layout 和 nav组件共同使用
           </p>
         </Description>
@@ -201,6 +202,18 @@ class Demo1 extends Component {
               {
                 name: "onCompanyChange",
                 description: "公司改变事件 params: `(id, content)`",
+                type: "function",
+                default: ""
+              },
+              {
+                name: "onUserNameClick",
+                description: "弹出框的用户名点击事件",
+                type: "function",
+                default: ""
+              },
+              {
+                name: "onLogOut",
+                description: "登出事件钩子， `return false` 可以阻止登出 ",
                 type: "function",
                 default: ""
               }
