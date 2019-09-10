@@ -1,8 +1,14 @@
+## 0.14.4 (2019/9/10)
+
+### feature
+
+- 为 `Header` 新增 api `showFullName`：允许外部展示全名
+
 ## 0.14.3 (2019/8/5)
 
 ### bugfix
 
-- 回滚 `wowjoy-components@3.5.21` 
+- 回滚 `wowjoy-components@3.5.21`
 
 ## 0.14.2 (2019/7/17)
 
