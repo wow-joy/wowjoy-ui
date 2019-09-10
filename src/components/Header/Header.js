@@ -174,8 +174,28 @@ const User = styled.div`
     height: 32px;
     border-radius: 50%;
     background-color: ${p =>
-      !p.deep || p.isblur ? p.theme.mainColor : p.theme.deepColor};
+      p.isblur ? p.theme.mainColor : p.theme.deepColor};
     z-index: -1;
+  }
+`;
+const UserFull = styled.div`
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  z-index: 11;
+  letter-spacing: 0.5px;
+  color: #fff;
+  &::after {
+    content: "";
+    display: inline-block;
+    border-right: 3px solid transparent;
+    border-left: 3px solid transparent;
+    border-top: 4px solid #fff;
+    margin-left: 4px;
+    position: relative;
+    top: -2px;
   }
 `;
 
@@ -354,7 +374,8 @@ class Header extends PureComponent {
       appListTEXT,
       newsListTEXT,
       userInfoTEXT,
-      onLogOut
+      onLogOut,
+      showFullName
     } = this.props;
     const { appList, moreSystem, newsList, logo } = this.state;
     const userLastName = user ? (user.name || "").substr(-1) : "";
@@ -418,9 +439,11 @@ class Header extends PureComponent {
             }
           </li>
           <li>
-            <User deep isblur={isblur}>
-              {userLastName}
-            </User>
+            {showFullName ? (
+              <UserFull isblur={isblur}>{user.name}</UserFull>
+            ) : (
+              <User isblur={isblur}>{userLastName}</User>
+            )}
             <ControlWrap className={"wj-user-control__wrap"}>
               <UserInfo {...UserInfoProps} TEXT={userInfoTEXT} />
             </ControlWrap>
@@ -447,6 +470,7 @@ Header.propTypes = {
   isblur: PropTypes.bool,
   onChange: PropTypes.func,
   defaultValue: PropTypes.bool,
+  showFullName: PropTypes.bool,
   company: PropTypes.string,
   defaultCompany: PropTypes.string,
   companyList: PropTypes.array,

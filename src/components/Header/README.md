@@ -35,26 +35,27 @@ const Foo = () => <Header
 
 ## APIs
 
-| 属性            | 描述                                                                      |  类型  | 默认值 |
-| --------------- | :------------------------------------------------------------------------ | :----: | :----: |
-| className       | 顶层样式 class                                                            | string |        |
-| defaultStyles   | 顶层默认样式                                                              | string |        |
-| children        | 内容                                                                      |  node  |        |
-| logo            | logo                                                                      |  node  |        |
-| title           | 标题                                                                      |  node  |        |
-| appList         | 应用列表 `[{id: string,onClick: function, content: node, icon: node}]`    | array  |        |
-| newsList        | 消息列表 `[{id: string,onClick: function, content: node, time: dateObj}]` | array  |        |
-| newsCount       | 信息数量                                                                  | number |        |
-| user            | 用户信息                                                                  | object |        |
-| isblur          | 是否处于失焦状态                                                          |  bool  |        |
-| onChange        | 左侧图标状态改变事件                                                      |  func  |        |
-| defaultValue    | 左侧图标初始状态                                                          |  bool  |        |
-| company         | 公司始选中的 id (受控)                                                    | string |        |
-| defaultCompany  | 公司初始选中的 id (非受控)                                                | string |        |
-| companyList     | 公司列表 `[{id, content}]`                                                | array  |        |
-| onCompanyChange | 公司改变事件 params: `(id, content)`                                      |  func  |        |
-| onUserNameClick | 弹出框的用户名点击事件                                                    |  func  |        |
-| onLogOut        | 登出事件钩子， `return false` 可以阻止登出                                |  func  |        |
+| 属性            | 描述                                                                      |  类型  | 默认值 |  版本  |
+| --------------- | :------------------------------------------------------------------------ | :----: | :----: | :----: |
+| className       | 顶层样式 class                                                            | string |        |        |
+| defaultStyles   | 顶层默认样式                                                              | string |        |        |
+| children        | 内容                                                                      |  node  |        |        |
+| logo            | logo                                                                      |  node  |        |        |
+| title           | 标题                                                                      |  node  |        |        |
+| appList         | 应用列表 `[{id: string,onClick: function, content: node, icon: node}]`    | array  |        |        |
+| newsList        | 消息列表 `[{id: string,onClick: function, content: node, time: dateObj}]` | array  |        |        |
+| newsCount       | 信息数量                                                                  | number |        |        |
+| user            | 用户信息                                                                  | object |        |        |
+| isblur          | 是否处于失焦状态                                                          |  bool  |        |        |
+| onChange        | 左侧图标状态改变事件                                                      |  func  |        |        |
+| defaultValue    | 左侧图标初始状态                                                          |  bool  |        |        |
+| company         | 公司始选中的 id (受控)                                                    | string |        |        |
+| defaultCompany  | 公司初始选中的 id (非受控)                                                | string |        |        |
+| companyList     | 公司列表 `[{id, content}]`                                                | array  |        |        |
+| onCompanyChange | 公司改变事件 params: `(id, content)`                                      |  func  |        |        |
+| onUserNameClick | 弹出框的用户名点击事件                                                    |  func  |        |        |
+| onLogOut        | 登出事件钩子， `return false` 可以阻止登出                                |  func  |        |        |
+| showFullName    | 是否显示全面                                                              |  bool  | false  | 0.14.4 |
 
 ## textApi
 

@@ -5,6 +5,7 @@ import ApiTable from "@demoComponents/ApiTable";
 import CodeDemo from "@demoComponents/CodeDemo";
 import Demo1 from "./Demo1";
 import Demo2 from "./Demo2";
+import Demo3 from "./Demo3";
 
 const Description = styled.section``;
 const Column = styled.div``;
@@ -72,6 +73,26 @@ class Demo1 extends Component {
     );
   }
 }`
+      },
+      {
+        display: <Demo3 />,
+        description: "显示全名",
+        code: `class Demo1 extends Component {
+          render() {
+            return (
+              <Header
+                title={"这是标题"}
+                user={{
+                  name: "用户名",
+                  number: "工号10086"
+                }}
+                showFullName
+              >
+                这是内容
+              </Header>
+            );
+          }
+        }`
       }
     ];
 
