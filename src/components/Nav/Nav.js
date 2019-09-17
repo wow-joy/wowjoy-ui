@@ -139,11 +139,10 @@ const Content = styled(NavContent)`
 const SubMenu = props => {
   return (
     <SubMenuSlideDown
-      onBlur={e =>
-        !!document
-          .querySelector(".wj-nav-item__1")
-          .parentNode.contains(e.target)
-      }
+      onBlur={e => {
+        const root = document.querySelector(".wj-nav-item__1").parentNode;
+        return root.contains(e.target) && root !== e.target;
+      }}
       {...props}
     />
   );

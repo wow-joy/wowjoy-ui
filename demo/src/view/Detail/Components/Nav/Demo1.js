@@ -10,6 +10,7 @@ const navList = [
   {
     content: [<Home key={"1"} />, "1级常规下拉"],
     id: "home2",
+    defaultIsOpen: true,
     subList: [
       {
         content: <div>常规下拉子项</div>,
