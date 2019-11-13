@@ -255,9 +255,14 @@ class Header extends PureComponent {
     const { mdid: nextMdid, userId: nextUserId, iaid: nextIaid } =
       nextProps.user || {};
     const idsInited =
-      nextUserId && nextUserId !== userId && nextIaid && nextIaid !== iaid;
+      nextMdid &&
+      nextMdid !== mdid &&
+      nextUserId &&
+      nextUserId !== userId &&
+      nextIaid &&
+      nextIaid !== iaid;
     idsInited &&
-      this.get_hospitalInfo({ mdid })
+      this.get_hospitalInfo({ mdid: nextMdid })
         .then(logo => {
           this.setState({
             logo
@@ -266,7 +271,7 @@ class Header extends PureComponent {
         .catch(err => console.error(err));
 
     idsInited &&
-      this.get_newsList({ userId, iaid })
+      this.get_newsList({ userId: nextUserId, iaid: nextIaid })
         .then(newsList =>
           this.setState({
             newsList
@@ -276,8 +281,8 @@ class Header extends PureComponent {
 
     idsInited &&
       this.get_appList({
-        userId,
-        mdid
+        userId: nextUserId,
+        mdid: nextMdid
       })
         .then(({ appList, moreSystem }) =>
           this.setState({
