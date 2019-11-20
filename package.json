@@ -46,5 +46,6 @@
   "repository": "",
   "keywords": [
     "react-component"
-  ]
+  ],
+  "publishConfig": { "registry": "http://registry.npmjs.org/" }
 }
