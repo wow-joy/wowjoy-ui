@@ -1,8 +1,14 @@
+## 0.14.8 (2019/11/21)
+
+### bugfix
+
+- `Dialog Dark` 组件大小写错误
+
 ## 0.14.7 (2019/11/13)
 
 ### bugfix
 
-- `Header` 组件的 logo、app请求参数bug
+- `Header` 组件的 logo、app 请求参数 bug
 
 ## 0.14.5 (2019/9/17)
 
