@@ -4,6 +4,10 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
+<a href="https://zeit.co/new/project?template=https://github.com/wow-joy/wowjoy-ui/tree/master">
+  <img src="https://zeit.co/button" alt="Deploy to ZEIT Now" />
+</a>
+
 # theme
 
 ```javascript
