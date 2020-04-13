@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Switch, HashRouter as Route, Redirect, Link } from "react-router-dom";
 import { Layout as LayoutBase, Header, Nav } from "@es";
 import { ScrollBox } from "wowjoy-component";
 import List from "./view/List";
