@@ -108,6 +108,13 @@ class Nav extends Component {
                 default: ""
               },
               {
+                name: "onOpenChange",
+                description:
+                  "open改变事件, 结合navList的isOpen可以实现对open的控制",
+                type: "func: (isOpen, openKey) => void",
+                default: ""
+              },
+              {
                 name: "activeId",
                 description: "选中项",
                 type: "string",

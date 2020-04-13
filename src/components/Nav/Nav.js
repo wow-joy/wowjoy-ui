@@ -18,7 +18,7 @@ const Wrap = styled.nav`
   box-shadow: 0 1px 4px 0 rgba(202, 202, 202, 0.5);
   font-size: 14px;
   color: #333;
-  ${p =>
+  ${(p) =>
     p.size === "small" &&
     `width: 180px;
       .wj-nav-item-content>svg{
@@ -29,14 +29,14 @@ const Wrap = styled.nav`
     `} .wj-nav-item-content__active {
     & > svg {
       path {
-        fill: ${p => p.theme.mainColor};
+        fill: ${(p) => p.theme.mainColor};
       }
     }
   }
 
   .wjc-slieDown-subContent > .active {
     & > .wjc-slideDown-content {
-      color: ${p => p.theme.mainColor};
+      color: ${(p) => p.theme.mainColor};
       position: relative;
       &::before {
         position: absolute;
@@ -53,17 +53,17 @@ const Wrap = styled.nav`
     }
   }
   .childActive:not(.open):not(.active) > .wjc-slideDown-content {
-    color: ${p => p.theme.mainColor};
+    color: ${(p) => p.theme.mainColor};
     &::before {
       display: none;
     }
     svg {
       path {
-        fill: ${p => p.theme.mainColor};
+        fill: ${(p) => p.theme.mainColor};
       }
     }
   }
-  ${props => props.defaultStyles};
+  ${(props) => props.defaultStyles};
 `;
 
 const SubMenuSlideDown = styled(SlideDown)`
@@ -71,14 +71,14 @@ const SubMenuSlideDown = styled(SlideDown)`
     color: #333;
   }
   .wjc-slideDown-content:hover {
-    background: ${p => p.theme.lightColor};
+    background: ${(p) => p.theme.lightColor};
   }
   .wjc-slieDown-subContent {
     background: #f5f7f8;
   }
 
   &.active > .wjc-slideDown-content {
-    color: ${p => p.theme.mainColor};
+    color: ${(p) => p.theme.mainColor};
     position: relative;
     &::before {
       position: absolute;
@@ -115,7 +115,7 @@ const SubMenuSlideDown = styled(SlideDown)`
 `;
 
 const Content = styled(NavContent)`
-  ${p => {
+  ${(p) => {
     switch (p.rank) {
       case 2:
         return `
@@ -136,12 +136,13 @@ const Content = styled(NavContent)`
     }
   }};
 `;
-const SubMenu = props => {
+const SubMenu = (props) => {
   return (
     <SubMenuSlideDown
-      onBlur={e => {
-        const root = document.querySelector(".wj-nav-item__1").parentNode;
-        return root.contains(e.target) && root !== e.target;
+      onBlur={(e) => {
+        // const root = document.querySelector(".wj-nav-item__1").parentNode;
+        // return root.contains(e.target) && root !== e.target;
+        return false;
       }}
       {...props}
     />
@@ -153,9 +154,9 @@ const Spread0 = styled(SpreadBase)`
   position: absolute;
   right: 16px;
   top: 50%;
-  transform: translateY(-50%) rotate(0deg);
+  transform: translateY(-50%) rotate(180deg);
   &.active {
-    transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(0deg);
   }
   transition: 0.3s;
   path {
@@ -173,7 +174,7 @@ const DropDown = styled(DropDownBase)`
   width: 8px;
   height: 8px;
   margin-left: 8px;
-  transform: rotate(${p => (p.isActive ? 0 : -90)}deg);
+  transform: rotate(${(p) => (p.isActive ? 0 : -90)}deg);
   transition: 0.3s;
   path {
     fill: currentColor;
@@ -194,11 +195,11 @@ const GetSubMenu = ({
   onTransitionEnd,
   onChange,
   activePath,
-  size
+  size,
 }) => {
   const activeId = activePath[0];
   const loop = (list, number, isFirst) => {
-    return list.map(item => (
+    return list.map((item) => (
       <SubMenu
         size={size}
         key={item.id}
@@ -208,7 +209,7 @@ const GetSubMenu = ({
         isActive={item.isOpen}
         defaultIsActive={item.defaultIsOpen}
         onTransitionEnd={onTransitionEnd}
-        onChange={onChange}
+        onChange={(isActive) => onChange(isActive, item.id)}
         content={
           <Content
             key={item.id}
@@ -239,7 +240,7 @@ const GetSubMenu = ({
 
 const getValuePath = (navList = [], activeId) => {
   const path = [];
-  const loop = list => {
+  const loop = (list) => {
     for (const item of list) {
       if (item.id === activeId) {
         path.push(item.id);
@@ -257,7 +258,7 @@ const getValuePath = (navList = [], activeId) => {
 
 class Nav extends PureComponent {
   state = {
-    overflow: ""
+    overflow: "",
   };
 
   render() {
@@ -268,7 +269,7 @@ class Nav extends PureComponent {
       navList,
       activeId,
       noScroll,
-      controlIconType = "arrow"
+      controlIconType = "arrow",
     } = this.props;
 
     const activePath = getValuePath(navList, activeId);
@@ -301,10 +302,12 @@ class Nav extends PureComponent {
     const { onChange } = this.props;
     return onChange && onChange(itemData.id || "", itemData);
   };
-  toggleSubMenu = () => {
+  toggleSubMenu = (isActive, id) => {
     this.setState({
-      overflow: "auto"
+      overflow: "auto",
     });
+    const { onOpenChange } = this.props;
+    onOpenChange(isActive, id);
   };
   onTransitionEnd = (...args) => {
     if (this.props.noScroll) {
@@ -323,11 +326,11 @@ Nav.propTypes = {
   activeId: PropTypes.string,
   defaultActiveId: PropTypes.string,
   noScroll: PropTypes.bool,
-  controlIconType: PropTypes.oneOf(["arrow", "delta"])
+  controlIconType: PropTypes.oneOf(["arrow", "delta"]),
 };
 export default withRouter(
   ControllSwitchHoc({
     value: "activeId",
-    defaultValue: "defaultActiveId"
+    defaultValue: "defaultActiveId",
   })(Nav)
 );
