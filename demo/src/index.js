@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 const GlobalStyle = createGlobalStyle`
   /* reset */
 
@@ -158,9 +158,9 @@ input[type=search]::-webkit-search-results-decoration {
 ReactDOM.render(
   <React.Fragment>
     <GlobalStyle />
-    <BrowserRouter basename={`/wowjoy-ui/demo/dist/`}>
+    <HashRouter basename={`/wowjoy-ui/demo/dist/`}>
       <Route component={App} />
-    </BrowserRouter>
+    </HashRouter>
   </React.Fragment>,
   document.getElementById("demo")
 );

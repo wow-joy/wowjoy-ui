@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, HashRouter as Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 import { Layout as LayoutBase, Header, Nav } from "@es";
 import { ScrollBox } from "wowjoy-component";
 import List from "./view/List";
@@ -41,7 +41,7 @@ const theme = {
   mainColor_hover: "#1AC3BB",
   mainColor_active: "#3E8A86",
   lightColor_hover: "#F0FFFD",
-  lightColor_active: "#06AEA6"
+  lightColor_active: "#06AEA6",
 };
 class Routers extends Component {
   render() {
@@ -63,7 +63,7 @@ class App extends Component {
   state = { showLeft: true };
   toggleLeft = () => {
     this.setState({
-      showLeft: !this.state.showLeft
+      showLeft: !this.state.showLeft,
     });
   };
   render() {
@@ -81,14 +81,14 @@ class App extends Component {
               navList={componentsData.map((ele, index) => ({
                 content: ele.name,
                 id: ele.name,
-                to: `/detail/${ele.name}`
+                to: `/detail/${ele.name}`,
               }))}
               activeId={this.props.location.pathname.replace(/\/detail\//, "")}
             />
           }
           showLeft={this.state.showLeft}
         >
-          <ScrollBox style={{height: `calc(100vh - 64px)`}} dynamic>
+          <ScrollBox style={{ height: `calc(100vh - 64px)` }} dynamic>
             <Routers />
           </ScrollBox>
         </Layout>
