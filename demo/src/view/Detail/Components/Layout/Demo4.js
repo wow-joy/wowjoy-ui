@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Layout, Header, Nav } from "@es";
-import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
+import Home from "@es/components/icons/home";
 const navList = [
   {
     content: [<Home key={"home"} />, "首页"],
     id: "home1",
-    to: "/"
+    to: "/",
   },
   {
     content: [<Home key={"1"} />, "1级常规下拉"],
@@ -15,7 +15,7 @@ const navList = [
       {
         content: <div>常规下拉子项</div>,
         id: "home21",
-        to: "/"
+        to: "/",
       },
       {
         content: <div>2级下拉1</div>,
@@ -23,19 +23,19 @@ const navList = [
         subList: [
           { content: <div>111</div>, id: "x1" },
           { content: <div>222</div>, id: "x2" },
-          { content: <div>333</div>, id: "x3" }
-        ]
-      }
-    ]
-  }
+          { content: <div>333</div>, id: "x3" },
+        ],
+      },
+    ],
+  },
 ];
 class Demo extends Component {
   state = {
-    showLeft: true
+    showLeft: true,
   };
   toggleLeft = () => {
     this.setState({
-      showLeft: !this.state.showLeft
+      showLeft: !this.state.showLeft,
     });
   };
   render() {

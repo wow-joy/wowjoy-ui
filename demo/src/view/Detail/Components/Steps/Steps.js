@@ -47,7 +47,7 @@ class Demo1 extends Component {
             </Steps>
         );
     }
-}`
+}`,
       },
       {
         display: <Demo3 />,
@@ -66,7 +66,7 @@ class Demo3 extends Component {
         );
     }
 }
-        `
+        `,
       },
       {
         display: <Demo2 />,
@@ -141,7 +141,7 @@ class Demo2 extends React.Component {
         );
     }
 }
-`
+`,
       },
       {
         display: <Demo4 />,
@@ -160,7 +160,7 @@ class Demo3 extends Component {
         );
     }
 }
-        `
+        `,
       },
       {
         display: <Demo5 />,
@@ -179,7 +179,7 @@ class Demo4 extends Component {
         );
     }
 }
-`
+`,
       },
       {
         display: <Demo6 />,
@@ -198,15 +198,15 @@ class Demo4 extends Component {
         );
     }
 }
-`
+`,
       },
       {
         display: <Demo7 />,
         description: "自定义Icon",
         code: `import React, { Component } from "react";
 import { Steps } from "@es";
-import { ReactComponent as Male } from "@es/static/medias/svg/male.svg";
-import { ReactComponent as Collection } from "@es/static/medias/svg/Collection.svg";
+import Male  from "@es/components/icons/male";
+import Collection  from "@es/components/icons/Collection";
 
 class Demo7 extends Component {
   render() {
@@ -223,7 +223,7 @@ class Demo7 extends Component {
     );
   }
 }
-`
+`,
       },
       {
         display: <Demo8 />,
@@ -242,8 +242,8 @@ class Demo8 extends Component {
     );
   }
 }
-`
-      }
+`,
+      },
     ];
 
     return (
@@ -277,66 +277,66 @@ class Demo8 extends Component {
                 name: "className",
                 description: "顶层样式 class",
                 type: "string",
-                default: ""
+                default: "",
               },
               {
                 name: "defaultStyles",
                 description: "顶层默认样式",
                 type: "string",
-                default: ""
+                default: "",
               },
               {
                 name: "children",
                 description: "内容",
                 type: "node",
-                default: ""
+                default: "",
               },
               {
                 name: "size",
                 description: "步骤条每个的大小, 单位px",
                 type: "number",
-                default: "24"
+                default: "24",
               },
               {
                 name: "type",
                 description: '步骤条布局类型，可选 "basic"、"dot" 和 "arrow"',
                 type: "string",
-                default: "basic"
+                default: "basic",
               },
               {
                 name: "current",
                 description:
                   "指定当前步骤，从 0 开始记数。在子 Step 元素中，可以通过 status 属性覆盖状态",
                 type: "number",
-                default: "0"
+                default: "0",
               },
               {
                 name: "direction",
                 description:
                   "指定步骤条方向。支持水平（horizontal）和竖直（vertical）两种方向",
                 type: "string",
-                default: "horizontal"
+                default: "horizontal",
               },
               {
                 name: "labelPlacement",
                 description:
                   "指定标签放置位置，默认水平放图标右侧，可选 vertical 放图标下方，upAndDown 标题和描述分别位于图标上下",
                 type: "string",
-                default: "horizontal"
+                default: "horizontal",
               },
               {
                 name: "status",
                 description:
                   "指定当前步骤的状态，可选 wait|process|finish|error",
                 type: "string",
-                default: ""
+                default: "",
               },
               {
                 name: "initial",
                 description: "起始序号，从 0 开始记数 ",
                 type: "number",
-                default: "0"
-              }
+                default: "0",
+              },
             ]}
           />
         </Apis>
@@ -348,35 +348,35 @@ class Demo8 extends Component {
                 name: "title",
                 description: "步骤的详情描述，可选 ",
                 type: "string|ReactNode",
-                default: ""
+                default: "",
               },
               {
                 name: "description",
                 description: "步骤的详情描述，可选 ",
                 type: "string|ReactNode",
-                default: ""
+                default: "",
               },
               {
                 name: "icon",
                 description: (
                   <div>
                     步骤图标的类型，可选，接受函数时：(currentIcon, (index,
-                    status, title, description) )=>ReactNode
+                    status, title, description) )=&gt;ReactNode
                     <br />
                     currentIcon 为结合当前状态应当显示的组件（如果此时
                     Steps.type 为'dot'，currentIcon 为内置默认 Dot 组件）
                   </div>
                 ),
                 type: "string | ReactNode | function ",
-                default: ""
+                default: "",
               },
               {
                 name: "status",
                 description:
                   "指定状态。当不配置该属性时，会使用 Steps 的 current 来自动指定状态。可选：wait|process|finish|error",
                 type: "string",
-                default: "wait"
-              }
+                default: "wait",
+              },
             ]}
           />
         </Apis>

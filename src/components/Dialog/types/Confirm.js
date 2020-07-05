@@ -2,9 +2,9 @@ import React from "react";
 import { Btn2 as Type2 } from "../../Btn";
 import styled from "styled-components";
 import Dialog from "../Dialog";
-import { ReactComponent as Pointer } from "../../../static/medias/svg/waring_line.svg";
-import { ReactComponent as Question } from "../../../static/medias/svg/question_line.svg";
-import { ReactComponent as Success } from "../../../static/medias/svg/done_line.svg";
+import Pointer from "../../../components/icons/waring_line";
+import Question from "../../../components/icons/question_line";
+import Success from "../../../components/icons/done_line";
 const Title = styled.h4`
   display: flex;
   align-items: center;
@@ -46,7 +46,7 @@ const svgObj = {
     path {
       fill: #3db39e;
     }
-  `
+  `,
 };
 class Confirm extends React.PureComponent {
   render() {
@@ -55,7 +55,7 @@ class Confirm extends React.PureComponent {
       children,
       description,
       icon,
-      type = "pointer"
+      type = "pointer",
     } = this.props;
     const Icon = svgObj[type];
     return (

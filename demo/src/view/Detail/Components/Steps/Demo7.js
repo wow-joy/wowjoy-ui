@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Steps } from "@es";
-import { ReactComponent as Male } from "@es/static/medias/svg/male.svg";
-import { ReactComponent as Collection } from "@es/static/medias/svg/collection.svg";
+import Male from "@es/components/icons/male";
+import Collection from "@es/components/icons/collection";
 
 class Demo7 extends Component {
   render() {

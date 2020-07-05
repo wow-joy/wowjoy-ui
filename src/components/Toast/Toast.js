@@ -2,11 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import { pop } from "wowjoy-component/es/tools";
-import { ReactComponent as LoadingBase } from "../../static/medias/svg/loading_shulan.svg";
-import { ReactComponent as Success } from "../../static/medias/svg/done_line.svg";
-import { ReactComponent as Error } from "../../static/medias/svg/wrong_line.svg";
-import { ReactComponent as Warning } from "../../static/medias/svg/waring_line.svg";
-import { ReactComponent as Info } from "../../static/medias/svg/information_line.svg";
+import LoadingBase from "../../components/icons/loading_shulan";
+import Success from "../../components/icons/done_line";
+import Error from "../../components/icons/wrong_line";
+import Warning from "../../components/icons/waring_line";
+import Info from "../../components/icons/information_line";
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -30,7 +30,7 @@ const Wrap = styled.div`
 const LoadingContent = styled.div`
   text-align: center;
   font-size: 17px;
-  color: ${p => (p.haveLayer ? "#fff" : "#000")};
+  color: ${(p) => (p.haveLayer ? "#fff" : "#000")};
 `;
 const Loading = styled(LoadingBase)`
   display: block;
@@ -48,7 +48,7 @@ const MsgContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${p => p.color};
+  background: ${(p) => p.color};
   color: #fff;
   & > svg {
     width: 20px;
@@ -70,10 +70,10 @@ class Toast extends PureComponent {
     const instance = createToast(<Toast>{content}</Toast>, {
       layer: false,
       autoClose: 1000,
-      onClose: self => {
+      onClose: (self) => {
         self.destroy();
       },
-      ...options
+      ...options,
     });
     return instance;
   };
@@ -83,11 +83,11 @@ class Toast extends PureComponent {
         <LoadingContent key={0} haveLayer={options.layer !== false}>
           {content}
         </LoadingContent>,
-        <Loading key={1} />
+        <Loading key={1} />,
       ],
       {
         layer: true,
-        ...options
+        ...options,
       }
     );
 
@@ -100,7 +100,7 @@ class Toast extends PureComponent {
       {
         layer: false,
         autoClose: 3000,
-        ...options
+        ...options,
       }
     );
   static error = (content, options = {}) =>
@@ -112,7 +112,7 @@ class Toast extends PureComponent {
       {
         layer: false,
         autoClose: 3000,
-        ...options
+        ...options,
       }
     );
   static warning = (content, options = {}) =>
@@ -124,7 +124,7 @@ class Toast extends PureComponent {
       {
         layer: false,
         autoClose: 3000,
-        ...options
+        ...options,
       }
     );
   static info = (content, options = {}) =>
@@ -136,7 +136,7 @@ class Toast extends PureComponent {
       {
         layer: false,
         autoClose: 3000,
-        ...options
+        ...options,
       }
     );
   render() {
@@ -154,6 +154,6 @@ class Toast extends PureComponent {
 
 Toast.propTypes = {
   className: PropTypes.string,
-  defaultStyles: PropTypes.string
+  defaultStyles: PropTypes.string,
 };
 export default Toast;

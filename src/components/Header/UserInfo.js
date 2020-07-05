@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { ReactComponent as Company } from "../../static/medias/svg/company.svg";
-import { ReactComponent as Password } from "../../static/medias/svg/password.svg";
-import { ReactComponent as LogOut } from "../../static/medias/svg/log_out.svg";
-import { ReactComponent as Selected } from "../../static/medias/svg/selected.svg";
+import Company from "../../components/icons/company";
+import Password from "../../components/icons/password";
+import LogOut from "../../components/icons/log_out";
+import Selected from "../../components/icons/selected";
 import { DialogDark } from "../Dialog";
 import InputBase from "../Input";
 import { $fetch, apis } from "../../config";
@@ -30,7 +30,7 @@ const User = styled.span`
     top: 0;
     height: 32px;
     border-radius: 50%;
-    background-color: ${p =>
+    background-color: ${(p) =>
       !p.deep || p.isblur ? p.theme.mainColor : "#007872"};
     z-index: -1;
   }
@@ -90,10 +90,10 @@ const UserControl = styled.div`
       }
     }
     &:hover {
-      color: ${p => p.theme.mainColor};
+      color: ${(p) => p.theme.mainColor};
       svg {
         path {
-          fill: ${p => p.theme.mainColor};
+          fill: ${(p) => p.theme.mainColor};
         }
       }
     }
@@ -160,7 +160,7 @@ const CompanyList = styled.ul`
       background: #fffbe0;
     }
     &.active {
-      color: ${p => p.theme.mainColor};
+      color: ${(p) => p.theme.mainColor};
       svg {
         path {
           fill: currentColor;
@@ -220,8 +220,8 @@ const TEXT = {
   unEnter: {
     oldPassword: "您还未输入旧密码",
     newPassword: "您还未输入新密码",
-    repeatePassword: "您还未确认新密码"
-  }
+    repeatePassword: "您还未确认新密码",
+  },
 };
 class UserInfo extends PureComponent {
   constructor(props) {
@@ -237,7 +237,7 @@ class UserInfo extends PureComponent {
       newPassword: "",
       repeatePassword: "",
       defaultCompany: "",
-      defaultNumber: ""
+      defaultNumber: "",
     };
   }
 
@@ -253,19 +253,19 @@ class UserInfo extends PureComponent {
       .post(apis.staffsDetail, {
         body: JSON.stringify({
           mdid: mdid,
-          auids: [userId]
-        })
+          auids: [userId],
+        }),
       })
-      .then(res => {
+      .then((res) => {
         if (res.responseCode === "0") {
           const data = res.responseData.staffList[0] || {};
           this.setState({
             defaultCompany: data.companyFullName,
-            defaultNumber: data.staffNumber
+            defaultNumber: data.staffNumber,
           });
         }
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   };
   get number() {
     return (this.props.user || {}).number || this.state.defaultNumber;
@@ -273,7 +273,7 @@ class UserInfo extends PureComponent {
   get currentCompany() {
     return this.props.companyList
       ? (
-          this.props.companyList.find(ele => ele.id === this.props.company) ||
+          this.props.companyList.find((ele) => ele.id === this.props.company) ||
           {}
         ).content
       : this.state.defaultCompany;
@@ -283,7 +283,7 @@ class UserInfo extends PureComponent {
     if (propTEXT) {
       return {
         ...TEXT,
-        ...propTEXT
+        ...propTEXT,
       };
     }
     return TEXT;
@@ -306,7 +306,7 @@ class UserInfo extends PureComponent {
   };
   showChangePassword = () => {
     this.setState({
-      showChangePassword: true
+      showChangePassword: true,
     });
   };
   closeChangePassword = () => {
@@ -315,39 +315,39 @@ class UserInfo extends PureComponent {
       errorMsg: {},
       oldPassword: "",
       newPassword: "",
-      repeatePassword: ""
+      repeatePassword: "",
     });
   };
-  changeCompany = (id, content) => e => {
+  changeCompany = (id, content) => (e) => {
     const { onCompanyChange } = this.props;
     onCompanyChange && onCompanyChange(id, content);
   };
-  changeHandle = name => e => {
+  changeHandle = (name) => (e) => {
     this.setState({
       [name]: e.target.value,
       errorMsg: {
         ...this.state.errorMsg,
         [name]: undefined,
-        repeatePassword: undefined
-      }
+        repeatePassword: undefined,
+      },
     });
   };
-  blurHandle = name => e => {
+  blurHandle = (name) => (e) => {
     const { value } = e.target;
     const checkResult = this.check(name, value);
     if (checkResult === TEXT.inconsistentWithTwoPassword) {
       this.setState({
         errorMsg: {
           ...this.state.errorMsg,
-          repeatePassword: checkResult || undefined
-        }
+          repeatePassword: checkResult || undefined,
+        },
       });
     } else {
       this.setState({
         errorMsg: {
           ...this.state.errorMsg,
-          [name]: checkResult || undefined
-        }
+          [name]: checkResult || undefined,
+        },
       });
     }
   };
@@ -377,27 +377,27 @@ class UserInfo extends PureComponent {
         return false;
     }
   };
-  getInputProps = name => {
+  getInputProps = (name) => {
     return {
       value: this.state[name],
       onChange: this.changeHandle(name),
       errorMsg: this.state.errorMsg[name],
-      onBlur: this.blurHandle(name)
+      onBlur: this.blurHandle(name),
     };
   };
   submit = (e, index) => {
     if (index === 0) {
-      if (Object.values(this.state.errorMsg).some(ele => ele)) {
+      if (Object.values(this.state.errorMsg).some((ele) => ele)) {
         return false;
       }
       if (
-        ["oldPassword", "newPassword", "repeatePassword"].some(ele => {
+        ["oldPassword", "newPassword", "repeatePassword"].some((ele) => {
           if (this.state[ele] === "") {
             this.setState({
               errorMsg: {
                 ...this.state.errorMsg,
-                [ele]: TEXT.unEnter[ele]
-              }
+                [ele]: TEXT.unEnter[ele],
+              },
             });
             return true;
           }
@@ -418,10 +418,10 @@ class UserInfo extends PureComponent {
           mdid,
           auid,
           newPassword: this.state.newPassword,
-          oldPassword: this.state.oldPassword
-        })
+          oldPassword: this.state.oldPassword,
+        }),
       })
-      .then(res => {
+      .then((res) => {
         if (res.responseCode === "0") {
           Toast.success("修改成功");
           this.closeChangePassword();
@@ -436,7 +436,7 @@ class UserInfo extends PureComponent {
       user,
       companyList,
       company,
-      userLastName
+      userLastName,
     } = this.props;
     const { currentCompany, TEXT, getInputProps, number } = this;
     return (
@@ -484,7 +484,7 @@ class UserInfo extends PureComponent {
           <form
             action="/logout"
             method="post"
-            ref={el => {
+            ref={(el) => {
               this.logOutForm = el;
             }}
             style={{ display: "none" }}
@@ -508,7 +508,7 @@ class UserInfo extends PureComponent {
             }
           }
           `}
-          ref={el => (this.dialog = el)}
+          ref={(el) => (this.dialog = el)}
           title={TEXT.changePassword}
           onClose={this.closeChangePassword}
           visible={this.state.showChangePassword}
@@ -560,7 +560,7 @@ UserInfo.propTypes = {
   userLastName: PropTypes.string,
   mdid: PropTypes.string,
   auid: PropTypes.string,
-  changePasswordUrl: PropTypes.string
+  changePasswordUrl: PropTypes.string,
 };
 
 export default UserInfo;

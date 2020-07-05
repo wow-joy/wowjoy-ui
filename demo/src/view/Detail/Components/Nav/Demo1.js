@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Nav, Btn1 } from "@es";
-import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
+import Home from "@es/components/icons/home";
 
 class Demo1 extends Component {
   state = {
@@ -103,7 +103,7 @@ export default Demo1;
 
 export const code = `import React, { Component } from "react";
 import { Nav, Btn1 } from "@es";
-import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
+import Home  from "@es/components/icons/home";
 
 const navList = [
   {

@@ -5,8 +5,8 @@ import { SlideDown, ScrollBox } from "wowjoy-component";
 import ControllSwitchHoc from "wowjoy-component/es/tools/Hoc/ControllSwitchHoc";
 import { withRouter } from "react-router-dom";
 import NavContent from "./NavContent";
-import { ReactComponent as SpreadBase } from "../../static/medias/svg/spread.svg";
-import { ReactComponent as DropDownBase } from "../../static/medias/svg/drop_down.svg";
+import SpreadBase from "../../components/icons/spread";
+import DropDownBase from "../../components/icons/drop_down";
 const isChrome = /(Chrome|Safari)/i.test(window.navigator.userAgent);
 
 const Wrap = styled.nav`

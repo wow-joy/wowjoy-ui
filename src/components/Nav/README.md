@@ -9,7 +9,7 @@ Nav 组件
 ```
 import React from 'react'
 import {Nav} from 'wowjoy-ui'
-import { ReactComponent as Home } from "wowjoy-ui/es/static/medias/svg/home.svg";
+import Home  from "wowjoy-ui/es/components/icons/home";
 
 const PROPS = {
   navList: [
@@ -77,11 +77,11 @@ const Foo = () => <Nav></Nav>
 
 ### navList [{}]
 
-| 属性          | 描述                                                      |  类型  | 默认值 |
-| ------------- | :-------------------------------------------------------- | :----: | :----: |
-| content       | 内容                                                      |  node  |        |
-| id            | 唯一标识                                                  | string |        |
-| subList       | 下拉列表内容 配置同`navList`                              | array  |        |
-| isOpen        | 是否打开此弹出菜单                                        |  bool  |        |
-| defaultIsOpen | 是否默认打开此弹出菜单                                    |  bool  |        |
-| to            | 点击跳转的路由                                            | string |        |
+| 属性          | 描述                         |  类型  | 默认值 |
+| ------------- | :--------------------------- | :----: | :----: |
+| content       | 内容                         |  node  |        |
+| id            | 唯一标识                     | string |        |
+| subList       | 下拉列表内容 配置同`navList` | array  |        |
+| isOpen        | 是否打开此弹出菜单           |  bool  |        |
+| defaultIsOpen | 是否默认打开此弹出菜单       |  bool  |        |
+| to            | 点击跳转的路由               | string |        |

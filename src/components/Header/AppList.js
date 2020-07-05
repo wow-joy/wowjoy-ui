@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import None from "./None";
-import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
+import Go from "../../components/icons/go";
 import { Link, withRouter } from "react-router-dom";
 import Toast from "../Toast";
 const Wrap = styled.div`
@@ -74,7 +74,7 @@ const App = styled.li`
 `;
 const TEXT = {
   viewMore: "查看更多系统 ",
-  none: "暂无应用"
+  none: "暂无应用",
 };
 
 class AppList extends PureComponent {
@@ -83,14 +83,14 @@ class AppList extends PureComponent {
     if (propTEXT) {
       return {
         ...TEXT,
-        ...propTEXT
+        ...propTEXT,
       };
     }
     return TEXT;
   }
-  gotoOtherApp = baseUrl => () => {
+  gotoOtherApp = (baseUrl) => () => {
     const url = "https://" + baseUrl;
-    this.beforeOpen(url).then(res => {
+    this.beforeOpen(url).then((res) => {
       const nodeA = document.createElement("a");
       nodeA.href = url;
       nodeA.target = "_blank";
@@ -98,15 +98,15 @@ class AppList extends PureComponent {
       nodeA.click();
     });
   };
-  beforeOpen = url =>
-    new Promise(res => {
+  beforeOpen = (url) =>
+    new Promise((res) => {
       if (this.isCacheUrl(url)) {
         res();
         return;
       }
       this.frame.src = url;
       const loading = Toast.loading({
-        container: this.wrap
+        container: this.wrap,
       });
       setTimeout(() => {
         this.cacheUrl(url);
@@ -114,14 +114,14 @@ class AppList extends PureComponent {
         res();
       }, 3000);
     });
-  isCacheUrl = url => {
+  isCacheUrl = (url) => {
     const viewedUrl = sessionStorage.getItem("viewedUrl") || [];
     if (viewedUrl.includes(url)) {
       return true;
     }
     return false;
   };
-  cacheUrl = url => {
+  cacheUrl = (url) => {
     const viewedUrl = sessionStorage.getItem("viewedUrl") || [];
     if (!this.isCacheUrl(url)) {
       viewedUrl.push(url);
@@ -133,8 +133,11 @@ class AppList extends PureComponent {
     const { list: appList = [], moreLink } = this.props;
     const { TEXT } = this;
     return (
-      <Wrap className={"wj-header-dropdown__app"} ref={el => (this.wrap = el)}>
-        <Frame ref={el => (this.frame = el)} />
+      <Wrap
+        className={"wj-header-dropdown__app"}
+        ref={(el) => (this.wrap = el)}
+      >
+        <Frame ref={(el) => (this.frame = el)} />
         {appList.length > 0 ? (
           <List>
             {appList.map((ele, index) => (
@@ -144,11 +147,7 @@ class AppList extends PureComponent {
                 id={ele.id}
                 // onClick={this.gotoOtherApp(ele.to)}
               >
-                <a
-                  href={ele.to}
-                  target={"_blank"}
-                  rol={"noreferrer noopener"}
-                >
+                <a href={ele.to} target={"_blank"} rol={"noreferrer noopener"}>
                   <img src={ele.icon} />
                   <p>{ele.title}</p>
                 </a>
@@ -171,7 +170,7 @@ class AppList extends PureComponent {
 AppList.propTypes = {
   TEXT: PropTypes.object,
   list: PropTypes.array,
-  moreLink: PropTypes.string
+  moreLink: PropTypes.string,
 };
 
 export default withRouter(AppList);

@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { ReactComponent as Go } from "../../static/medias/svg/go.svg";
-import { ReactComponent as MsgBase } from "../../static/medias/svg/msg.svg";
-import { ReactComponent as TimeBase } from "../../static/medias/svg/time.svg";
+import Go from "../../components/icons/go";
+import MsgBase from "../../components/icons/msg";
+import TimeBase from "../../components/icons/time";
 import { Link } from "react-router-dom";
 import None from "./None";
 
@@ -50,7 +50,7 @@ const News = styled.li`
   justify-content: space-between;
   line-height: 1;
   cursor: pointer;
-  &>a{
+  & > a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -103,7 +103,7 @@ const TEXT = {
   minutesAgo: "分钟前",
   hoursAgo: "小时前",
   gotoMsgCenter: "进入消息中心 ",
-  none: "暂无消息"
+  none: "暂无消息",
 };
 
 class NewsList extends PureComponent {
@@ -112,7 +112,7 @@ class NewsList extends PureComponent {
     if (propTEXT) {
       return {
         ...TEXT,
-        ...propTEXT
+        ...propTEXT,
       };
     }
     return TEXT;
@@ -125,7 +125,7 @@ class NewsList extends PureComponent {
         <Header>{TEXT.title}</Header>
         {newsList.length > 0 ? (
           <List>
-            {newsList.slice(0,3).map((ele, index) => (
+            {newsList.slice(0, 3).map((ele, index) => (
               <News key={index} onClick={ele.onClick} id={ele.id}>
                 <a href={ele.to} target={"_blank"} rol={"noreferrer noopener"}>
                   <Msg />
@@ -167,7 +167,7 @@ NewsList.propTypes = {
   TEXT: PropTypes.object,
   list: PropTypes.array,
   currentDate: PropTypes.object,
-  moreLink: PropTypes.string
+  moreLink: PropTypes.string,
 };
 
 export default NewsList;

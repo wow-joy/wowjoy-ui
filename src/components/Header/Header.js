@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { ReactComponent as NavOpen } from "../../static/medias/svg/nav_open.svg";
-import { ReactComponent as NavClose } from "../../static/medias/svg/nav_close.svg";
-import { ReactComponent as WowjoyLogo } from "../../static/medias/svg/wowjoy_logo.svg";
-import { ReactComponent as News } from "../../static/medias/svg/news.svg";
+import NavOpen  from "../../components/icons/nav_open";
+import NavClose  from "../../components/icons/nav_close";
+import WowjoyLogo  from "../../components/icons/wowjoy_logo";
+import News  from "../../components/icons/news";
 import { ControllSwitchHoc } from "wowjoy-component/es/tools";
 import NewsList from "./NewsList";
 import AppList from "./AppList";

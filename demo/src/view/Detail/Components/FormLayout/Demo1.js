@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FormLayout } from "@src";
-import { ReactComponent as Home } from "@es/static/medias/svg/home.svg";
+import Home from "@es/components/icons/home";
 
 class Demo1 extends Component {
   render() {
@@ -12,7 +12,7 @@ class Demo1 extends Component {
           "学号",
           "姓名姓名姓名姓名",
           "班级班级班级",
-          "学号学号"
+          "学号学号",
         ].map((ele, index) => (
           <label style={{ display: "flex", margin: "10px 0" }} key={index}>
             <span className={"label"} style={{ flexShrink: "0" }}>
@@ -23,7 +23,7 @@ class Demo1 extends Component {
                 border: "1px solid #ccc",
                 width: "250px",
                 height: "32px",
-                marginLeft: "20px"
+                marginLeft: "20px",
               }}
             />
           </label>

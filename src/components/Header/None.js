@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ReactComponent as NoneBase } from "../../static/medias/svg/none.svg";
+import NoneBase from "../../components/icons/none";
 import styled from "styled-components";
 const Wrap = styled.div`
   display: flex;

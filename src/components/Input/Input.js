@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { ReactComponent as Wrong } from "../../static/medias/svg/wrong.svg";
+import Wrong from "../../components/icons/wrong";
 const Wrap = styled.div`
   display: flex;
   position: relative;
@@ -13,7 +13,7 @@ const Wrap = styled.div`
   &.wrap__error {
     margin-bottom: 40px;
   }
-  ${props => props.defaultStyles};
+  ${(props) => props.defaultStyles};
 `;
 const InputBase = styled.input`
   flex-grow: 1;
@@ -28,7 +28,7 @@ const InputBase = styled.input`
     color: #999;
   }
   &:focus {
-    border-color: ${p => p.theme.mainColor};
+    border-color: ${(p) => p.theme.mainColor};
   }
   &:disabled {
     border-color: #e8e8e8;
@@ -94,6 +94,6 @@ Input.propTypes = {
   defaultStyles: PropTypes.string,
   errorMsg: PropTypes.string,
   viewType: PropTypes.oneOf(["captcha", "password", "search"]),
-  TEXT: PropTypes.object
+  TEXT: PropTypes.object,
 };
 export default Input;
