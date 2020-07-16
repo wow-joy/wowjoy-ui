@@ -6,7 +6,7 @@
  *  @param options.params  // 请求体(params)
  *  @param noCache @default true  // 不进行请求存储拦截
  */
-const baseUrl = "/unified/ui";
+const baseUrl = "";
 
 const $fetch = {
   base: (url, options, noCache = true) => {
@@ -96,12 +96,12 @@ const $fetch = {
 };
 
 const apis = {
-  changePassword: "/ms-base-org/v1/base/app-platform/org/modifypassword",
-  newsList: "/ms-message-platform/v1/base/message/platform/message/list",
-  appList: "/ui-individual-workbench/base/personal/platform/appList",
+  changePassword: "/unified/ui/ms-base-org/v1/base/app-platform/org/modifypassword",
+  newsList: "/unified/ui/ms-message-platform/v1/base/message/platform/message/list",
+  appList: "/unified/ui/ui-individual-workbench/base/personal/platform/appList",
   hospitalAppMarket: "/v1/hospital",
-  hospitalInfo: "/ms-base-org/v1/base/org/hospital/info",
-  staffsDetail: "/ms-base-org/v1/base/app-platform/staffs-detail"
+  hospitalInfo: "/unified/ui/ms-base-org/v1/base/org/hospital/info",
+  staffsDetail: "/unified/ui/ms-base-org/v1/base/app-platform/staffs-detail"
 };
 
 export { $fetch, apis };
