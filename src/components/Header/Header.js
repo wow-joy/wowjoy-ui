@@ -378,8 +378,8 @@ class Header extends PureComponent {
     return $fetch
       .get(apis.hospitalAppMarket, {})
       .then(res => {
-        if (res.responseCode === "0") {
-          const { data } = res.responseData;
+        if (res.code === "0") {
+          const { data } = res;
           return data.logo;
         }
       })
