@@ -269,14 +269,6 @@ class Header extends PureComponent {
       nextUserId !== userId &&
       nextIaid &&
       nextIaid !== iaid;
-    !nextMdid &&
-      this.get_hospitalAppMarket()
-        .then(logo => {
-          this.setState({
-            logo
-          });
-        })
-        .catch(err => console.error(err));
     idsInited &&
       this.get_hospitalInfo({ mdid: nextMdid })
         .then(logo => {
