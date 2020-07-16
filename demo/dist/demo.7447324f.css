@@ -118,7 +118,7 @@ pre[class*="language-"] {
 	color: #999;
 }
 
-.namespace {
+.token.namespace {
 	opacity: .7;
 }
 
@@ -180,4 +180,4 @@ pre[class*="language-"] {
 }
 
 
-/*# sourceMappingURL=demo.c3c373d4.css.map*/
+/*# sourceMappingURL=demo.7447324f.css.map*/

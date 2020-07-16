@@ -216,6 +216,14 @@ class Header extends PureComponent {
   componentDidMount() {
     const { mdid, userId, iaid } = this.props.user || {};
 
+    !mdid && this.get_hospitalAppMarket()
+    .then(logo => {
+      this.setState({
+        logo
+      });
+    })
+    .catch(err => console.error(err));
+
     mdid &&
       this.get_hospitalInfo({ mdid })
         .then(logo => {
@@ -261,6 +269,14 @@ class Header extends PureComponent {
       nextUserId !== userId &&
       nextIaid &&
       nextIaid !== iaid;
+    !nextMdid &&
+      this.get_hospitalAppMarket()
+        .then(logo => {
+          this.setState({
+            logo
+          });
+        })
+        .catch(err => console.error(err));
     idsInited &&
       this.get_hospitalInfo({ mdid: nextMdid })
         .then(logo => {
@@ -354,6 +370,17 @@ class Header extends PureComponent {
         if (res.responseCode === "0") {
           const { hospital } = res.responseData;
           return hospital.logoImage;
+        }
+      })
+      .catch(err => console.error(err));
+  };
+  get_hospitalAppMarket = () => {
+    return $fetch
+      .get(apis.hospitalAppMarket, {})
+      .then(res => {
+        if (res.responseCode === "0") {
+          const { data } = res.responseData;
+          return data.logo;
         }
       })
       .catch(err => console.error(err));
