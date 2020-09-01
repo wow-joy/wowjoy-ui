@@ -99,7 +99,7 @@ const apis = {
   changePassword: "/unified/ui/ms-base-org/v1/base/app-platform/org/modifypassword",
   newsList: "/unified/ui/ms-message-platform/v1/base/message/platform/message/list",
   appList: "/unified/ui/ui-individual-workbench/base/personal/platform/appList",
-  hospitalAppMarket: "/v1/hospital",
+  hospitalAppMarket: "/api/auth/v1/hospital",
   hospitalInfo: "/unified/ui/ms-base-org/v1/base/org/hospital/info",
   staffsDetail: "/unified/ui/ms-base-org/v1/base/app-platform/staffs-detail"
 };

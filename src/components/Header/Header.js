@@ -60,7 +60,7 @@ const CloseIcon = styled(NavClose)`
 
 const Logo = styled.img`
   width: auto;
-  height: 50px;
+  height: 17px;
   margin-left: 34px;
   display: inline-block;
   user-select: none;
